@@ -6,8 +6,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Protractor setup
-Run `npm install -g protractor`. 
+## Set up Protractor
+Run `npm install -g protractor`.   
+All protractor config and test files are in `/e2e` directory.
+## Run Protractor tests
+Run `npm run start`. Angular project has to be running.
 Run `npm run e2e`. If this command fails, update your chrome version
 using this command `sudo apt-get update && sudo apt-get --only-upgrade install google-chrome-stable`
 
