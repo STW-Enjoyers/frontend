@@ -19,7 +19,7 @@ exports.config = {
     // IMPORTANTE: Necesario ejecutar en modo headless para que
     // pasen los test en gihub actions.
     'goog:chromeOptions': {
-      args: ['--headless', '--disable-gpu', '--disable-dev-shm-usage'],
+      args: ['--headless', '--disable-gpu', '--disable-dev-shm-usage', '--allow-insecure-localhost', '--ignore-certificate-errors'],
     }
   },
   directConnect: true,
