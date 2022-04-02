@@ -5,7 +5,7 @@ describe('Angular App', function() {
   it('check title', async () => {
     browser.get(browser.baseUrl);
 
-    let expected = "My App";
+    let expected = "Unizapp";
     let actual = browser.getTitle();
 
     // @ts-ignore
