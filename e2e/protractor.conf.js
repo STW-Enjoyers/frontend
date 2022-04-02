@@ -13,7 +13,14 @@ exports.config = {
     './src/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    browserName: 'chrome'
+    maxInstances: 5,
+    browserName: 'chrome',
+    acceptInsecureCerts: true,
+    // IMPORTANTE: Necesario ejecutar en modo headless para que
+    // pasen los test en gihub actions.
+    'goog:chromeOptions': {
+      args: ['--headless', '--disable-gpu', '--disable-dev-shm-usage'],
+    }
   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
