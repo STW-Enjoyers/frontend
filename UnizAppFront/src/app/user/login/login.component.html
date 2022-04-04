@@ -1,1 +1,39 @@
-<p>login works!</p>
+<form #loginForm="ngForm" (ngSubmit)="loginForm.valid && onSubmit(loginForm)">
+  <input
+    type="text"
+    name="email"
+    #email="ngModel"
+    [(ngModel)]="model.email"
+    placeholder="Email"
+    [pattern]="emailRegex"
+    required
+    [ngClass]="{ 'invalid-textbox': loginForm.submitted && !email.valid }"
+  />
+  <div *ngIf="loginForm.submitted && email.errors?.['pattern']">
+    <label *ngIf="email.errors?.['required']" class="validation-message">
+      ¡Falta este campo!
+    </label>
+    <label *ngIf="email.errors?.['pattern']" class="validation-message">
+      Email inválido.
+    </label>
+  </div>
+  <input
+    type="password"
+    name="password"
+    #password="ngModel"
+    [(ngModel)]="model.password"
+    placeholder="Contraseña"
+    required
+    minlength="5"
+    [ngClass]="{ 'invalid-textbox': loginForm.submitted && !password.valid }"
+  />
+  <div *ngIf="loginForm.submitted && password.errors?.['pattern']">
+    <label *ngIf="password.errors?.['required']" class="validation-message">
+      ¡Falta este campo!
+    </label>
+    <label *ngIf="password.errors?.['minlength']" class="validation-message">
+      Mínimo 5 cáracteres.
+    </label>
+  </div>
+  <input type="submit" placeholder="Entrar" />
+</form>

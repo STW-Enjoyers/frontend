@@ -21,10 +21,10 @@
   />
   <div *ngIf="registerForm.submitted && email.errors">
     <label *ngIf="username.errors?.['required']" class="validation-message">
-      This field is required.
+      ¡Falta este campo!
     </label>
     <label *ngIf="username.errors?.['pattern']" class="validation-message">
-      Invalid username.
+      Nombre de usuario inváido.
     </label>
   </div>
   <input
@@ -39,10 +39,10 @@
   />
   <div *ngIf="registerForm.submitted && email.errors">
     <label *ngIf="email.errors?.['required']" class="validation-message">
-      This field is required.
+      ¡Falta este campo!
     </label>
     <label *ngIf="email.errors?.['pattern']" class="validation-message">
-      Invalid email address.
+      Email inválido.
     </label>
   </div>
 
@@ -58,7 +58,7 @@
   />
   <div *ngIf="registerForm.submitted && password.errors">
     <label *ngIf="password.errors?.['required']" class="validation-message">
-      This field is required.
+      ¡Falta este campo!
     </label>
     <label *ngIf="password.errors?.['minlength']" class="validation-message">
       Mínimo 5 cáracteres.

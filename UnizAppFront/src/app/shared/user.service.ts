@@ -16,4 +16,10 @@ export class UserService {
   postUser(user: User) {
     return this.http.post(environment.url + '/register', user);
   }
+  login(authCredentials: any) {
+    return this.http.post(environment.url + '/login', authCredentials);
+  }
+  setToken(token: string) {
+    localStorage.setItem('token', token);
+  }
 }
