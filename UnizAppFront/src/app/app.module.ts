@@ -9,9 +9,17 @@ import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './register/register.component';
 import { appRoutes } from './routes';
 import { HttpClientModule } from '@angular/common/http';
+import { UserprofileComponent } from './userprofile/userprofile.component';
+import { LoginComponent } from './user/login/login.component';
 
 @NgModule({
-  declarations: [AppComponent, UserComponent, RegisterComponent],
+  declarations: [
+    AppComponent,
+    UserComponent,
+    RegisterComponent,
+    UserprofileComponent,
+    LoginComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

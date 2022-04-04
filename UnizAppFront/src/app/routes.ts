@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './user/login/login.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
 
 export const appRoutes: Routes = [
   {
@@ -9,8 +11,18 @@ export const appRoutes: Routes = [
     children: [{ path: '', component: RegisterComponent }],
   },
   {
+    path: 'login',
+    component: UserComponent,
+    children: [{ path: '', component: LoginComponent }],
+  },
+  {
+    path: 'user',
+    component: UserComponent,
+    children: [{ path: '', component: UserprofileComponent }],
+  },
+  {
     path: '',
-    redirectTo: '/register',
+    redirectTo: '/login',
     pathMatch: 'full',
   },
 ];
