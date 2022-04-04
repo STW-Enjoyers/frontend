@@ -12,15 +12,29 @@ export class UserService {
     email: '',
     password: '',
   };
+  header = { headers: new HttpHeaders({ NoAuth: 'True' }) }; //For those that don't need authorization
   constructor(private http: HttpClient) {}
   postUser(user: User) {
-    return this.http.post(environment.url + '/register', user);
+    return this.http.post(environment.url + '/register', user, this.header);
   }
   login(authCredentials: any) {
-    return this.http.post(environment.url + '/login', authCredentials);
+    return this.http.post(
+      environment.url + '/login',
+      authCredentials,
+      this.header
+    );
   }
+  getProfile() {
+    //Needs JWT auth
+    return this.http.get(environment.url + '/profile');
+  }
+
+  //Aux
   setToken(token: string) {
     localStorage.setItem('token', token);
+  }
+  getToken() {
+    localStorage.getItem('token');
   }
   unSetToken() {
     localStorage.removeItem('token');
