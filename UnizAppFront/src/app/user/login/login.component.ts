@@ -22,14 +22,11 @@ export class LoginComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.userService.login(form.value).subscribe(
       (res: any) => {
-        console.log('A');
         this.userService.setToken(res['token']);
         this.success = true;
         this.router.navigateByUrl('/user');
       },
-      (err) => {
-        console.log('B');
-      }
+      (err) => {}
     );
   }
 }

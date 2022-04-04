@@ -22,4 +22,20 @@ export class UserService {
   setToken(token: string) {
     localStorage.setItem('token', token);
   }
+  unSetToken() {
+    localStorage.removeItem('token');
+  }
+  getUserData() {
+    var token = localStorage.getItem('token');
+    if (token) {
+      var userData = atob(token.split('.')[1]);
+      return JSON.parse(userData);
+    } else return null;
+  }
+  isLoggedIn() {
+    var userData = this.getUserData();
+    if (userData) return userData.exp > Date.now() / 1000;
+    //TODO cambiar el 1000
+    else return null;
+  }
 }

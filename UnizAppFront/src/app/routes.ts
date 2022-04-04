@@ -3,6 +3,7 @@ import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './user/login/login.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
+import { AuthGuard } from './auth/auth.guard';
 
 export const appRoutes: Routes = [
   {
@@ -18,6 +19,7 @@ export const appRoutes: Routes = [
   {
     path: 'user',
     component: UserComponent,
+    canActivate: [AuthGuard],
     children: [{ path: '', component: UserprofileComponent }],
   },
   {
