@@ -2,13 +2,15 @@
   "name": "frontend",
   "version": "0.0.0",
   "scripts": {
+    "start": "ng serve --port=4200",
+    "e2e": "protractor e2e/protractor.conf.js --baseUrl='http://localhost:4200/'",
+
     "ng": "ng",
-    "start": "node server.js",
+    "heroku-start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "lint": "ng lint",
-    "test": "ng test",
-    "e2e": "protractor e2e/protractor.conf.js"
+    "test": "ng test"
 
   },
   "private": true,
