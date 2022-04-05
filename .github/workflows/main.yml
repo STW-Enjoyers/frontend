@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - testing
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js 16.10.0
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.10.0
+      - name: Install dependencies
+        run: npm install
+      - name: Lint
+        run: npm run lint
+      - name: Build
+        run: npm run build -- --prod
+      - name: Update webdriver
+        run: node node_modules/protractor/bin/webdriver-manager update
+      - name: Update Chrome # See https://stackoverflow.com/q/63651059/419956
+        run: |
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+          sudo apt-get update
+          sudo apt-get --only-upgrade install google-chrome-stable
+      - name: Run angular app
+        run: npm run start &
+      - name: E2E tests
+        run: npm run e2e -- --configuration=ci
