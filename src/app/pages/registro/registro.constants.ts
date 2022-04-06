@@ -12,20 +12,20 @@ export const REDIRECT_MESSAGE:string = "¿Ya estás registrado/a?";
 export const REDIRECT_BUTTON:string = "Iniciar sesión";
 
 export const VALIDATION_MESSAGES = {
-  'Username': {
-    'required': 'Introduce tu nombre de usuario',
+  'username': {
+    'required': 'Por favor, introduce un nombre de usuario',
   },
-  'Email': {
-    'required': 'Introduce tu correo electrónico',
-    'pattern': 'El formato del correo no es correcto'
+  'email': {
+    'required': 'Por favor, introduce un correo electrónico',
+    'pattern': 'Por favor, introduce un correo electrónico válido'
   },
-  'Password': {
-    'required': 'Introduce tu contraseña',
+  'password': {
+    'required': 'Por favor, introduce una contraseña',
     'minlength': 'La contraseña es muy corta'
   },
-  'ConfirmPassword': {
-    'required': 'Introduce tu contraseña de nuevo',
+  'confirmPassword': {
+    'required': 'Por favor, confirma la contraseña',
     'minlength': 'La contraseña es muy corta',
-    'mismatch': 'Las contraseñas no coinciden'
+    'mismatch': 'Las contraseñas introducidas no coinciden'
   }
 };

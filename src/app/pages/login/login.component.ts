@@ -29,7 +29,10 @@ export class LoginComponent implements OnInit {
   // Form
   loginForm!: FormGroup;
   // Input error messages
-  formErrors = { Email: undefined, Password: undefined };
+  formErrors = {
+    email: undefined,
+    password: undefined
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -41,8 +44,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     // Init form validators
     this.loginForm = this.fb.group({
-        Email: ['', [Validators.required, Validators.pattern(this.validator.regex.email)]],
-        Password: ['', [Validators.required]],
+        email: ['', [Validators.required, Validators.pattern(this.validator.regex.email)]],
+        password: ['', [Validators.required]],
       });
     // Subscribe on value change
     this.loginForm.valueChanges.subscribe(

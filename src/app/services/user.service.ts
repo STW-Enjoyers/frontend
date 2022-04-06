@@ -20,10 +20,11 @@ export class UserService {
     return this.http.post(environment.url + '/register', user, this.header);
   }
 
-  login(authCredentials: any) {
+  login(user: User) {
+    console.log('USER:' + JSON.stringify(user))
     return this.http.post(
       environment.url + '/login',
-      authCredentials,
+      user,
       this.header
     );
   }

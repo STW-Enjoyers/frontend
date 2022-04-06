@@ -34,10 +34,10 @@ export class RegistroComponent implements OnInit {
   registerForm!: FormGroup;
   // Input error messages
   formErrors = {
-    Email: undefined,
-    Username: undefined,
-    Password: undefined,
-    ConfirmPassword:undefined
+    email: undefined,
+    username: undefined,
+    password: undefined,
+    confirmPassword:undefined
   };
 
   constructor(
@@ -50,12 +50,12 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
     // Init form validators
     this.registerForm = this.fb.group({
-      Username: ['', [Validators.required]],
-      Email: ['', [Validators.required, Validators.pattern(this.validator.regex.email)]],
-      Password: ['', [Validators.required, Validators.minLength(5)]],
-      ConfirmPassword: ['', [Validators.required, Validators.minLength(5)]],
+      username: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.pattern(this.validator.regex.email)]],
+      password: ['', [Validators.required, Validators.minLength(5)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(5)]],
     }, {
-      validator: this.validator.matchConfirmItems('Password', 'ConfirmPassword'),
+      validator: this.validator.matchConfirmItems('password', 'confirmPassword'),
     });
     // Subscribe on value change
     this.registerForm.valueChanges.subscribe(

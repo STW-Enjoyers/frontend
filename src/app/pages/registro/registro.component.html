@@ -5,28 +5,28 @@
       <form class="border border-light p-5" [formGroup]="registerForm">
         <div class="form-group mb-4">
           <label class="text-start">{{emailLabel}}</label><br>
-          <input type="text" class="form-control p-3" formControlName="Email" placeholder="{{emailPlaceholder}}"
-                 [ngClass]="{ 'is-invalid': formErrors.Email }"  (blur)="updateValidationErrors()"/>
-          <span class="text-danger" *ngIf="formErrors.Email">{{formErrors.Email}}</span>
+          <input type="text" class="form-control p-3" formControlName="email" placeholder="{{emailPlaceholder}}"
+                 [ngClass]="{ 'is-invalid': formErrors.email }"  (blur)="updateValidationErrors()"/>
+          <span class="text-danger" *ngIf="formErrors.email">{{formErrors.email}}</span>
         </div>
         <div class="form-group mb-5">
           <label>{{usernameLabel}}</label>
-          <input type="text" class="form-control p-3" formControlName="Username" placeholder="{{usernamePlaceholder}}"
-                 [ngClass]="{ 'is-invalid':formErrors.Username }" (blur)="updateValidationErrors()"/>
-          <span class="text-danger" *ngIf="formErrors.Username">{{formErrors.Username}}</span>
+          <input type="text" class="form-control p-3" formControlName="username" placeholder="{{usernamePlaceholder}}"
+                 [ngClass]="{ 'is-invalid':formErrors.username }" (blur)="updateValidationErrors()"/>
+          <span class="text-danger" *ngIf="formErrors.username">{{formErrors.username}}</span>
         </div>
         <div class="form-group mb-5">
           <label>{{passwordLabel}}</label> <br>
           <span class="text-secondary">La contraseña debe tener al menos 5 caracteres</span>
-          <input type="password" class="form-control p-3" formControlName="Password" placeholder="{{passwordPlaceholder}}"
-                 [ngClass]="{ 'is-invalid':formErrors.Password }" (blur)="updateValidationErrors()"/>
-          <span class="text-danger" *ngIf="formErrors.Password">{{formErrors.Password}}</span>
+          <input type="password" class="form-control p-3" formControlName="password" placeholder="{{passwordPlaceholder}}"
+                 [ngClass]="{ 'is-invalid':formErrors.password }" (blur)="updateValidationErrors()"/>
+          <span class="text-danger" *ngIf="formErrors.password">{{formErrors.password}}</span>
         </div>
         <div class="form-group mb-5">
           <label>{{confirmPasswordLabel}}</label>
-          <input type="password" class="form-control p-3" formControlName="ConfirmPassword" placeholder="{{confirmPasswordPlaceholder}}"
-                 [ngClass]="{ 'is-invalid':formErrors.ConfirmPassword }" (blur)="updateValidationErrors()"/>
-          <span class="text-danger" *ngIf="formErrors.ConfirmPassword">{{formErrors.ConfirmPassword}}</span>
+          <input type="password" class="form-control p-3" formControlName="confirmPassword" placeholder="{{confirmPasswordPlaceholder}}"
+                 [ngClass]="{ 'is-invalid':formErrors.confirmPassword }" (blur)="updateValidationErrors()"/>
+          <span class="text-danger" *ngIf="formErrors.confirmPassword">{{formErrors.confirmPassword}}</span>
         </div>
         <app-button [text]="submitButton" [disabled]="!registerForm.valid" (btnClick)="onSubmit()"></app-button>
         <p class="mt-5"> {{redirectMessage}} <a href='/login'>{{redirectButton}}</a></p>

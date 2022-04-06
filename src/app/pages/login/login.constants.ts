@@ -8,12 +8,12 @@ export const REDIRECT_MESSAGE:string = "¿No estás registrado/a todavía?";
 export const REDIRECT_BUTTON:string = "Registrar";
 
 export const VALIDATION_MESSAGES = {
-  'Email': {
-    'required': 'Introduce tu correo',
-    'pattern': 'El formato del correo no es correcto'
+  'email': {
+    'required': 'Por favor, introduce tu correo electrónico',
+    'pattern': 'Por favor, introduce un correo electrónico válido',
   },
-  'Password': {
-    'required': 'Introduce tu contraseña'
+  'password': {
+    'required': 'Por favor, introduce tu contraseña',
   },
 };
 
