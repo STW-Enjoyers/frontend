@@ -14,7 +14,8 @@ Production variables are located in `/src/environments/environment.prod.ts`
 ## Heroku
 Heroku is configured to deploy all commits to main branch.  
 Heroku starts the app reading from `Procfile`.
-##Protractor
+
+## Protractor
 Config and test files are in `/e2e` directory.  
 Set up:  
 1. Run `npm install -g protractor`.  
