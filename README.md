@@ -24,4 +24,3 @@ Run tests:
 2. Run `npm run e2e`.  
    (If this command fails, update your chrome version
 using this command `sudo apt-get update && sudo apt-get --only-upgrade install google-chrome-stable`)
-
