@@ -1,11 +1,12 @@
 /**************************************************
  * file: form.validator.ts
  * coms: Validator for FormGroup form.
- * This code has been modified from tutorial https://morioh.com/p/a7831806801
+ * This code has been modified from tutorial https://morioh.com/p/a78318068011
  *************************************************/
 
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import {stringify} from "@angular/compiler/src/util";
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,6 @@ export class FormValidatorService {
 
         // @ts-ignore
         const messages = validationMessages[key];
-
         for (const errorKey in abstractControl.errors) {
           if (errorKey) {
             // @ts-ignore

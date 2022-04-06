@@ -1,6 +1,6 @@
 /***************************************
  * file: login.component.ts
- * coms: Implements a reactive form.
+ * coms: Implements a reactive login form.
  ***************************************/
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { FormValidatorService} from "../../services/form-validator.service";
 
 import * as LoginConstants from './login.constants'
+import {REDIRECT_MESSAGE} from "../registro/registro.constants";
 
 @Component({
   selector: 'app-login',
@@ -16,15 +17,15 @@ import * as LoginConstants from './login.constants'
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  // Text
+  // Constants
   title:string = LoginConstants.TITLE;
   emailLabel:string = LoginConstants.EMAIL_LABEL;
   emailPlaceholder:string = LoginConstants.EMAIL_PLACEHOLDER;
   passwordLabel:string = LoginConstants.PASSWORD_LABEL;
   passwordPlaceholder:string = LoginConstants.PASSWORD_PLACEHOLDER;
   submitButton:string = LoginConstants.SUBMIT_BUTTON;
-  registerMessage:string = LoginConstants.REGISTER_MESSAGE;
-  registeRedirect: string = LoginConstants.REGISTER_REDIRECT;
+  redirectMessage:string = LoginConstants.REDIRECT_MESSAGE;
+  redirectButton: string = LoginConstants.REDIRECT_BUTTON;
   // Form
   loginForm!: FormGroup;
   // Input error messages
@@ -57,6 +58,11 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    if (!this.loginForm.valid) {
+      this.updateValidationErrors();
+      return;
+    }
+
     this.userService.login(this.loginForm.value).subscribe(
       (res: any) => {
         console.log('Sin problema man');

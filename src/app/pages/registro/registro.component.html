@@ -1,70 +1,36 @@
-<div>
-  <img
-    alt="Cat icon"
-    id="icon"
-    src="../../assets/img/undraw_Playful_cat_re_ac9g.png"
-    style="width: 80%"
-  />
+<div class="container mt-5">
+  <div class="row">
+    <div class=" col-md-10 col-lg-7 mx-auto">
+      <h1 class="display-4 text-center">{{title}}</h1>
+      <form class="border border-light p-5" [formGroup]="registerForm">
+        <div class="form-group mb-4">
+          <label class="text-start">{{emailLabel}}</label><br>
+          <input type="text" class="form-control p-3" formControlName="Email" placeholder="{{emailPlaceholder}}"
+                 [ngClass]="{ 'is-invalid': formErrors.Email }"  (blur)="updateValidationErrors()"/>
+          <span class="text-danger" *ngIf="formErrors.Email">{{formErrors.Email}}</span>
+        </div>
+        <div class="form-group mb-5">
+          <label>{{usernameLabel}}</label>
+          <input type="text" class="form-control p-3" formControlName="Username" placeholder="{{usernamePlaceholder}}"
+                 [ngClass]="{ 'is-invalid':formErrors.Username }" (blur)="updateValidationErrors()"/>
+          <span class="text-danger" *ngIf="formErrors.Username">{{formErrors.Username}}</span>
+        </div>
+        <div class="form-group mb-5">
+          <label>{{passwordLabel}}</label> <br>
+          <span class="text-secondary">La contraseña debe tener al menos 5 caracteres</span>
+          <input type="password" class="form-control p-3" formControlName="Password" placeholder="{{passwordPlaceholder}}"
+                 [ngClass]="{ 'is-invalid':formErrors.Password }" (blur)="updateValidationErrors()"/>
+          <span class="text-danger" *ngIf="formErrors.Password">{{formErrors.Password}}</span>
+        </div>
+        <div class="form-group mb-5">
+          <label>{{confirmPasswordLabel}}</label>
+          <input type="password" class="form-control p-3" formControlName="ConfirmPassword" placeholder="{{confirmPasswordPlaceholder}}"
+                 [ngClass]="{ 'is-invalid':formErrors.ConfirmPassword }" (blur)="updateValidationErrors()"/>
+          <span class="text-danger" *ngIf="formErrors.ConfirmPassword">{{formErrors.ConfirmPassword}}</span>
+        </div>
+        <app-button [text]="submitButton" [disabled]="!registerForm.valid" (btnClick)="onSubmit()"></app-button>
+        <p class="mt-5"> {{redirectMessage}} <a href='/login'>{{redirectButton}}</a></p>
+      </form>
+    </div>
+  </div>
 </div>
-<form
-  #registerForm="ngForm"
-  (ngSubmit)="registerForm.valid && onSubmit(registerForm)"
->
-  <input
-    #username="ngModel"
-    [(ngModel)]="userService.actUser.username"
-    [ngClass]="{ 'invalid-textbox': registerForm.submitted && !username.valid }"
-    name="username"
-    placeholder="Nombre de usuario"
-    required
-    type="text"
-  />
-  <div *ngIf="registerForm.submitted && email.errors">
-    <label *ngIf="username.errors?.['required']" class="validation-message">
-      ¡Falta este campo!
-    </label>
-    <label *ngIf="username.errors?.['pattern']" class="validation-message">
-      Nombre de usuario inváido.
-    </label>
-  </div>
-  <input
-    #email="ngModel"
-    [(ngModel)]="userService.actUser.email"
-    [ngClass]="{ 'invalid-textbox': registerForm.submitted && !email.valid }"
-    [pattern]="emailRegex"
-    name="email"
-    placeholder="Email"
-    required
-    type="text"
-  />
-  <div *ngIf="registerForm.submitted && email.errors">
-    <label *ngIf="email.errors?.['required']" class="validation-message">
-      ¡Falta este campo!
-    </label>
-    <label *ngIf="email.errors?.['pattern']" class="validation-message">
-      Email inválido.
-    </label>
-  </div>
-
-  <input
-    #password="ngModel"
-    [(ngModel)]="userService.actUser.password"
-    [ngClass]="{ 'invalid-textbox': registerForm.submitted && !password.valid }"
-    minlength="5"
-    name="password"
-    placeholder="Contraseña"
-    required
-    type="password"
-  />
-  <div *ngIf="registerForm.submitted && password.errors">
-    <label *ngIf="password.errors?.['required']" class="validation-message">
-      ¡Falta este campo!
-    </label>
-    <label *ngIf="password.errors?.['minlength']" class="validation-message">
-      Mínimo 5 cáracteres.
-    </label>
-  </div>
-  <input placeholder="Registrar" type="submit"/>
-</form>
-
-<div *ngIf="success" class="success">Saved successfully</div>
