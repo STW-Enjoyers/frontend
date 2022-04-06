@@ -34,6 +34,6 @@ jobs:
           sudo apt-get update
           sudo apt-get --only-upgrade install google-chrome-stable
       - name: Run angular app
-        run: npm run start &
+        run: npm run start-prod &
       - name: E2E tests
         run: npm run e2e -- --configuration=ci

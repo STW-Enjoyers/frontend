@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { AppComponent } from './app.component';
 import {HomeComponent} from "./pages/home/home.component";
 import {ButtonComponent} from "./components/button/button.component";
@@ -9,6 +11,14 @@ import { HeaderComponent } from './components/header/header.component';
 import { FiltradorNotasComponent } from './pages/filtrador-notas/filtrador-notas.component';
 import { ListaCarrerasComponent } from './pages/lista-carreras/lista-carreras.component';
 import { MapaErasmusComponent } from './pages/mapa-erasmus/mapa-erasmus.component';
+import { RegistroComponent } from './pages/registro/registro.component';
+
+import { UserService } from './services/user.service';
+
+import { AuthGuard } from './guards/auth.guard';
+import { AuthInterceptor } from './guards/auth.interceptor';
+import { LoginComponent } from './pages/login/login.component';
+import { AjustesUsuarioComponent } from './pages/ajustes-usuario/ajustes-usuario.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +28,22 @@ import { MapaErasmusComponent } from './pages/mapa-erasmus/mapa-erasmus.componen
     HeaderComponent,
     FiltradorNotasComponent,
     ListaCarrerasComponent,
-    MapaErasmusComponent
+    MapaErasmusComponent,
+    RegistroComponent,
+    LoginComponent,
+    AjustesUsuarioComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    UserService,
+    AuthGuard,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

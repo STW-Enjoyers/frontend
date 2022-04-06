@@ -1,0 +1,70 @@
+<div>
+  <img
+    alt="Cat icon"
+    id="icon"
+    src="../../assets/img/undraw_Playful_cat_re_ac9g.png"
+    style="width: 80%"
+  />
+</div>
+<form
+  #registerForm="ngForm"
+  (ngSubmit)="registerForm.valid && onSubmit(registerForm)"
+>
+  <input
+    #username="ngModel"
+    [(ngModel)]="userService.actUser.username"
+    [ngClass]="{ 'invalid-textbox': registerForm.submitted && !username.valid }"
+    name="username"
+    placeholder="Nombre de usuario"
+    required
+    type="text"
+  />
+  <div *ngIf="registerForm.submitted && email.errors">
+    <label *ngIf="username.errors?.['required']" class="validation-message">
+      ¡Falta este campo!
+    </label>
+    <label *ngIf="username.errors?.['pattern']" class="validation-message">
+      Nombre de usuario inváido.
+    </label>
+  </div>
+  <input
+    #email="ngModel"
+    [(ngModel)]="userService.actUser.email"
+    [ngClass]="{ 'invalid-textbox': registerForm.submitted && !email.valid }"
+    [pattern]="emailRegex"
+    name="email"
+    placeholder="Email"
+    required
+    type="text"
+  />
+  <div *ngIf="registerForm.submitted && email.errors">
+    <label *ngIf="email.errors?.['required']" class="validation-message">
+      ¡Falta este campo!
+    </label>
+    <label *ngIf="email.errors?.['pattern']" class="validation-message">
+      Email inválido.
+    </label>
+  </div>
+
+  <input
+    #password="ngModel"
+    [(ngModel)]="userService.actUser.password"
+    [ngClass]="{ 'invalid-textbox': registerForm.submitted && !password.valid }"
+    minlength="5"
+    name="password"
+    placeholder="Contraseña"
+    required
+    type="password"
+  />
+  <div *ngIf="registerForm.submitted && password.errors">
+    <label *ngIf="password.errors?.['required']" class="validation-message">
+      ¡Falta este campo!
+    </label>
+    <label *ngIf="password.errors?.['minlength']" class="validation-message">
+      Mínimo 5 cáracteres.
+    </label>
+  </div>
+  <input placeholder="Registrar" type="submit"/>
+</form>
+
+<div *ngIf="success" class="success">Saved successfully</div>
