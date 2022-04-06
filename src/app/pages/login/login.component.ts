@@ -1,7 +1,12 @@
+/***************************************
+ * file: login.component.ts
+ * coms: Implements a reactive form.
+ ***************************************/
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { FormValidatorService} from "../../services/form-validator.service";
 
 import * as LoginConstants from './login.constants'
 
@@ -11,6 +16,7 @@ import * as LoginConstants from './login.constants'
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  // Text
   title:string = LoginConstants.TITLE;
   emailLabel:string = LoginConstants.EMAIL_LABEL;
   emailPlaceholder:string = LoginConstants.EMAIL_PLACEHOLDER;
@@ -19,18 +25,39 @@ export class LoginComponent implements OnInit {
   submitButton:string = LoginConstants.SUBMIT_BUTTON;
   registerMessage:string = LoginConstants.REGISTER_MESSAGE;
   registeRedirect: string = LoginConstants.REGISTER_REDIRECT;
-  emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  model = {
-    email: '',
-    password: '',
-  };
+  // Form
+  loginForm!: FormGroup;
+  // Input error messages
+  formErrors = { Email: undefined, Password: undefined };
 
-  constructor(public userService: UserService, public router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    public router: Router,
+    private validator: FormValidatorService
+    ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Init form validators
+    this.loginForm = this.fb.group({
+        Email: ['', [Validators.required, Validators.pattern(this.validator.regex.email)]],
+        Password: ['', [Validators.required]],
+      });
+    // Subscribe on value change
+    this.loginForm.valueChanges.subscribe(
+      value => {
+        this.updateValidationErrors()
+      }
+    );
+  }
 
-  onSubmit(form: NgForm) {
-    this.userService.login(form.value).subscribe(
+  // Get errors and update form
+  updateValidationErrors() {
+    this.formErrors = this.validator.getValidationErrors(this.loginForm, LoginConstants.VALIDATION_MESSAGES);
+  }
+
+  onSubmit() {
+    this.userService.login(this.loginForm.value).subscribe(
       (res: any) => {
         console.log('Sin problema man');
         this.userService.setToken(res['token']);
