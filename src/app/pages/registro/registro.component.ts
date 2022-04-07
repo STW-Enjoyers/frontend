@@ -10,6 +10,7 @@ import * as RegistroConstants from "./registro.constants";
 import {Router} from "@angular/router";
 import {FormValidatorService} from "../../services/form-validator.service";
 import * as LoginConstants from "../login/login.constants";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-registro',
@@ -81,13 +82,12 @@ export class RegistroComponent implements OnInit {
     this.userService.postUser(this.registerForm.value).subscribe(
       (res) => {
         this.duplicateEmail = false
-
       },
       (error) => {
         if (error.status === 422) {
           // Duplicate email error
           this.duplicateEmail = true
-        }
+        }  else throw new HttpErrorResponse(error) //GlobalErrorHandler will handle it
       }
     );
   }

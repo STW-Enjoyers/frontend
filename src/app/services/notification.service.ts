@@ -5,11 +5,11 @@ import { Injectable  } from '@angular/core';
 })
 export class NotificationService {
 
-  notifications: any[] = [];
+  //notifications: any[] = [];
 
   // Push error notifications
   showError(message: string) {
-    let options = {
+   /* let options = {
       classname: 'bg-danger text-light position-absolute top-0 start-0',
       delay: 10000,
       autohide: true,
@@ -17,10 +17,12 @@ export class NotificationService {
     }
     this.notifications = []
     this.notifications.push({ ...options });
+    */
+    alert(message) //TODO: INSTEAD OF AN ALERT, IMPLEMENT A TOAST COMPONENT THAT CONSUMES  THIS SERVICE
   }
 
   // Remove notification
   remove(notification: any) {
-    this.notifications = this.notifications.filter(t => t !== notification);
+    //this.notifications = this.notifications.filter(t => t !== notification);
   }
 }

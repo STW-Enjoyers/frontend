@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { AppComponent } from './app.component';
@@ -24,7 +23,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { AjustesUsuarioComponent } from './pages/ajustes-usuario/ajustes-usuario.component';
 import {ServerErrorInterceptor} from "./guards/error.interceptor";
 import {GlobalErrorHandler} from "./global-error-handler";
-import { ToastComponent } from './components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +36,6 @@ import { ToastComponent } from './components/toast/toast.component';
     RegistroComponent,
     LoginComponent,
     AjustesUsuarioComponent,
-    ToastComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +43,6 @@ import { ToastComponent } from './components/toast/toast.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbModule
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler },

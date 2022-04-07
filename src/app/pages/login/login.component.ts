@@ -10,6 +10,7 @@ import { FormValidatorService} from "../../services/form-validator.service";
 
 import * as LoginConstants from './login.constants'
 import {REDIRECT_MESSAGE} from "../registro/registro.constants";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -80,7 +81,7 @@ export class LoginComponent implements OnInit {
         if (error.status === 404) {
           // Email or password doesnt match with a existing user
           this.unknownUser = true
-        }
+        } else throw new HttpErrorResponse(error) //GlobalErrorHandler will handle it
       }
     );
   }

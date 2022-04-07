@@ -3,6 +3,9 @@
   <div class="alert alert-info" role="alert">
     <a href='/login'>Clica aquí para acceder al login. (Link temporal hasta tener un header) </a>
   </div>
+  <div class="alert alert-info" role="alert">
+    <a href='#' (click)="testNotification()">Clica aquí para generar una notificación de error. (Link temporal)</a>
+  </div>
   <div class="row d-flex justify-content-center" *ngFor="let card of cards">
     <div class="col-auto col-lg">
       <h2><b>{{card.title}}</b></h2>
