@@ -3,12 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {HomeComponent} from "./pages/home/home.component";
-import {ButtonComponent} from "./components/button/button.component";
+import { HomeComponent } from "./pages/home/home.component";
+import { ButtonComponent } from "./components/button/button.component";
 import { HeaderComponent } from './components/header/header.component';
 import { FiltradorNotasComponent } from './pages/filtrador-notas/filtrador-notas.component';
 import { ListaCarrerasComponent } from './pages/lista-carreras/lista-carreras.component';
 import { MapaErasmusComponent } from './pages/mapa-erasmus/mapa-erasmus.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MapaErasmusComponent } from './pages/mapa-erasmus/mapa-erasmus.componen
     HeaderComponent,
     FiltradorNotasComponent,
     ListaCarrerasComponent,
-    MapaErasmusComponent
+    MapaErasmusComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

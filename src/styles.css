@@ -1,4 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 p {
-  font-size: 22px; 
+  font-size: 18px; 
+}
+
+.hr-white-space-16 {
+  margin: 16px;
+  color: white;
+  border-color: white;
+}
+
+.hr-white-space-32 {
+  margin: 32px;
+  color: white;
+  border-color: white;
 }
