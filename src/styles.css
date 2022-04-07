@@ -6,11 +6,13 @@ p {
 .hr-white-space-16 {
   margin: 16px;
   color: white;
+  background-color: white;
   border-color: white;
 }
 
 .hr-white-space-32 {
   margin: 32px;
   color: white;
+  background-color: white;
   border-color: white;
 }
