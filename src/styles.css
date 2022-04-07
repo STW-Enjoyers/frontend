@@ -3,16 +3,15 @@ p {
   font-size: 18px; 
 }
 
-.hr-white-space-16 {
+hr.space-16 {
   margin: 16px;
-  color: white;
-  background-color: white;
-  border-color: white;
+  border: 0px solid;
+  border-radius: 0px;
 }
 
-.hr-white-space-32 {
+hr.space-32 {
   margin: 32px;
   color: white;
-  background-color: white;
-  border-color: white;
+  border: 0px solid white;
+  border-radius: 0px;
 }
