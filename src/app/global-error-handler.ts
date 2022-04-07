@@ -1,6 +1,8 @@
 /************************************************************
  * file: global-error-handler.ts
- * coms: This code has been modified from this tutorial:
+ * coms: Handle all exceptions unhandled in the application.
+ *       If other class handle an exception, this class won't be called
+ *       Tutorial where this code comes from:
  * https://medium.com/@michael.karen/esperando-lo-inesperado-buenas-pr%C3%A1cticas-para-el-manejo-de-errores-en-angular-dc578da68ef9
  ************************************************************/
 

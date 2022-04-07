@@ -1,3 +1,9 @@
+/**************************************************
+ * file: error.interceptor.ts
+ * Coms: Intercept all HttpResponses.
+ *       If status response != 2XX, it throws an exception.
+ *       (This exception will be captured later by GlobalErrorHandler)
+ **************************************************/
 import { Injectable } from '@angular/core';
 import {
   HttpEvent, HttpRequest, HttpHandler,
@@ -5,8 +11,6 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { environment } from '../../environments/environment'
-import {UserService} from "../services/user.service";
 import {Router} from "@angular/router";
 
 @Injectable()

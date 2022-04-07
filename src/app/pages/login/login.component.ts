@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
         email: ['', [Validators.required, Validators.pattern(this.validator.regex.email)]],
         password: ['', [Validators.required]],
       });
-    // Subscribe on value change
+    // Subscribe on values changes in form
     this.loginForm.valueChanges.subscribe(
       value => {
         this.updateValidationErrors()
@@ -63,6 +63,7 @@ export class LoginComponent implements OnInit {
     this.formErrors = this.validator.getValidationErrors(this.loginForm, LoginConstants.VALIDATION_MESSAGES);
   }
 
+  // If form is OK, log user in backend.
   onSubmit() {
     if (!this.loginForm.valid) {
       this.updateValidationErrors();
@@ -71,15 +72,12 @@ export class LoginComponent implements OnInit {
 
     this.userService.login(this.loginForm.value).subscribe(
       (res: any) => {
-        console.log('Sin problema man');
         this.unknownUser = false
         this.userService.setToken(res['token']);
         this.router.navigateByUrl('/ajustes-usuario');
       },
       (error) => {
-        console.log("NO CAPTURADO: " + JSON.stringify(error))
         if (error.status === 404) {
-          console.log("CAPTURADO UNKNOWN USER")
           // Email or password doesnt match with a existing user
           this.unknownUser = true
         }

@@ -1,6 +1,6 @@
 /**************************************************
  * file: toast.component.ts
- * Coms: This component show all notifications pushed in NotificationService
+ * Coms: This component show all notifications pushed with NotificationService
  **************************************************/
 
 import {Component} from '@angular/core';

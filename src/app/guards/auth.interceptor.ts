@@ -1,8 +1,8 @@
-/*
+/***********************************************************
  * file: auth.interceptor.ts
- * coms: It Captures a request and then inserts a JWT on the Bearer token header
- *       if it is needed.
- */
+ * coms: Intercept all HttpRequest.
+ * If request doesn't have a  'noauth' header, it inserts a JWT on the Bearer token header
+ **********************************************************/
 import {
   HttpHandler,
   HttpInterceptor,
