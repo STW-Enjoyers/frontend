@@ -23,8 +23,9 @@ Set up:
 Run tests:  
 1. Run `npm run start-prod`. (Angular project must be running)  
 2. Run `npm run e2e`.  
-   (If this command fails, update your chrome version
-using this command `sudo apt-get update && sudo apt-get --only-upgrade install google-chrome-stable`)
+      (If this command fails, update your chrome version
+   using this command `sudo apt-get update && sudo apt-get --only-upgrade install google-chrome-stable`.)  
+      (If command keeps failing, update webdriver too `node node_modules/protractor/bin/webdriver-manager update`)
 
 ## Error handling  
 ![errorHandling](https://user-images.githubusercontent.com/45805074/162187709-668f8276-c2f7-45cd-9e05-cc9258c43d47.png)
