@@ -30,15 +30,18 @@ export class RegistroComponent implements OnInit {
   submitButton:string = RegistroConstants.SUBMIT_BUTTON;
   redirectMessage:string = RegistroConstants.REDIRECT_MESSAGE;
   redirectButton: string = RegistroConstants.REDIRECT_BUTTON;
+  duplicateEmailMessage: string =  RegistroConstants.DUPLICATE_EMAIL_MESSAGE;
   // Form
   registerForm!: FormGroup;
-  // Input error messages
+  // Client errors (undefined = No errors)
   formErrors = {
     email: undefined,
     username: undefined,
     password: undefined,
     confirmPassword:undefined
   };
+  // Server errors
+  duplicateEmail: boolean = false
 
   constructor(
     private fb: FormBuilder,
@@ -77,9 +80,14 @@ export class RegistroComponent implements OnInit {
 
     this.userService.postUser(this.registerForm.value).subscribe(
       (res) => {
+        this.duplicateEmail = false
 
       },
-      (err) => {
+      (error) => {
+        if (error.status === 422) {
+          // Duplicate email error
+          this.duplicateEmail = true
+        }
       }
     );
   }

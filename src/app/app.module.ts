@@ -1,9 +1,11 @@
-import { NgModule } from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 import { AppComponent } from './app.component';
 import {HomeComponent} from "./pages/home/home.component";
@@ -20,6 +22,9 @@ import { AuthGuard } from './guards/auth.guard';
 import { AuthInterceptor } from './guards/auth.interceptor';
 import { LoginComponent } from './pages/login/login.component';
 import { AjustesUsuarioComponent } from './pages/ajustes-usuario/ajustes-usuario.component';
+import {ServerErrorInterceptor} from "./guards/error.interceptor";
+import {GlobalErrorHandler} from "./global-error-handler";
+import { ToastComponent } from './components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -32,17 +37,21 @@ import { AjustesUsuarioComponent } from './pages/ajustes-usuario/ajustes-usuario
     MapaErasmusComponent,
     RegistroComponent,
     LoginComponent,
-    AjustesUsuarioComponent
+    AjustesUsuarioComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
     UserService,
     AuthGuard,
   ],

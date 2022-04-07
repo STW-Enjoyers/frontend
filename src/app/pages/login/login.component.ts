@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
   submitButton:string = LoginConstants.SUBMIT_BUTTON;
   redirectMessage:string = LoginConstants.REDIRECT_MESSAGE;
   redirectButton: string = LoginConstants.REDIRECT_BUTTON;
+  unknownUserMessage: string = LoginConstants.UNKNOWN_USER_MESSAGE;
   // Form
   loginForm!: FormGroup;
   // Input error messages
@@ -33,6 +34,8 @@ export class LoginComponent implements OnInit {
     email: undefined,
     password: undefined
   };
+  // Server errors
+  unknownUser:boolean = false
 
   constructor(
     private fb: FormBuilder,
@@ -69,10 +72,18 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.loginForm.value).subscribe(
       (res: any) => {
         console.log('Sin problema man');
+        this.unknownUser = false
         this.userService.setToken(res['token']);
         this.router.navigateByUrl('/ajustes-usuario');
       },
-      //(err) => {}
+      (error) => {
+        console.log("NO CAPTURADO: " + JSON.stringify(error))
+        if (error.status === 404) {
+          console.log("CAPTURADO UNKNOWN USER")
+          // Email or password doesnt match with a existing user
+          this.unknownUser = true
+        }
+      }
     );
   }
 }

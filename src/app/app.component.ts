@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {Title} from "@angular/platform-browser";
+import {NotificationService} from "./services/notification.service";
 
 @Component({
   selector: 'app-root',

@@ -29,6 +29,7 @@
           <span class="text-danger" *ngIf="formErrors.confirmPassword">{{formErrors.confirmPassword}}</span>
         </div>
         <app-button [text]="submitButton" [disabled]="!registerForm.valid" (btnClick)="onSubmit()"></app-button>
+        <p class="text-danger mt-2" *ngIf="duplicateEmail">{{duplicateEmailMessage}}</p>
         <p class="mt-5"> {{redirectMessage}} <a href='/login'>{{redirectButton}}</a></p>
       </form>
     </div>

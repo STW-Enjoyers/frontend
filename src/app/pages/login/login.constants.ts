@@ -4,6 +4,7 @@ export const EMAIL_PLACEHOLDER:string = "Escribe el correo";
 export const PASSWORD_LABEL:string = "Contraseña";
 export const PASSWORD_PLACEHOLDER:string = "Escribe la contraseña";
 export const SUBMIT_BUTTON:string = "Entrar";
+export const UNKNOWN_USER_MESSAGE:string="La contraseña o el correo no son correctos. Compruébalos."
 export const REDIRECT_MESSAGE:string = "¿No estás registrado/a todavía?";
 export const REDIRECT_BUTTON:string = "Registrar";
 

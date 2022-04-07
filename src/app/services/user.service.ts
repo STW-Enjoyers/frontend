@@ -17,11 +17,14 @@ export class UserService {
   }
 
   postUser(user: User) {
-    return this.http.post(environment.url + '/register', user, this.header);
+    return this.http.post(
+      environment.url + '/register',
+      user,
+      this.header,
+    );
   }
 
   login(user: User) {
-    console.log('USER:' + JSON.stringify(user))
     return this.http.post(
       environment.url + '/login',
       user,
@@ -62,4 +65,6 @@ export class UserService {
     //TODO cambiar el 1000
     else return null;
   }
+
+
 }

@@ -20,6 +20,7 @@
           </span>
         </div>
         <app-button [text]="submitButton" [disabled]="!loginForm.valid" (btnClick)="onSubmit()"></app-button>
+        <p class="text-danger mt-2" *ngIf="unknownUser">{{unknownUserMessage}}</p>
         <p class="mt-5"> {{redirectMessage}} <a href='/registro'>{{redirectButton}}</a></p>
       </form>
     </div>
