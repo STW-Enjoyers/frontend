@@ -1,5 +1,4 @@
 import { browser, by, element } from 'protractor';
-import {welcomeCards} from "../../src/app/pages/home/welcomeCards";
 
 describe('Home page', function() {
   beforeAll( function () {
