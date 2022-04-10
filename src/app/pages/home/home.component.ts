@@ -21,6 +21,11 @@ export class HomeComponent implements OnInit {
     this.router.navigate([link]);
   }
 
+  // For testing purposes, (will disapear soon)
+  testNotification() {
+    throw new Error('Soy un error muy malo')
+  }
+
 
 
 }

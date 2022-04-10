@@ -1,0 +1,28 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class=" col-md-10 col-lg-7 mx-auto">
+      <h1 class="display-4 text-center">{{title}}</h1>
+      <form class="border border-light p-5" [formGroup]="loginForm">
+        <div class="form-group mb-4">
+          <label class="text-start">{{emailLabel}}</label><br>
+          <input type="text" class="form-control p-3" formControlName="email" placeholder="{{emailPlaceholder}}"
+                 [ngClass]="{ 'is-invalid': formErrors.email }" (blur)="updateValidationErrors()"/>
+          <span class="text-danger" *ngIf="formErrors.email">
+            {{formErrors.email}}
+          </span>
+        </div>
+        <div class="form-group mb-5">
+          <label>{{passwordLabel}}</label>
+          <input type="password" class="form-control p-3" formControlName="password" placeholder="{{passwordPlaceholder}}"
+                 [ngClass]="{ 'is-invalid': formErrors.password }" (blur)="updateValidationErrors()"/>
+          <span class="text-danger" *ngIf="formErrors.password">
+            {{formErrors.password}}
+          </span>
+        </div>
+        <app-button [text]="submitButton" [disabled]="!loginForm.valid" (btnClick)="onSubmit()"></app-button>
+        <p class="text-danger mt-2" *ngIf="unknownUser">{{unknownUserMessage}}</p>
+        <p class="mt-5"> {{redirectMessage}} <a href='/registro'>{{redirectButton}}</a></p>
+      </form>
+    </div>
+  </div>
+</div>
