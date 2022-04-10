@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 import { FormValidatorService} from "../../services/form-validator.service";
 
 import * as LoginConstants from './login.constants'
-import {REDIRECT_MESSAGE} from "../registro/registro.constants";
 import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({

@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import {welcomeCards} from "./welcomeCards";
-import {WelcomeCard} from "./WelcomeCard";
-
+import * as HomeConstants from "./home.constants";
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  textHelp:string = "¿No has encontrado lo que buscabas?";
-  textUnizarLink:string = "https://www.unizar.es";
-  cards:WelcomeCard[] = welcomeCards;
+  // Constants
+  textHelp:string = HomeConstants.HELP_MESSAGE;
+  textUnizarLink:string = HomeConstants.HELP_REDIRECT;
+  welcomeCards= HomeConstants.WELCOME_CARDS;
 
   constructor(private router: Router) { }
 
@@ -20,12 +19,4 @@ export class HomeComponent implements OnInit {
   goToPage(link:string): void {
     this.router.navigate([link]);
   }
-
-  // For testing purposes, (will disapear soon)
-  testNotification() {
-    throw new Error('Soy un error muy malo')
-  }
-
-
-
 }
