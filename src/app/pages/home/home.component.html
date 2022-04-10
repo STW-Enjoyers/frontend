@@ -1,17 +1,17 @@
 
 <div class="container mt-5">
-  <div class="row d-flex justify-content-center" *ngFor="let card of welcomeCards">
-    <div class="col-auto col-lg">
+  <div class="row justify-content-center" *ngFor="let card of welcomeCards">
+    <div class="col-12 col-sm-12 col-md-9">
       <h2><b>{{card.title}}</b></h2>
       <p>{{card.subtitle}}</p>
     </div>
-    <div class="col-3">
+    <div class="col-12 col-sm-12 col-md-3">
       <app-button [text]="card.buttonText" (btnClick)="goToPage(card.buttonLink)"></app-button>
     </div>
     <div class="space-16"></div>
   </div>
   <div class="row">
-    <img id="adabyron" class="img-fluid mt-5 col-11" src="/assets/adabyron.jpg" alt="">
+    <img id="adabyron" class="img-fluid mt-5" src="/assets/adabyron.jpg" alt="">
   </div>
   <p class="mt-3">{{textHelp}} <a href={{textUnizarLink}} class="link-primary">{{textUnizarLink}}</a></p>
 </div>
