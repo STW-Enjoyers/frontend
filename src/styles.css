@@ -1,7 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-p {
-  font-size: 18px;
-}
-label{
-  font-size: 20px;
-}
+p { font-size: 18px; }
+
+label{ font-size: 20px; }
+
+div.space-16 { margin: 16px; }
+div.space-32 { margin: 32px; }
+div.space-64 { margin: 64px; }
+div.space-128 { margin: 128px; }
+

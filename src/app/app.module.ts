@@ -7,8 +7,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
-import {HomeComponent} from "./pages/home/home.component";
-import {ButtonComponent} from "./components/button/button.component";
+import { HomeComponent } from "./pages/home/home.component";
+import { ButtonComponent } from "./components/button/button.component";
 import { HeaderComponent } from './components/header/header.component';
 import { FiltradorNotasComponent } from './pages/filtrador-notas/filtrador-notas.component';
 import { ListaCarrerasComponent } from './pages/lista-carreras/lista-carreras.component';
@@ -23,6 +23,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { AjustesUsuarioComponent } from './pages/ajustes-usuario/ajustes-usuario.component';
 import {ServerErrorInterceptor} from "./guards/error.interceptor";
 import {GlobalErrorHandler} from "./global-error-handler";
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {GlobalErrorHandler} from "./global-error-handler";
     RegistroComponent,
     LoginComponent,
     AjustesUsuarioComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
