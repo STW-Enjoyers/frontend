@@ -1,17 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-p {
-  font-size: 18px; 
-}
+p { font-size: 18px; }
 
-hr.space-16 {
-  margin: 16px;
-  border: 0px solid;
-  border-radius: 0px;
-}
+div.space-16 { margin: 16px; }
+div.space-32 { margin: 32px; }
+div.space-64 { margin: 64px; }
+div.space-128 { margin: 128px; }
 
-hr.space-32 {
-  margin: 32px;
-  color: white;
-  border: 0px solid white;
-  border-radius: 0px;
-}
