@@ -1,1 +1,47 @@
-<p>lista-carreras works!</p>
+<div class="container mt-5">
+  <h1 class="display-4 text-center">{{title}}</h1>
+  <button class="button" (click)="previousCity()">Previous</button>
+  <button class="button" (click)="nextCity()">Next</button>
+
+  <div class="container border">
+  <div class="row">
+    <div class="mx-auto">
+      <img id="img" class="img-fluid col-12" src="{{city.image}}" alt="">
+    </div>
+    <h3>{{city.name}}</h3>
+    <a href="{{city.web}}">{{city.web}}</a>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-9 col-lg-7 align-content-center">
+      <input type="text"
+             class="form-control rounded-pill mt-3 mb-3 p-4"
+             name="search"
+             id="search"
+             [(ngModel)]="search"
+             (ngModelChange)="updateDatatables()"
+             placeholder="{{placeholder}}"
+      />
+    </div>
+  </div>
+  </div>
+
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class=" row-border hover">
+    <thead>
+    <tr>
+      <th>Carrera</th>
+      <th>Centro</th>
+      <th class="d-none">Localidad</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of grades">
+      <td>{{ user.estudio }}</td>
+      <td>{{ user.centro }}</td>
+      <td class="d-none">{{ user.localidad }}</td>
+
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+

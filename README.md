@@ -5,11 +5,11 @@ Node: v16.13.0
 ## Development environment
 `npm run start`  
 This environment is intended to be executed with backend in localhost.  
-Development variables are located in `/src/environments/environment.ts`
+Development variables are located in `/src/environments/environmentGrade.ts`
 ## Production environment
 `npm run start-prod`  
 This environment is intended to be executed with backend deployed in Heroku.  
-Production variables are located in `/src/environments/environment.prod.ts`
+Production variables are located in `/src/environments/environment.prodGrade.ts`
 
 ## Heroku
 Heroku is configured to deploy all commits to main branch.  

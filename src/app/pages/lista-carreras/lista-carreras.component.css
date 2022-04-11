@@ -1,0 +1,16 @@
+img {
+  object-fit: none; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  width: 100%;
+  max-height: 250px;
+  margin-bottom: 1rem;
+}
+
+.col-centered{
+  float: none;
+  margin: 0 auto;
+}
+
+::placeholder {
+  font-size: 1.3em;
+}
