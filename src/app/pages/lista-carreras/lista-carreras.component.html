@@ -24,24 +24,26 @@
     </div>
   </div>
   </div>
-
-  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class=" row-border hover">
-    <thead>
-    <tr>
-      <th>Carrera</th>
-      <th>Centro</th>
-      <th class="d-none">Localidad</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let user of grades">
-      <td>{{ user.estudio }}</td>
-      <td>{{ user.centro }}</td>
-      <td class="d-none">{{ user.localidad }}</td>
-
-    </tr>
-    </tbody>
-  </table>
-
+  <div class="table-responsive">
+    <table datatable
+           [dtOptions]="dtOptions"
+           [dtTrigger]="dtTrigger"
+           class="table table-sm table-striped nowrap">
+      <thead>
+      <tr>
+        <th>Carrera</th>
+        <th>Centro</th>
+        <th class="d-none">Localidad</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of grades">
+        <td>{{ user.estudio }}</td>
+        <td class="overflow-hidden">{{ user.centro }}</td>
+        <td class="d-none">{{ user.localidad }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 

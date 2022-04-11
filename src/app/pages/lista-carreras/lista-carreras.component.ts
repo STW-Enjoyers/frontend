@@ -36,7 +36,19 @@ export class ListaCarrerasComponent implements OnInit {
     this.dtOptions = {
       pageLength: 10,
       search: true,
-      "dom":  '<<t>ip>'
+      dom:  '<<t>p>',
+      autoWidth: true,
+      language: {
+        zeroRecords: "No hemos encontrado la carrera - disculpa",
+        infoEmpty: "No hay carreras disponibles",
+        infoFiltered: "",
+        paginate: {
+          first: "Primera página",
+          last:"Última página",
+          next:"Siguiente",
+          previous: "Anterior"
+        },
+      }
     }
     // Get grades from backend and update datatables
     this.getGrades();
