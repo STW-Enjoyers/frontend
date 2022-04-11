@@ -30,52 +30,18 @@ export class ListaCarrerasComponent implements OnInit {
   constructor(private gradesService: GradesService) { }
 
   ngOnInit(): void {
-    // Config external filter associated to custom search bar
+    // Add custom filters (name and city)
     this.setExternalFilter()
-    this.dtOptions = {
-      pageLength: 10,
-      search: true,
-      dom:  '<<t>ip>',
-      scrollX: true,
-      scrollCollapse: true,
-      columnDefs: [
-        { // Handle Carreras column overflow
-          "targets": 0,
-          "width": "30%",
-          render: function ( data, type, row ) {
-            return data.length > 70
-              ? data.substr( 0, 70 ) + "..."
-              : data
-          }
-        },
-        {  // Handle cell padding (the only way that works)
-          "targets": '_all',
-          "createdCell": function (td) {
-            $(td).css('padding', '15px')
-          }
-        }
-      ],
-      language: {
-        zeroRecords: "No hemos encontrado ninguna carrera - disculpa",
-        info: "Mostrando _TOTAL_ carreras",
-        infoEmpty: "No hay carreras disponibles",
-        infoFiltered: "",
-        paginate: {
-          first: "Primera página",
-          last:"Última página",
-          next:"Siguiente",
-          previous: "Anterior"
-        },
-      }
-    }
-    // Get grades from backend and update datatables
+    // Config datatables
+    this.dtOptions = ListaCarrerasConstants.DTOPTIONS
+    // Get grades and initialize datatables
     this.getGrades();
   }
 
   ngOnDestroy(): void {
     // Reset data table every time we leave the page
     this.dtTrigger.unsubscribe();
-    // Unconfig external filter associated to custom search bar
+    // Delete custom filters
     this.unsetExternalFilter()
   }
 

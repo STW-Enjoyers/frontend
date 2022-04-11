@@ -20,4 +20,42 @@ export const CITIES = [
 
 ]
 
+// Datatables options
+export const DTOPTIONS = {
+  pageLength: 10,
+  search: true,
+  dom:  '<<t>ip>',
+  scrollX: true,
+  scrollCollapse: true,
+  columnDefs: [
+    { // Handle Carreras column overflow
+      "targets": 0,
+      "width": "30%",
+      render: function ( data: string) {
+        return data.length > 70
+          ? data.substr( 0, 70 ) + "..."
+          : data
+      }
+    },
+    {  // Handle cell padding (the only way that works)
+      "targets": '_all',
+      "createdCell": function (td: any) {
+        $(td).css('padding', '15px')
+      }
+    }
+  ],
+  language: {
+    zeroRecords: "No hemos encontrado ninguna carrera - disculpa",
+    info: "Mostrando _TOTAL_ carreras",
+    infoEmpty: "No hay carreras disponibles",
+    infoFiltered: "",
+    paginate: {
+      first: "Primera página",
+      last:"Última página",
+      next:"Siguiente",
+      previous: "Anterior"
+    },
+  }
+}
+
 
