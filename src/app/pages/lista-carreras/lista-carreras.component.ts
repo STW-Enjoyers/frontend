@@ -38,15 +38,20 @@ export class ListaCarrerasComponent implements OnInit {
       dom:  '<<t>ip>',
       scrollX: true,
       scrollCollapse: true,
-      "columnDefs": [
-        {
-          "targets": 0, // Carreras column
-          "width": "30%",  //space with next column
+      columnDefs: [
+        { // Handle Carreras column overflow
+          "targets": 0,
+          "width": "30%",
           render: function ( data, type, row ) {
-            // Handle large lines
             return data.length > 70
               ? data.substr( 0, 70 ) + "..."
               : data
+          }
+        },
+        {  // Handle cell padding (the only way that works)
+          "targets": '_all',
+          "createdCell": function (td) {
+            $(td).css('padding', '15px')
           }
         }
       ],
@@ -114,10 +119,10 @@ export class ListaCarrerasComponent implements OnInit {
   // Code modified from: http://l-lin.github.io/angular-datatables/#/advanced/custom-range-search
   setExternalFilter() {
     $.fn['dataTable'].ext.search.push((settings: any, data: string[], dataIndex: any) => {
-      const estudio:string = data[0]; // use data for the Carrera column
+      const estudio:string = data[0].toLowerCase(); // use data for the Carrera column
       const ciudad:string = data[2]; // use data for the Ciudad column
-      if ((estudio.includes(this.search) || !this.search)
-        && ciudad.includes(this.city.name)) {
+      if ((!this.search || estudio.includes(this.search.toLowerCase()))
+          && ciudad.includes(this.city.name)) {
         return true;
       }
       return false;

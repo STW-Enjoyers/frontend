@@ -38,7 +38,7 @@ import { FooterComponent } from './components/footer/footer.component';
     RegistroComponent,
     LoginComponent,
     AjustesUsuarioComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

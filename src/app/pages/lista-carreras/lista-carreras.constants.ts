@@ -1,5 +1,5 @@
 export const TITLE:string = "Foro de carreras";
-export const PLACEHOLDER:string = "Buscar carrera";
+export const PLACEHOLDER:string = "Buscar una carrera";
 
 export const CITIES = [
   {
