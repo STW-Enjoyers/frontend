@@ -37,13 +37,12 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let user of grades">
-        <td>{{ user.estudio }}</td>
-        <td class="overflow-hidden">{{ user.centro }}</td>
-        <td class="d-none">{{ user.localidad }}</td>
+      <tr *ngFor="let grade of grades">
+        <td>{{ grade.estudio }}</td>
+        <td class="overflow-hidden">{{ grade.centro }}</td>
+        <td class="d-none">{{ grade.localidad }}</td>
       </tr>
       </tbody>
     </table>
   </div>
 </div>
-

@@ -14,3 +14,7 @@ img {
 ::placeholder {
   font-size: 1.3em;
 }
+
+table {
+  width: 100%;
+}

@@ -16,7 +16,6 @@ export class ListaCarrerasComponent implements OnInit {
   // Constants
   title:string = ListaCarrerasConstants.TITLE;
   placeholder = ListaCarrerasConstants.PLACEHOLDER;
-
   grades: Grade[] = [];
   // Filter values
   search!: string; /* Search bar value */
@@ -36,10 +35,24 @@ export class ListaCarrerasComponent implements OnInit {
     this.dtOptions = {
       pageLength: 10,
       search: true,
-      dom:  '<<t>p>',
-      autoWidth: true,
+      dom:  '<<t>ip>',
+      scrollX: true,
+      scrollCollapse: true,
+      "columnDefs": [
+        {
+          "targets": 0, // Carreras column
+          "width": "30%",  //space with next column
+          render: function ( data, type, row ) {
+            // Handle large lines
+            return data.length > 70
+              ? data.substr( 0, 70 ) + "..."
+              : data
+          }
+        }
+      ],
       language: {
-        zeroRecords: "No hemos encontrado la carrera - disculpa",
+        zeroRecords: "No hemos encontrado ninguna carrera - disculpa",
+        info: "Mostrando _TOTAL_ carreras",
         infoEmpty: "No hay carreras disponibles",
         infoFiltered: "",
         paginate: {
@@ -66,7 +79,10 @@ export class ListaCarrerasComponent implements OnInit {
     this.gradesService
       .getGrades()
       .subscribe((grades) =>{
-        this.grades = grades
+        grades = this.gradesService.filterByType(grades, this.gradesService.TYPES.GRADO);
+        grades = this.gradesService.filterByCupo(grades, this.gradesService.CUPOS.GENERAL)
+        grades = this.gradesService.renameCareers(grades);
+        this.grades = grades;
         // Workaround to init datatables with dtOptions
         setTimeout(function() {
           // @ts-ignore
@@ -94,13 +110,14 @@ export class ListaCarrerasComponent implements OnInit {
     });
   }
 
-  // Set an external filter to search by grade name
+  // Set an external filter to search by grade name and city
   // Code modified from: http://l-lin.github.io/angular-datatables/#/advanced/custom-range-search
   setExternalFilter() {
     $.fn['dataTable'].ext.search.push((settings: any, data: string[], dataIndex: any) => {
       const estudio:string = data[0]; // use data for the Carrera column
       const ciudad:string = data[2]; // use data for the Ciudad column
-      if ((estudio.includes(this.search) || !this.search) && ciudad.includes(this.city.name)) {
+      if ((estudio.includes(this.search) || !this.search)
+        && ciudad.includes(this.city.name)) {
         return true;
       }
       return false;
