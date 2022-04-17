@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 
 import { AppComponent } from './app.component';
@@ -45,6 +46,7 @@ import { FooterComponent } from './components/footer/footer.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    LeafletModule
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
