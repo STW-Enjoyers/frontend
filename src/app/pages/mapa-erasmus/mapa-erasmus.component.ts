@@ -1,6 +1,8 @@
 // Documentation, https://github.com/Asymmetrik/ngx-leaflet
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import {ErasmusService} from "../../services/erasmus.service";
+import {HttpErrorResponse} from "@angular/common/http";
 @Component({
   selector: 'app-mapa-erasmus',
   templateUrl: './mapa-erasmus.component.html',
@@ -21,9 +23,18 @@ export class MapaErasmusComponent implements OnInit {
     L.marker([ 46.879966, -121.726909 ])
   ];
 
-  constructor() { }
+  constructor(private erasmusService: ErasmusService) { }
 
   ngOnInit(): void {
+    this.getErasmusIn()
+  }
+
+  getErasmusIn() {
+    this.erasmusService.getErasmusIn().subscribe(
+      (res: any) => {
+        console.log(JSON.stringify(res))
+      },
+    );
   }
 
 }
