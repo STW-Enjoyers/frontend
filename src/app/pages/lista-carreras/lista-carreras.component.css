@@ -1,0 +1,29 @@
+img {
+  object-fit:none;
+  object-position: center; /* Center the image within the element */
+  width: 100%;
+  max-height: 350px;
+}
+
+::placeholder {
+  font-size: 1.3em;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  outline: black;
+  background-size: 50%, 100%;
+  border-radius: 100%;
+  border: 1px solid black;
+  background-color: black;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+  background-color: #fafdff;
+}
+
+
+

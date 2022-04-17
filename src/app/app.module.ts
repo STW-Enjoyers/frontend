@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { DataTablesModule } from "angular-datatables";
 
 
 import { AppComponent } from './app.component';
@@ -38,7 +39,7 @@ import { FooterComponent } from './components/footer/footer.component';
     RegistroComponent,
     LoginComponent,
     AjustesUsuarioComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +47,8 @@ import { FooterComponent } from './components/footer/footer.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    LeafletModule
+    LeafletModule,
+    DataTablesModule
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler },

@@ -7,5 +7,5 @@
 // https://www.tutorialesprogramacionya.com/angularya/detalleconcepto.php?punto=62&codigo=62&inicio=60
 export const environment = {
   production: true,
-  url: 'https://unizapp-prueba.herokuapp.com/api'
+  url: 'https://unizapp-backend.herokuapp.com/api'
 };
