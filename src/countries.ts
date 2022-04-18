@@ -1,4 +1,14 @@
-let paises = [
+/*
+ *  This file contains a list of all countries centroid coordinates
+ *
+ *  To get this list we have transformed some data:
+ *    1. We have downloaded as CSV this html, https://www.antipodas.net/coordenadaspais/
+ *    2. We have used this command to parse all CSV data
+ *          sed 's/"//g'
+ *          sed 's/\(^[^,]*\),\(.*\)/{"pais": "\1", "coordenadas": "\2"},/g'
+ */
+
+export let countries = [
 {"pais": "Afganistán", "coordenadas": "N33°0'0 E65°0'0"},
 {"pais": "Albania", "coordenadas": "N41°19'60 E19°49'0"},
 {"pais": "Alemania", "coordenadas": "N51°0'0 E9°0'0"},
@@ -166,7 +176,7 @@ let paises = [
 {"pais": "Nueva Caledonia", "coordenadas": "S21°30'0 E165°30'0"},
 {"pais": "Nueva Zelanda", "coordenadas": "S41°0'0 E174°0'0"},
 {"pais": "Omán", "coordenadas": "N21°0'0 E57°0'0"},
-{"pais": "Países Bajos", "coordenadas": "N52°30'0 E5°45'0"},
+{"pais": "Holanda", "coordenadas": "N52°30'0 E5°45'0"},
 {"pais": "Pakistán", "coordenadas": "N30°0'0 E70°0'0"},
 {"pais": "Palaos", "coordenadas": "N7°30'0 E134°30'0"},
 {"pais": "Panamá", "coordenadas": "N9°0'0 O80°0'0"},
@@ -182,7 +192,7 @@ let paises = [
 {"pais": "República Árabe Saharaui Democrática", "coordenadas": "N24°30'0 O13°0'0"},
 {"pais": "República Centroafricana", "coordenadas": "N7°0'0 E21°0'0"},
 {"pais": "República Checa", "coordenadas": "N49°45'0 E15°30'0"},
-{"pais": "República de Macedonia", "coordenadas": "N41°49'59.88 E22°0'0"},
+{"pais": "Macedonia", "coordenadas": "N41°49'59.88 E22°0'0"},
 {"pais": "República del Congo", "coordenadas": "S1°0'0 E15°0'0"},
 {"pais": "República Dominicana", "coordenadas": "N19°0'0 O70°40'0.12"},
 {"pais": "Reunión", "coordenadas": "S21°6'0 E55°36'0"},

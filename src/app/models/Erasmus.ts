@@ -5,6 +5,6 @@
 export interface Erasmus {
   pais: string;
   plazas: number;
-  latitud: number;
-  longitud: number;
+  lat: number;
+  lng: number;
 }

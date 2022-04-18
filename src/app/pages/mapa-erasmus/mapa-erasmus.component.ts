@@ -2,13 +2,14 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import {ErasmusService} from "../../services/erasmus.service";
-import {HttpErrorResponse} from "@angular/common/http";
+import {Erasmus} from "../../models/Erasmus";
 @Component({
   selector: 'app-mapa-erasmus',
   templateUrl: './mapa-erasmus.component.html',
   styleUrls: ['./mapa-erasmus.component.css']
 })
 export class MapaErasmusComponent implements OnInit {
+  erasmusOut!:Erasmus[]
   options = {
     layers: [
       L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
@@ -32,7 +33,10 @@ export class MapaErasmusComponent implements OnInit {
   getErasmusOut() {
     this.erasmusService.getErasmusOut().subscribe(
       (res: any) => {
-        console.log(JSON.stringify(res))
+        this.erasmusOut = res
+        this.erasmusOut.forEach(erasmus => {
+          this.layers.push( L.circle([erasmus.lat, erasmus.lng], {radius: erasmus.plazas * 200}))
+        })
       },
     );
   }

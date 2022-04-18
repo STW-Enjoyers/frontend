@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CoordinatesService } from './coordinates.service';
+import { GeocodeService } from './geocode.service';
 
 describe('CoordinatesService', () => {
-  let service: CoordinatesService;
+  let service: GeocodeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CoordinatesService);
+    service = TestBed.inject(GeocodeService);
   });
 
   it('should be created', () => {
