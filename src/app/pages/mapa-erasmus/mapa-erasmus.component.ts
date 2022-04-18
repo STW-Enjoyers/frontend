@@ -1,6 +1,7 @@
 // Documentation, https://github.com/Asymmetrik/ngx-leaflet
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import * as MapaErasmusConstants from './mapa-erasmus.constants'
 import {ErasmusService} from "../../services/erasmus.service";
 import {Erasmus} from "../../models/Erasmus";
 @Component({
@@ -9,14 +10,22 @@ import {Erasmus} from "../../models/Erasmus";
   styleUrls: ['./mapa-erasmus.component.css']
 })
 export class MapaErasmusComponent implements OnInit {
+  // Constants
+  title = MapaErasmusConstants.TITLE
+  legendTitle = MapaErasmusConstants.LEGEND_TITLE
+  legendErasmusIn = MapaErasmusConstants.LEGEND_ERASMUS_IN
+  legendErasmusOut = MapaErasmusConstants.LEGEND_ERASMUS_OUT
+  colorErasmusIn = MapaErasmusConstants.COLOR_ERASMUS_IN
+  colorErasmusOut = MapaErasmusConstants.COLOR_ERASMUS_OUT
+  maxCircleSize = MapaErasmusConstants.MAX_CIRCLE_SIZE
+
   erasmusList!:Erasmus[]
-  maxCircleSize = 2000
   options = {
     layers: [
-      L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 15, attribution: '...' })
+      L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 15, attribution: '...' }),
     ],
     zoom: 5,
-    center: L.latLng(50.378472, 14.970598)
+    center: L.latLng(48.499998, 26.3833318)
   };
 
   layers:L.Layer[] = [];
@@ -28,13 +37,25 @@ export class MapaErasmusComponent implements OnInit {
     this.getErasmusIn()
   }
 
+  onMapReady(map: L.Map) {
+    let legend = new L.Control({ position: "bottomright" });
+    legend.onAdd = this.addLegend
+    legend.addTo(map)
+  }
+
+  addLegend(map: L.Map) {
+    var div = L.DomUtil.get("leyenda") ?? L.DomUtil.create("div");
+
+    return div;
+  }
+
   // Erasmus from Unizar to other foreign countries
   getErasmusOut() {
     this.erasmusService.getErasmusOut().subscribe(
       (res: any) => {
         this.erasmusList = res
         this.erasmusList.forEach(erasmus => {
-          this.addCircle(erasmus, this.maxCircleSize)
+          this.addCircle(erasmus, this.maxCircleSize, this.colorErasmusOut)
         })})
   }
 
@@ -43,14 +64,14 @@ export class MapaErasmusComponent implements OnInit {
     this.erasmusService.getErasmusIn().subscribe(
       (res: any) => {
         let erasmus = res
-        this.addCircle(erasmus, this.maxCircleSize)
+        this.addCircle(erasmus, this.maxCircleSize, this.colorErasmusIn)
       })
   }
 
   //Add a circle layer
-  addCircle(erasmus: Erasmus, maxSize:number) {
+  addCircle(erasmus: Erasmus, maxSize:number, color:string) {
     var circle = L.circleMarker([erasmus.lat, erasmus.lng], {
-      radius:  this.scaledRadius(erasmus.plazas, maxSize)
+      radius:  this.scaledRadius(erasmus.plazas, maxSize), color: color
     })
     // Add circle tooltip
     circle.bindPopup("<b>País: </b>" + erasmus.pais + "<br>" + "<b>Plazas: </b>" + erasmus.plazas)
