@@ -71,7 +71,7 @@ export let countries = [
 {"pais": "Eritrea", "coordenadas": "N15°0'0 E39°0'0"},
 {"pais": "Eslovaquia", "coordenadas": "N48°40'0.12 E19°30'0"},
 {"pais": "Eslovenia", "coordenadas": "N46°0'0 E15°0'0"},
-{"pais": "España", "coordenadas": "N40°0'0 O4°0'0"},
+{"pais": "España", "coordenadas": "N40°0'0 W4°0'0"},
 {"pais": "Estado de Palestina", "coordenadas": "N32°0'0 E35°15'0"},
 {"pais": "Estados Unidos", "coordenadas": "N38°0'0 O97°0'0"},
 {"pais": "Estonia", "coordenadas": "N59°0'0 E26°0'0"},

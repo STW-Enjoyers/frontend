@@ -9,36 +9,59 @@ import {Erasmus} from "../../models/Erasmus";
   styleUrls: ['./mapa-erasmus.component.css']
 })
 export class MapaErasmusComponent implements OnInit {
-  erasmusOut!:Erasmus[]
+  erasmusList!:Erasmus[]
+  maxCircleSize = 2000
   options = {
     layers: [
-      L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+      L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 15, attribution: '...' })
     ],
     zoom: 5,
-    center: L.latLng(46.879966, -121.726909)
+    center: L.latLng(50.378472, 14.970598)
   };
 
-  layers = [
-    L.circle([ 46.95, -122 ], { radius: 500000 }),
-    L.polygon([[ 46.8, -121.85 ], [ 46.92, -121.92 ], [ 46.87, -121.8 ]]),
-    L.marker([ 46.879966, -121.726909 ])
-  ];
+  layers:L.Layer[] = [];
 
   constructor(private erasmusService: ErasmusService) { }
 
   ngOnInit(): void {
     this.getErasmusOut()
+    this.getErasmusIn()
   }
 
+  // Erasmus from Unizar to other foreign countries
   getErasmusOut() {
     this.erasmusService.getErasmusOut().subscribe(
       (res: any) => {
-        this.erasmusOut = res
-        this.erasmusOut.forEach(erasmus => {
-          this.layers.push( L.circle([erasmus.lat, erasmus.lng], {radius: erasmus.plazas * 200}))
-        })
-      },
-    );
+        this.erasmusList = res
+        this.erasmusList.forEach(erasmus => {
+          this.addCircle(erasmus, this.maxCircleSize)
+        })})
+  }
+
+  // Erasmus from other foreign countries to Unizar
+  getErasmusIn() {
+    this.erasmusService.getErasmusIn().subscribe(
+      (res: any) => {
+        let erasmus = res
+        this.addCircle(erasmus, this.maxCircleSize)
+      })
+  }
+
+  //Add a circle layer
+  addCircle(erasmus: Erasmus, maxSize:number) {
+    var circle = L.circleMarker([erasmus.lat, erasmus.lng], {
+      radius:  this.scaledRadius(erasmus.plazas, maxSize)
+    })
+    // Add circle tooltip
+    circle.bindPopup("<b>País: </b>" + erasmus.pais + "<br>" + "<b>Plazas: </b>" + erasmus.plazas)
+    this.layers.push( circle )
+  }
+
+  scaledRadius(val:number, maxVal:number) {
+    let multiplier = 100
+    if (val > maxVal) return multiplier
+    return multiplier * (val / maxVal);
   }
 
 }
+
