@@ -26,11 +26,11 @@ export class MapaErasmusComponent implements OnInit {
   constructor(private erasmusService: ErasmusService) { }
 
   ngOnInit(): void {
-    this.getErasmusIn()
+    this.getErasmusOut()
   }
 
-  getErasmusIn() {
-    this.erasmusService.getErasmusIn().subscribe(
+  getErasmusOut() {
+    this.erasmusService.getErasmusOut().subscribe(
       (res: any) => {
         console.log(JSON.stringify(res))
       },
