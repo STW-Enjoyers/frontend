@@ -1,1 +1,19 @@
-<p>mapa-erasmus works!</p>
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.15.4/css/all.css">
+<div class="container mt-5">
+  <div id="map"
+       leaflet
+       [leafletOptions]="options"
+       [leafletLayers]="layers"
+       (leafletMapReady)="onMapReady($event)">
+  >
+  </div>
+
+  <div class="d-none">
+    <div id="leyenda"  class="container bg-light  bg-opacity-75 p-2 m-2">
+      <h4 class='text-black-50'>{{legendTitle}}</h4>
+      <i style="background: {{colorErasmusOut}}" class="fa-solid fa-square"></i><h6 class="d-inline text-black-50">  {{legendErasmusOut}}</h6><br>
+      <i style="background: {{colorErasmusIn}}" class="fa-solid fa-square"></i><h6 class="d-inline text-black-50">  {{legendErasmusIn}}</h6><br>
+    </div>
+  </div>
+</div>
+

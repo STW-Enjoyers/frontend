@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { DataTablesModule } from "angular-datatables";
 
 
@@ -46,6 +47,7 @@ import { FooterComponent } from './components/footer/footer.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    LeafletModule,
     DataTablesModule
   ],
   providers: [
