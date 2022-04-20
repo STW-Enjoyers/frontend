@@ -24,8 +24,8 @@ export class MapaErasmusComponent implements OnInit {
     layers: [
       L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 15, attribution: '...' }),
     ],
-    zoom: 5,
-    center: L.latLng(48.499998, 26.3833318)
+    zoom: 4,
+    center: L.latLng(40, 3.7)
   };
 
   layers:L.Layer[] = [];
@@ -79,7 +79,7 @@ export class MapaErasmusComponent implements OnInit {
   }
 
   scaledRadius(val:number, maxVal:number) {
-    let multiplier = 100
+    let multiplier = 40
     if (val > maxVal) return multiplier
     return multiplier * (val / maxVal);
   }
