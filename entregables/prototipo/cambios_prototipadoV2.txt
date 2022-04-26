@@ -1,0 +1,12 @@
+Cambios en el prototipo para la versión 2.  (26-04-2022)
+
+- El administrador puede ver una gráfica con el histórico de usuarios que se han dado de alta en la aplicación.
+  Este cambio se refleja en la interfaz llamada 'Dashboard de administrador' (Figura 11).
+
+- El administrador puede banear usuarios.
+  Este cambio se refleja en la interfaz llamada 'Dashboard de administrador' (Figura 11). 
+  Este cambio implica que el usuario baneado no tendrá acceso a la aplicación y sus comentarios se ocultarán
+  al resto de usuarios.
+
+- Se muestra una gráfica con el histórico de notas de corte desde el año 2012.
+  Este cambio se refleja en la interfaz llamada 'Perfil de carrera' (Figura 7). 
