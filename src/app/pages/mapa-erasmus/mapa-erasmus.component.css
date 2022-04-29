@@ -1,5 +1,5 @@
 .map {
-   height: 1000px;
+   height: 500px;
 }
 @media only screen and (max-width: 600px) {
   .map {

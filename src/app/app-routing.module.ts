@@ -7,6 +7,8 @@ import {MapaErasmusComponent} from "./pages/mapa-erasmus/mapa-erasmus.component"
 import {RegistroComponent} from "./pages/registro/registro.component";
 import {LoginComponent} from "./pages/login/login.component";
 import {AjustesUsuarioComponent} from "./pages/ajustes-usuario/ajustes-usuario.component";
+import {InfoNotasComponent} from './pages/info-notas/info-notas.component';
+import {InfoErasmusComponent} from './pages/info-erasmus/info-erasmus.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -16,7 +18,8 @@ const routes: Routes = [
   {path: 'lista-carreras', component: ListaCarrerasComponent},
   {path: 'mapa-erasmus', component: MapaErasmusComponent},
   {path: 'ajustes-usuario', component: AjustesUsuarioComponent},
-
+  {path: 'info-notas', component: InfoNotasComponent},
+  {path: 'info-erasmus', component: InfoErasmusComponent}
 ];
 
 @NgModule({

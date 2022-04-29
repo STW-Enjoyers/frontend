@@ -1,23 +1,59 @@
 <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.15.4/css/all.css">
 <link rel="stylesheet" href="header.component.css" />
 
-<nav>
-	<input type="checkbox" id="check">
-	<label for="check" class="checkbtn">
-		<i class="fas fa-bars"></i>
-	</label>
-	<label class="logox">
-		UnizAPP
-	</label>
-	<ul>
-		<li><a href="/login"><i class="fas fa-user"></i></a></li>
-	</ul>
-	<ul class="align-items-center">
-		<li><a href="#"><i class="fas fa-home"></i></a></li>
-		<li><a href="/lista-carreras">Carreras</a></li>
-		<li><a href="#">Notas de Corte(#)</a></li>
-		<li><a href="/filtrador-notas">Filtrador Notas</a></li>
-		<li><a href="#">Erasmus(#)</a></li>
-		<li><a href="mapa-erasmus">Mapa Erasmus</a></li>
-	</ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+
+    <a class="navbar-brand me-2 mb-1 d-flex align-items-center" (click)="goToPage('')" role="button">
+			<img src="assets/logo.png" height="45" alt="" loading="lazy"/>
+		</a>
+
+    <button class="navbar-toggler" type="button" (click)="togglerNavbar.toggle()" aria-controls="togglerNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-center" id="togglerNavbar" mdbCollapse #togglerNavbar="mdbCollapse">
+      
+			<ul class="navbar-nav mb-0 mb-lg-0">
+
+        <li mdbDropdown class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle hidden-arrow" type="button" id="dropdownNotas" mdbDropdownToggle aria-expanded="false">
+						<i class="fas fa-cut"></i> Notas
+					</a>
+					<ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownNotas">
+						<li><a class="dropdown-item"> Filtrador </a></li>
+						<li><a class="dropdown-item"> Información </a></li>
+					</ul>
+				</li>
+
+				<li class="nav-item me-3 me-lg-1">
+					<a class="nav-link" (click)="goToPage('lista-carreras')" role="button">
+						<i class="fas fa-graduation-cap"></i> Carreras
+					</a>
+				</li>
+
+				<li mdbDropdown class="nav-item dropdown me-3 me-lg-1">
+					<a class="nav-link dropdown-toggle hidden-arrow" type="button" id="dropdownErasmusButton" mdbDropdownToggle aria-expanded="false">
+						<i class="fas fa-plane"></i> Erasmus
+					</a>
+					<ul mdbDropdownMenu  class="dropdown-menu" aria-labelledby="dropdownErasmusButton">
+						<li><a class="dropdown-item" href="#"> Mapa </a></li>
+						<li><a class="dropdown-item" href="#"> Información </a></li>
+					</ul>
+				</li>
+
+      </ul>
+
+			<ul class="navbar-nav mb-4 mb-lg-0">
+
+				<li class="nav-item me-3 me-lg-1">
+					<a class="nav-link" (click)="goToPage('login')" role="button">
+						<i class="fas fa-user"></i> Iniciar sesión
+					</a>
+				</li>
+
+			</ul>
+
+    </div>
+  </div>
 </nav>
