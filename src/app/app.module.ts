@@ -26,6 +26,7 @@ import { AjustesUsuarioComponent } from './pages/ajustes-usuario/ajustes-usuario
 import {ServerErrorInterceptor} from "./guards/error.interceptor";
 import {GlobalErrorHandler} from "./global-error-handler";
 import { FooterComponent } from './components/footer/footer.component';
+import { PerfilCarreraComponent } from './pages/perfil-carrera/perfil-carrera.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { FooterComponent } from './components/footer/footer.component';
     LoginComponent,
     AjustesUsuarioComponent,
     FooterComponent,
+    PerfilCarreraComponent,
   ],
   imports: [
     BrowserModule,

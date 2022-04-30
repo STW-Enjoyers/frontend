@@ -9,7 +9,7 @@ export interface Grade {
   localidad: string;
   cupo: string;
   curso: number;
-  id: string;
+  idCarrera: string;
 }
 
 /* For example:

@@ -7,6 +7,7 @@ import {MapaErasmusComponent} from "./pages/mapa-erasmus/mapa-erasmus.component"
 import {RegistroComponent} from "./pages/registro/registro.component";
 import {LoginComponent} from "./pages/login/login.component";
 import {AjustesUsuarioComponent} from "./pages/ajustes-usuario/ajustes-usuario.component";
+import {PerfilCarreraComponent} from "./pages/perfil-carrera/perfil-carrera.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -16,6 +17,8 @@ const routes: Routes = [
   {path: 'lista-carreras', component: ListaCarrerasComponent},
   {path: 'mapa-erasmus', component: MapaErasmusComponent},
   {path: 'ajustes-usuario', component: AjustesUsuarioComponent},
+  {path: 'perfil-carrera/:id', component: PerfilCarreraComponent},
+
 
 ];
 

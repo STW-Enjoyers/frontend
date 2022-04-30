@@ -51,7 +51,7 @@ export class ListaCarrerasComponent implements OnInit {
       .getGrades()
       .subscribe((grades) =>{
         grades = this.gradesService.filterByType(grades, this.gradesService.TYPES.GRADO);
-        grades = this.gradesService.filterByCupo(grades, this.gradesService.CUPOS.GENERAL)
+        grades = this.gradesService.filterByCupo(grades, this.gradesService.CUPOS.GENERAL);
         grades = this.gradesService.renameCareers(grades);
         this.grades = grades;
         // Workaround to init datatables with dtOptions

@@ -33,7 +33,7 @@ export const DTOPTIONS = {
       "width": "30%",
       render: function ( data: string) {
         return data.length > 70
-          ? data.substr( 0, 70 ) + "..."
+          ? data.substr( 0, 70 ) + "<br>" + data.substr(71, data.length)
           : data
       }
     },

@@ -42,7 +42,9 @@
         </thead>
         <tbody>
         <tr *ngFor="let grade of grades">
-          <td>{{ grade.estudio }}</td>
+          <td><a [routerLink]="['/perfil-carrera', grade.idCarrera]">
+            {{ grade.estudio }}
+          </a></td>
           <td>{{ grade.centro }}</td>
           <td class="d-none">{{ grade.localidad }}</td>
         </tr>
