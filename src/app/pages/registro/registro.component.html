@@ -4,7 +4,7 @@
       <h1 class="display-4 text-center">{{title}}</h1>
       <form class="border border-light p-5" [formGroup]="registerForm">
         <!-------------- INIT EMAIL ---------------------->
-        <div class="form-group mb-4">
+        <div class="form-group mb-2">
           <label class="text-start">{{emailLabel}}</label><br>
           <input type="text" class="form-control p-3" formControlName="email" placeholder="{{emailPlaceholder}}"
                  [ngClass]="{ 'is-invalid': formErrors.email }"  (blur)="updateValidationErrors()"/>
@@ -12,7 +12,7 @@
           <span class="text-danger" *ngIf="duplicateEmail">{{duplicateEmailMessage}}</span>
         </div>
         <!-------------- INIT USERNAME ---------------------->
-        <div class="form-group mb-5">
+        <div class="form-group mb-2">
           <label>{{usernameLabel}}</label>
           <input type="text" class="form-control p-3" formControlName="username" placeholder="{{usernamePlaceholder}}"
                  [ngClass]="{ 'is-invalid':formErrors.username }" (blur)="updateValidationErrors()"/>
@@ -20,15 +20,15 @@
           <span class="text-danger" *ngIf="duplicateUsername">{{duplicateUsernameMessage}}</span>
         </div>
         <!-------------- INIT PASSWORD ---------------------->
-        <div class="form-group mb-5">
+        <div class="form-group mb-2">
           <label>{{passwordLabel}}</label> <br>
-          <span class="text-secondary">La contraseña debe tener al menos 5 caracteres</span>
+          <span class="fs-6 text-secondary">La contraseña debe tener al menos 5 caracteres</span>
           <input type="password" class="form-control p-3" formControlName="password" placeholder="{{passwordPlaceholder}}"
                  [ngClass]="{ 'is-invalid':formErrors.password }" (blur)="updateValidationErrors()"/>
           <span class="text-danger" *ngIf="formErrors.password">{{formErrors.password}}</span>
         </div>
         <!-------------- INIT CONFIRM PASSWORD ---------------------->
-        <div class="form-group mb-5">
+        <div class="form-group mb-2">
           <label>{{confirmPasswordLabel}}</label>
           <input type="password" class="form-control p-3" formControlName="confirmPassword" placeholder="{{confirmPasswordPlaceholder}}"
                  [ngClass]="{ 'is-invalid':formErrors.confirmPassword }" (blur)="updateValidationErrors()"/>
