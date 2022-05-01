@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Observable} from "rxjs";
+import { Observable } from "rxjs";
 import {environment} from 'src/environments/environment';
 import { Grade } from '../models/Grade';
 @Injectable({
@@ -25,6 +25,14 @@ export class GradesService {
     MAS40: "Mayores de 40",
     MAS45: "Mayores de 45",
     TITULADOS: "Titulados Universitarios ",
+  }
+
+  // Different cities
+  CITIES = {
+    ZARAGOZA: "Zaragoza",
+    TERUEL: "Teruel",
+    HUESCA: "Huesca",
+    ALMUNIA: "Almunia de Doña Godina (La)"
   }
 
   constructor(private http: HttpClient) {}
@@ -55,6 +63,22 @@ export class GradesService {
       return grades.filter(grade => grade.cupo.includes(cupo))
     } else {
       throw new Error("gradesService: filterByCupo: Incorrect cupo " + cupo)
+    }
+  }
+
+  // Filter careers, masters or doctor'degrees
+  filterByCity(grades: Grade[], city:string): Grade[] {
+    switch (city) {
+      case this.CITIES.ZARAGOZA:
+        return grades.filter(grade => grade.localidad.includes(this.CITIES.ZARAGOZA))
+      case this.CITIES.TERUEL:
+        return grades.filter(grade => grade.localidad.includes(this.CITIES.TERUEL))
+      case this.CITIES.HUESCA:
+        return grades.filter(grade => grade.localidad.includes(this.CITIES.HUESCA))
+        case this.CITIES.ALMUNIA:
+        return grades.filter(grade => grade.localidad.includes(this.CITIES.ALMUNIA))
+      default:
+        throw new Error("gradesService: filterByCity: Incorrect city " + city)
     }
   }
 

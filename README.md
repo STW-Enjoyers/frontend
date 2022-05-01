@@ -31,3 +31,9 @@ Run tests:
 ![errorHandling](https://user-images.githubusercontent.com/45805074/162187709-668f8276-c2f7-45cd-9e05-cc9258c43d47.png)
 All server and client exceptions that hasn't been handled by other classes, are handled
 by GlobalErrorHandling class and later are notified and logged in the app.
+
+## Otros comandos realizados
+`npm install leaflet@1.7.9`
+`npm i mdb-angular-ui-kit`
+`npm install @angular/animations`
+`npm install chart.js`
