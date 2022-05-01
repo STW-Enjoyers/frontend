@@ -6,9 +6,8 @@ describe('Angular App', function() {
     browser.get(browser.baseUrl);
 
     let expected = "Unizapp";
-    let actual = browser.getTitle();
+    let actual = await browser.getTitle();
 
-    // @ts-ignore
     expect(actual).toEqual(expected);
 
   });
