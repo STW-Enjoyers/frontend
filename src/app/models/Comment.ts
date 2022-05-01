@@ -4,9 +4,12 @@
  **************************************************/
 import {Response} from './Response';
 export interface Comment {
-  author: string,
-  text: string,
-  upVotes: number,
+  username: string,
+  upvotes: number,
+  upvotedUsers: string[],
+  visible: boolean,
+  body: string,
   responses: Response[],
-  isUpVoted: boolean
+  _id: string
+  date: string
 }

@@ -2,8 +2,9 @@
  * file: GradeProfile.ts
  * Coms: grade profile model
  **************************************************/
+import { Comment } from '../models/Comment';
 export interface GradeProfile {
-  comments: object,
+  comments: Comment[],
   graduated: number,
   changed: number,
   average: number,

@@ -8,12 +8,16 @@ import {Comment} from '../../models/Comment';
 export class CommentComponent implements OnInit {
   // By default responses are hidden
   responsesAreShown: boolean = false;
+  isUpvoted:boolean = false;
+  @Input() userId!: string;
   @Input() comment!: Comment;
   @Output() showResponses: EventEmitter<boolean> = new EventEmitter();
   @Output() upvote: EventEmitter<any> = new EventEmitter();
+  @Output() downvote: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
+    this.isUpvoted = this.comment.upvotedUsers.includes(this.userId);
   }
 
   // Ver respuestas button has been pressed
@@ -24,8 +28,14 @@ export class CommentComponent implements OnInit {
 
   // Likes button has been pressed
   onUpVote() {
-    this.upvote.emit()
-    this.comment.isUpVoted = !this.comment.isUpVoted
+    if (!this.comment.upvotedUsers.includes(this.userId)) {
+      //User had not liked this comment
+      this.upvote.emit()
+      this.isUpvoted = true
+    } else {
+      this.downvote.emit()
+      this.isUpvoted = false
+    }
   }
 
 }

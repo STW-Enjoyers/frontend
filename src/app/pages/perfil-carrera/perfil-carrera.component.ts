@@ -6,6 +6,8 @@ import {Grade} from "../../models/Grade";
 import { Chart, registerables } from 'chart.js';
 import { Comment } from '../../models/Comment';
 import {Response} from '../../models/Response';
+import * as PerfilCarreraConstants from './perfil-carrera.constants'
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-perfil-carrera',
@@ -13,14 +15,23 @@ import {Response} from '../../models/Response';
   styleUrls: ['./perfil-carrera.component.css']
 })
 export class PerfilCarreraComponent implements OnInit {
+  // Constants
+  statistics_title = PerfilCarreraConstants.STATISTICS_TITLE;
+  comments_title = PerfilCarreraConstants.COMMENTS_TITLE;
+  comment_input_label = PerfilCarreraConstants.COMMENT_INPUT_LABEL;
+  comment_button_text = PerfilCarreraConstants.COMMENT_BUTTON_TEXT;
   // Actual grade
   grade!: Grade;
-  // Grade profile with comments and data to feed charts
-  gradeProfile!: GradeProfile;
+  // Grade profile comments
+  comments!: Comment[];
+  // Grade prifile performance chart
   chart:any = []
-  comments:Comment[] = []
+  // Input comment text value
+  newCommentText!:string;
 
-  constructor(private forumService: ForumService,  private route: ActivatedRoute) {
+
+  constructor(private forumService: ForumService,
+              public userService: UserService) {
     Chart.register(...registerables)
   }
 
@@ -28,50 +39,41 @@ export class PerfilCarreraComponent implements OnInit {
     // Get profile id from url data
     this.grade = history.state.data
     this.getGradeProfileData(this.grade.idCarrera)
-    this.getComments()
   }
 
-  // Get grades and update datatables
+  // Get gradeProfile (Chart data and comments)
   getGradeProfileData(idCarrera:string): void {
     this.forumService
       .getGradeProfile(idCarrera)
       .subscribe((gradeProfile) =>{
-        this.gradeProfile = gradeProfile
+        this.comments = gradeProfile.comments
         this.chart = new Chart('rendimientoChart', {
           type: 'pie',
           data: {
-            labels: [
-              "Graduados",
-              "Cambio de carrera",
-              "Abandono"
-            ],
+            labels: PerfilCarreraConstants.CHART_PIE_LABELS,
             datasets: [{
-              data: [this.gradeProfile.graduated, this.gradeProfile.changed, this.gradeProfile.abandoned],
+              data: [gradeProfile.graduated, gradeProfile.changed, gradeProfile.abandoned],
               borderWidth: 2,
-              backgroundColor: ['#d91920', '#0baff0', '#f79517'],
+              backgroundColor: PerfilCarreraConstants.CHART_PIE_COLORS,
             }],
           },
         })
       })
   }
 
-  getComments() {
-    // TODO: GET DATA FROM BACKEND
-    var reponse: Response = {
-      author: 'Javier Campos',
-      text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-      upVotes: 0,
-      isUpVoted: false
+  postComment() {
+    console.log("postComment")
+    console.log(localStorage.getItem('token'))
+    console.log(this.grade.idCarrera)
+    if (this.newCommentText && this.newCommentText.length > 0) {
+      console.log("SEND POST TO BACKEND")
+      this.forumService.postComment(this.grade, <Comment>{body: this.newCommentText}).subscribe(
+        (res: any) => {
+         console.log("RESPONSE RECEIVED")
+          this.newCommentText = ""
+          window.location.reload();
+        })
     }
-    this.comments.push(
-      <Comment>{
-        author: 'Javier Fabra',
-        text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley o',
-        upVotes: 6,
-        responses: [reponse],
-        isUpVoted: false,
-      }
-    )
   }
 
 }

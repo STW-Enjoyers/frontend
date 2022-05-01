@@ -7,16 +7,16 @@
            class="rounded-circle shadow-4" style="width: 100%;" alt="Avatar" />
     </div>
     <div class="col-10">
-      <p><b>{{comment.author}}</b></p>
-      <p>{{comment.text}}</p>
+      <p><b>{{comment.username}}</b></p>
+      <p>{{comment.body}}</p>
       <div class="row">
         <div class="col">
           <p *ngIf="responsesAreShown"><i class="bi bi-caret-up-fill" (click)="onShowResponses()"></i> Ver respuestas</p>
           <p *ngIf="!responsesAreShown"><i class="bi bi-caret-down-fill" (click)="onShowResponses()"></i>Ver respuestas</p>
         </div>
         <div class="col">
-          <p *ngIf="this.comment.isUpVoted"><i class="bi bi-heart-fill" (click)="onUpVote()"></i> {{comment.upVotes}}</p>
-          <p *ngIf="!this.comment.isUpVoted"><i class="bi bi-heart" (click)="onUpVote()"></i> {{comment.upVotes}}</p>
+          <p *ngIf="isUpvoted"><i class="bi bi-heart-fill" (click)="onUpVote()"></i> {{comment.upvotes}}</p>
+          <p *ngIf="!isUpvoted"><i class="bi bi-heart" (click)="onUpVote()"></i> {{comment.upvotes}}</p>
         </div>
       </div>
     </div>
