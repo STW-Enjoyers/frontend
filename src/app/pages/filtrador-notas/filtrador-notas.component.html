@@ -4,17 +4,20 @@
       <h5>{{title_input}}</h5>
       <input type="text"
             class="input-group form-control rounded-pill bg-light border-4 border-light"
-            name="search"
-            id="search"
-            [(ngModel)]="search"
+            name="filter"
+            id="filter"
+            [(ngModel)]="filter"
             (ngModelChange)="updateDatatables()"
             placeholder="{{placeholder}}"/>
     </div>
 
     <div class="col-12 col-sm-12 col-md-4 align-self-center">
       <h5>{{title_select}}</h5>
-      <select class="form-control">
-        <option selected="selected"> Todos los cupos </option>
+      <select class="form-control"      
+              name="select"
+              id="select"
+              [(ngModel)]="select"
+              (ngModelChange)="updateDatatables()">
         <option *ngFor="let cupo of cupos" [ngValue]="cupo.text">{{cupo.text}}</option>
       </select>
     </div>
@@ -34,7 +37,7 @@
         <th>Carrera</th>
         <th>Nota de corte</th>
         <th>Localidad</th>
-        <th class="d-none">Localidad</th>
+        <th class="d-none">Cupo</th>
       </tr>
       </thead>
       <tbody>
@@ -42,7 +45,7 @@
         <td>{{ grade.estudio }}</td>
         <td>{{ grade.nota }}</td>
         <td>{{ grade.localidad }}</td>
-        <td class="d-none">{{ grade.localidad }}</td>
+        <td class="d-none">{{ grade.cupo }}</td>
       </tr>
       </tbody>
     </table>

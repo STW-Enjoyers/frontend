@@ -20,7 +20,8 @@ export class FiltradorNotasComponent implements OnInit {
   cupos = FiltradorNotasConstants.CUPOS;
   grades: Grade[] = [];
   // Filter values
-  search!: string; /* Search bar value */
+  filter: string = ''; /* Filter bar value */
+  select: string = ''; /* Select bar value */
   cupoIndex:number = 0;
   cupo = CUPOS[this.cupoIndex] /* Actual cupo filtered */
   // Datatables attributes
@@ -49,6 +50,7 @@ export class FiltradorNotasComponent implements OnInit {
         grades = this.gradesService.filterByCupo(grades, this.gradesService.CUPOS.GENERAL)
         grades = this.gradesService.renameCareers(grades);
         this.grades = grades;
+        console.log(grades)
         // Workaround to init datatables with dtOptions
         setTimeout(function() {
           // @ts-ignore
@@ -67,7 +69,17 @@ export class FiltradorNotasComponent implements OnInit {
   // Set an external filter to search by grade name and city
   // Code modified from: http://l-lin.github.io/angular-datatables/#/advanced/custom-range-search
   setExternalFilter() {
-
+    $.fn['dataTable'].ext.search.push((settings: any, data: string[], dataIndex: any) => {
+      const nota:string = data[1];
+      const cupo:string = data[3];
+      console.log(data)
+      if (this.filter == '' || Number(this.filter) >= Number(nota)) {
+        if (this.select == '' || this.select == cupo) {
+          return true;
+        }
+      }
+      return false;
+    });
   }
 
 }

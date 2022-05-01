@@ -16,11 +16,11 @@ export const CUPOS = [
 
 // Datatables options
 export const DTOPTIONS = {
-  pageLength: 10,
   search: true,
   dom:  '<<t>ip>',
   scrollX: true,
   scrollCollapse: true,
+  order: [ 1, 'desc' ],
   columnDefs: [
     { // Handle Carreras column overflow
       "targets": 0,
