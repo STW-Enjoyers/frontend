@@ -3,18 +3,23 @@
     <div class=" col-md-10 col-lg-7 mx-auto">
       <h1 class="display-4 text-center">{{title}}</h1>
       <form class="border border-light p-5" [formGroup]="registerForm">
+        <!-------------- INIT EMAIL ---------------------->
         <div class="form-group mb-4">
           <label class="text-start">{{emailLabel}}</label><br>
           <input type="text" class="form-control p-3" formControlName="email" placeholder="{{emailPlaceholder}}"
                  [ngClass]="{ 'is-invalid': formErrors.email }"  (blur)="updateValidationErrors()"/>
           <span class="text-danger" *ngIf="formErrors.email">{{formErrors.email}}</span>
+          <span class="text-danger" *ngIf="duplicateEmail">{{duplicateEmailMessage}}</span>
         </div>
+        <!-------------- INIT USERNAME ---------------------->
         <div class="form-group mb-5">
           <label>{{usernameLabel}}</label>
           <input type="text" class="form-control p-3" formControlName="username" placeholder="{{usernamePlaceholder}}"
                  [ngClass]="{ 'is-invalid':formErrors.username }" (blur)="updateValidationErrors()"/>
           <span class="text-danger" *ngIf="formErrors.username">{{formErrors.username}}</span>
+          <span class="text-danger" *ngIf="duplicateUsername">{{duplicateUsernameMessage}}</span>
         </div>
+        <!-------------- INIT PASSWORD ---------------------->
         <div class="form-group mb-5">
           <label>{{passwordLabel}}</label> <br>
           <span class="text-secondary">La contraseña debe tener al menos 5 caracteres</span>
@@ -22,14 +27,15 @@
                  [ngClass]="{ 'is-invalid':formErrors.password }" (blur)="updateValidationErrors()"/>
           <span class="text-danger" *ngIf="formErrors.password">{{formErrors.password}}</span>
         </div>
+        <!-------------- INIT CONFIRM PASSWORD ---------------------->
         <div class="form-group mb-5">
           <label>{{confirmPasswordLabel}}</label>
           <input type="password" class="form-control p-3" formControlName="confirmPassword" placeholder="{{confirmPasswordPlaceholder}}"
                  [ngClass]="{ 'is-invalid':formErrors.confirmPassword }" (blur)="updateValidationErrors()"/>
           <span class="text-danger" *ngIf="formErrors.confirmPassword">{{formErrors.confirmPassword}}</span>
         </div>
+        <!-------------- INIT SUBMIT BUTTON ---------------------->
         <app-button [text]="submitButton" [disabled]="!registerForm.valid" (btnClick)="onSubmit()"></app-button>
-        <p class="text-danger mt-2" *ngIf="duplicateEmail">{{duplicateEmailMessage}}</p>
         <p class="mt-5"> {{redirectMessage}} <a href='/login'>{{redirectButton}}</a></p>
       </form>
     </div>

@@ -11,6 +11,7 @@ export const SUBMIT_BUTTON:string = "Registrar";
 export const REDIRECT_MESSAGE:string = "¿Ya estás registrado/a?";
 export const REDIRECT_BUTTON:string = "Iniciar sesión";
 export const DUPLICATE_EMAIL_MESSAGE:string = "El correo introducido ya existe.";
+export const DUPLICATE_USERNAME_MESSAGE:string = "El usuario introducido ya existe.";
 export const VALIDATION_MESSAGES = {
   'username': {
     'required': 'Por favor, introduce un nombre de usuario',

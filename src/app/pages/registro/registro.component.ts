@@ -32,6 +32,7 @@ export class RegistroComponent implements OnInit {
   redirectMessage:string = RegistroConstants.REDIRECT_MESSAGE;
   redirectButton: string = RegistroConstants.REDIRECT_BUTTON;
   duplicateEmailMessage: string =  RegistroConstants.DUPLICATE_EMAIL_MESSAGE;
+  duplicateUsernameMessage: string =  RegistroConstants.DUPLICATE_USERNAME_MESSAGE;
   // Form
   registerForm!: FormGroup;
   // Client errors (undefined = No errors)
@@ -43,6 +44,7 @@ export class RegistroComponent implements OnInit {
   };
   // Server errors
   duplicateEmail: boolean = false
+  duplicateUsername: boolean = false
 
   constructor(
     private fb: FormBuilder,
@@ -74,6 +76,11 @@ export class RegistroComponent implements OnInit {
     this.formErrors = this.validator.getValidationErrors(this.registerForm, RegistroConstants.VALIDATION_MESSAGES);
   }
 
+  resetErrors() {
+    this.duplicateEmail = false
+    this.duplicateUsername = false
+  }
+
   onSubmit() {
     if (!this.registerForm.valid) {
       return;
@@ -81,12 +88,17 @@ export class RegistroComponent implements OnInit {
 
     this.userService.postUser(this.registerForm.value).subscribe(
       (res) => {
-        this.duplicateEmail = false
+        this.resetErrors()
       },
       (error) => {
-        if (error.status === 422) {
+        console.log("ERROR: " + JSON.stringify(error.error[0]))
+        if (error.status === 422 && error.error[0].includes("email")) {
           // Duplicate email error
+          this.resetErrors()
           this.duplicateEmail = true
+        } else if(error.status === 422 && error.error[0].includes("username")) {
+          this.resetErrors()
+          this.duplicateUsername = true
         }  else throw new HttpErrorResponse(error) //GlobalErrorHandler will handle it
       }
     );
