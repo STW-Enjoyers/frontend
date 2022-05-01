@@ -1,1 +1,53 @@
-<p>filtrador-notas works!</p>
+<div class="container mt-5">
+  <div class="row">
+    <div class="d-inline col-12 col-sm-12 col-md-8 align-self-center">
+      <h5>{{title_input}}</h5>
+      <input type="text"
+            class="input-group form-control rounded-pill bg-light border-4 border-light"
+            name="filter"
+            id="filter"
+            [(ngModel)]="filter"
+            (ngModelChange)="updateDatatables()"
+            placeholder="{{placeholder}}"/>
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-4 align-self-center">
+      <h5>{{title_select}}</h5>
+      <select class="form-control"      
+              name="select"
+              id="select"
+              [(ngModel)]="select"
+              (ngModelChange)="updateDatatables()">
+        <option *ngFor="let cupo of cupos" [ngValue]="cupo.text">{{cupo.text}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="space-16"></div>
+
+  <p class="fs-6">{{text_after_input}}<a href="https://janovas.unizar.es/admision/adm400simulador.faces">aquí</a></p>
+
+  <div class="space-32"></div>
+
+  <!-- Datatable starts-->
+  <div class="table-responsive">
+    <table datatable class="table table-sm table-striped nowrap" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+      <thead>
+      <tr>
+        <th>Carrera</th>
+        <th>Nota de corte</th>
+        <th>Localidad</th>
+        <th class="d-none">Cupo</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let grade of grades">
+        <td>{{ grade.estudio }}</td>
+        <td>{{ grade.nota }}</td>
+        <td>{{ grade.localidad }}</td>
+        <td class="d-none">{{ grade.cupo }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

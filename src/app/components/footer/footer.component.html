@@ -5,17 +5,38 @@
 <div class="footer-basic bg-dark text-white">
     <footer>
         <div class="social">
-            <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
-            <a href="https://mail.google.com/"><i class="fas fa-at"></i></a>
-            <a href="https://www.buymeacoffee.com/"><i class="fas fa-coffee"></i></a>
+            <a href="https://twitter.com/">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://mail.google.com/">
+                <i class="fas fa-at"></i>
+            </a>
+            <a href="https://www.buymeacoffee.com/">
+                <i class="fas fa-coffee"></i>
+            </a>
         </div>
         <ul class="list-inline">
-            <li class="list-inline-item"><a href="/">Inicio</a></li>
-            <li class="list-inline-item"><a href="/lista-carreras">Lista Carreras</a></li>
-            <li class="list-inline-item"><a href="#">Notas de Corte</a></li>
-            <li class="list-inline-item"><a href="/filtrador-notas">Filtrador Notas</a></li>
-            <li class="list-inline-item"><a href="#">Erasmus</a></li>
-            <li class="list-inline-item"><a href="/mapa-erasmus">Mapa Erasmus</a></li>
+            <li class="list-inline-item">
+                <a (click)="goToPage('')" role="button"> <i class="fas fa-home" title="Inicio"></i> </a>
+            </li>
+            <li class="list-inline-item">
+                <a (click)="goToPage('lista-carreras')" role="button"> Lista Carreras </a>
+            </li>
+            <li class="list-inline-item">
+                <a (click)="goToPage('info-notas')" role="button"> Notas de Corte </a>
+            </li>
+            <li class="list-inline-item">
+                <a (click)="goToPage('filtrador-notas')" role="button"> Filtrador Notas </a>
+            </li>
+            <li class="list-inline-item">
+                <a (click)="goToPage('info-erasmus')" role="button"> Erasmus </a>
+            </li>
+            <li class="list-inline-item">
+                <a (click)="goToPage('mapa-erasmus')" role="button"> Mapa Erasmus </a>
+            </li>
+            <li class="list-inline-item">
+                <a (click)="goToPage('login')" role="button"> <i class="fas fa-user" title="Usuario"></i> </a>
+            </li>
         </ul>
 
         <hr class="space-32">

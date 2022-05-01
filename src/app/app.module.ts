@@ -8,6 +8,10 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { DataTablesModule } from "angular-datatables";
 
 
+import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
+import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from "./pages/home/home.component";
 import { ButtonComponent } from "./components/button/button.component";
@@ -26,6 +30,8 @@ import { AjustesUsuarioComponent } from './pages/ajustes-usuario/ajustes-usuario
 import {ServerErrorInterceptor} from "./guards/error.interceptor";
 import {GlobalErrorHandler} from "./global-error-handler";
 import { FooterComponent } from './components/footer/footer.component';
+import { InfoNotasComponent } from './pages/info-notas/info-notas.component';
+import { InfoErasmusComponent } from './pages/info-erasmus/info-erasmus.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +46,8 @@ import { FooterComponent } from './components/footer/footer.component';
     LoginComponent,
     AjustesUsuarioComponent,
     FooterComponent,
+    InfoNotasComponent,
+    InfoErasmusComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +56,10 @@ import { FooterComponent } from './components/footer/footer.component';
     ReactiveFormsModule,
     HttpClientModule,
     LeafletModule,
-    DataTablesModule
+    DataTablesModule,
+    MdbDropdownModule,
+    MdbCollapseModule,
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler },

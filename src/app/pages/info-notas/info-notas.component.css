@@ -1,0 +1,22 @@
+.list-bullets {
+  list-style: none;
+  padding: 0px;
+}
+
+.list-bullets p {
+  display: flex;
+  align-items: center;
+}
+
+.list-bullets p::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6257f8;
+  display: block;
+  margin-right: 1rem;
+}
+.btn {
+  margin: 8px;
+}
