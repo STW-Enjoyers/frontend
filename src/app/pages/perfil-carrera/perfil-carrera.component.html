@@ -1,1 +1,24 @@
-<p>perfil-carrera works! id: {{id}}</p>
+<div class="container-fluid">
+  <h1 class="display-6 text-center p-5 bg-light">{{grade.estudio}} - {{grade.localidad}}</h1>
+
+  <div class="container mt-3">
+    <h5>Estadísticas de egresados</h5>
+    <div class="row">
+      <div class="col-4 border border-1 rounded p-3">
+        <canvas id="rendimientoChart"> {{chart}} </canvas>
+      </div>
+    </div>
+  </div>
+  <br><br>
+
+  <div class="container mt-5">
+    <h5>Comentarios</h5>
+    <div *ngFor="let comment of comments">
+      <app-comment [comment]="comment"></app-comment>
+    </div>
+  </div>
+</div>
+
+
+
+

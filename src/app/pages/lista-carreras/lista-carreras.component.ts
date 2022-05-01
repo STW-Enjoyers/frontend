@@ -105,7 +105,7 @@ export class ListaCarrerasComponent implements OnInit {
   }
 
   navigateToProfile(grade: Grade) {
-    this.router.navigate(['perfil-carrera'], { state: {data: grade.idCarrera} });
+    this.router.navigate(['perfil-carrera'], { state: {data: grade} });
   }
   // Calculate modulus.
   // % is not a modulus operator. It is a remainder operator

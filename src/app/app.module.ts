@@ -27,6 +27,8 @@ import {ServerErrorInterceptor} from "./guards/error.interceptor";
 import {GlobalErrorHandler} from "./global-error-handler";
 import { FooterComponent } from './components/footer/footer.component';
 import { PerfilCarreraComponent } from './pages/perfil-carrera/perfil-carrera.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { ResponseComponent } from './components/response/response.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { PerfilCarreraComponent } from './pages/perfil-carrera/perfil-carrera.co
     AjustesUsuarioComponent,
     FooterComponent,
     PerfilCarreraComponent,
+    CommentComponent,
+    ResponseComponent,
   ],
   imports: [
     BrowserModule,
