@@ -31,7 +31,11 @@
 
     <div *ngIf="comments">
       <div *ngFor="let comment of comments" class="mt-3">
-        <app-comment [comment]="comment"></app-comment>
+        <app-comment [userId]="'TODO: ENLAZAR ID'"
+                     [gradeId]="this.grade.idCarrera"
+                     [comment]="comment"
+                     (hasChanged)="onCommentsHaveChanged()">
+        </app-comment>
       </div>
     </div>
 

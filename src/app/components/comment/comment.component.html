@@ -11,21 +11,46 @@
       <p>{{comment.body}}</p>
       <div class="row">
         <div class="col">
-          <p *ngIf="responsesAreShown"><i class="bi bi-caret-up-fill" (click)="onShowResponses()"></i> Ver respuestas</p>
-          <p *ngIf="!responsesAreShown"><i class="bi bi-caret-down-fill" (click)="onShowResponses()"></i>Ver respuestas</p>
+          <p><i class="bi {{responsesAreShown ? 'bi-caret-up-fill' : 'bi-caret-down-fill'}}" (click)="onShowResponses()"></i>
+            Ver respuestas <span>({{comment.responses.length}})</span>
+          </p>
         </div>
         <div class="col">
-          <p *ngIf="isUpvoted"><i class="bi bi-heart-fill" (click)="onUpVote()"></i> {{comment.upvotes}}</p>
-          <p *ngIf="!isUpvoted"><i class="bi bi-heart" (click)="onUpVote()"></i> {{comment.upvotes}}</p>
+          <p *ngIf="userService.isLoggedIn()"><i class="bi {{isUpvoted ? 'bi-heart-fill' : 'bi-heart'}}"
+               (click)="onUpVote()"></i> {{comment.upvotes}}</p>
+          <p *ngIf="!userService.isLoggedIn()"><i class="bi {{isUpvoted ? 'bi-heart-fill' : 'bi-heart'}}"
+                (click)="redirectToRegister()"></i> {{comment.upvotes}}</p>
+        </div>
+        <div class="col">
+          <p *ngIf="userService.isLoggedIn()"><i class="bi bi-reply-fill" (click)="onShowResponseInput()"></i>Responder</p>
+          <p *ngIf="!userService.isLoggedIn()"><i class="bi bi-reply-fill" (click)="redirectToRegister()"></i>Responder</p>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div *ngIf="responsesAreShown" class="row justify-content-end">
-  <div *ngFor="let response of comment.responses" class="col-10 col">
-    <app-response [response]="response"></app-response>
+<div *ngIf="responsesAreShown || responseInputIsShown" class="row justify-content-end">
+  <div *ngIf="responseInputIsShown" class="col-10">
+    <div class="row justify-content-center gy-2">
+      <div class="col-12 col-sm-12 col-md-9">
+        <textarea type="text" class="form-control" style="height: 100%" [(ngModel)]="newResponseText" rows="1" maxlength="150"></textarea>
+      </div>
+      <div class="col-12 col-sm-12 col-md-3">
+        <app-button [text]="'Publicar'" (btnClick)="onPostResponse()"></app-button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="comment.responses" class="col-10 col">
+    <div *ngFor="let response of comment.responses">
+      <app-response [userId]="userId"
+                    [gradeId]="gradeId"
+                    [commentId]="comment._id"
+                    [response]="response"
+                    (hasChanged)="onResponsesChanged()">
+      </app-response>
+    </div>
   </div>
 </div>
 

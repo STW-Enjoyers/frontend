@@ -5,6 +5,7 @@ import {Erasmus} from "../models/Erasmus";
 import {environment} from "../../environments/environment";
 import {GradeProfile} from "../models/GradeProfile";
 import {Comment} from "../models/Comment";
+import {Response} from "../models/Response";
 import {Grade} from "../models/Grade";
 
 @Injectable({
@@ -32,7 +33,33 @@ export class ForumService {
   postComment(grade: Grade, comment: Comment) {
     //Needs JWT auth
     return this.http.post(
-      environment.url + '/comment?idCarrera=' + grade.idCarrera + '&' + "cuerpo=" + comment.body,
+      environment.url + '/comment?idCarrera=' + grade.idCarrera + "&cuerpo=" + comment.body,
+      this.header
+    );
+  }
+
+  postResponse(idCarrera:string, idComment: string, responseBody: string) {
+    //Needs JWT auth
+    return this.http.post(
+      environment.url + '/reply?idCarrera=' + idCarrera + "&cuerpo=" + responseBody + "&_id=" + idComment,
+      this.header
+    );
+  }
+
+  postUpvote(idCarrera: string, idComment: string, idResponse?: string) {
+    //Needs JWT auth
+    return this.http.post(
+      // @ts-ignore
+    environment.url + `/upVote?idCarrera=${idCarrera}&idcom=${idComment}${ (idResponse) ? `&idrep=${idResponse}` : `` }`,
+      this.header
+    );
+  }
+
+  postDownvote(idCarrera: string, idComment: string, idResponse?: string) {
+    //Needs JWT auth
+    return this.http.post(
+      // @ts-ignore
+      environment.url + `/downVote?idCarrera=${idCarrera}&idcom=${idComment}${ (idResponse) ? `&idrep=${idResponse}` : `` }`,
       this.header
     );
   }

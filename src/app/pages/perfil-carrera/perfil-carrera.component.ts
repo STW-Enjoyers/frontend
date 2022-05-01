@@ -37,43 +37,51 @@ export class PerfilCarreraComponent implements OnInit {
 
   ngOnInit(): void {
     // Get profile id from url data
-    this.grade = history.state.data
-    this.getGradeProfileData(this.grade.idCarrera)
+    var localStorageGrade = JSON.parse(<string>localStorage.getItem('grade')) as Grade
+    if (localStorageGrade) {
+      this.grade = localStorageGrade;
+    } else {
+      throw new Error("perfil-carrera: ngOnInit: El id de la carrera es nulo")
+    }
+    this.getGradeProfileData(this.grade.idCarrera, true)
   }
 
   // Get gradeProfile (Chart data and comments)
-  getGradeProfileData(idCarrera:string): void {
+  getGradeProfileData(idCarrera:string, updateChart:boolean): void {
     this.forumService
       .getGradeProfile(idCarrera)
       .subscribe((gradeProfile) =>{
         this.comments = gradeProfile.comments
-        this.chart = new Chart('rendimientoChart', {
-          type: 'pie',
-          data: {
-            labels: PerfilCarreraConstants.CHART_PIE_LABELS,
-            datasets: [{
-              data: [gradeProfile.graduated, gradeProfile.changed, gradeProfile.abandoned],
-              borderWidth: 2,
-              backgroundColor: PerfilCarreraConstants.CHART_PIE_COLORS,
-            }],
-          },
-        })
+        if(updateChart) {
+          this.chart = new Chart('rendimientoChart', {
+            type: 'pie',
+            data: {
+              labels: PerfilCarreraConstants.CHART_PIE_LABELS,
+              datasets: [{
+                data: [gradeProfile.graduated, gradeProfile.changed, gradeProfile.abandoned],
+                borderWidth: 2,
+                backgroundColor: PerfilCarreraConstants.CHART_PIE_COLORS,
+              }],
+            },
+          })
+        }
       })
   }
 
   postComment() {
-    console.log("postComment")
-    console.log(localStorage.getItem('token'))
-    console.log(this.grade.idCarrera)
     if (this.newCommentText && this.newCommentText.length > 0) {
-      console.log("SEND POST TO BACKEND")
       this.forumService.postComment(this.grade, <Comment>{body: this.newCommentText}).subscribe(
         (res: any) => {
-         console.log("RESPONSE RECEIVED")
+          // Reset input
           this.newCommentText = ""
-          window.location.reload();
+          this.onCommentsHaveChanged()
         })
     }
+  }
+
+  onCommentsHaveChanged() {
+    // Update comments
+    this.getGradeProfileData(this.grade.idCarrera, false)
   }
 
 }

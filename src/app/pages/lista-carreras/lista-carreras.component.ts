@@ -105,7 +105,11 @@ export class ListaCarrerasComponent implements OnInit {
   }
 
   navigateToProfile(grade: Grade) {
-    this.router.navigate(['perfil-carrera'], { state: {data: grade} });
+    // We need to pass the grade object to grade profile page.
+    // Doing it with local storage is a temporal solution.
+    // This will need a design rethinking
+    localStorage.setItem('grade', JSON.stringify(grade));
+    this.router.navigate(['perfil-carrera']);
   }
   // Calculate modulus.
   // % is not a modulus operator. It is a remainder operator
