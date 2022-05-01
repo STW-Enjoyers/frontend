@@ -2,28 +2,28 @@
 
 <div class="container-fluid rounded bg-light mt-2">
   <div class="row">
+    <!-------------- INIT AVATAR ---------------------->
     <div class="col-2 col-lg-1">
-      <img src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp"
-           class="rounded-circle shadow-4" style="width: 100%;" alt="Avatar" />
+      <img src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp" class="rounded-circle shadow-4" style="width: 100%;" alt="Avatar" />
     </div>
+    <!-------------- INIT CONTENT ---------------------->
     <div class="col-10">
       <p><b>{{comment.username}}</b></p>
       <p>{{comment.body}}</p>
       <div class="row">
-        <div class="col">
-          <p><i class="bi {{responsesAreShown ? 'bi-caret-up-fill' : 'bi-caret-down-fill'}}" (click)="onShowResponses()"></i>
+        <!-------------- INIT RESPONSES BUTTON ---------------------->
+        <div class="col" (click)="onShowResponses()"  role="button">
+          <p class="fs-6 text-secondary"><i class="bi {{responsesAreShown ? 'bi-caret-up-fill' : 'bi-caret-down-fill'}}"></i>
             Ver respuestas <span>({{comment.responses.length}})</span>
           </p>
         </div>
-        <div class="col">
-          <p *ngIf="userService.isLoggedIn()"><i class="bi {{isUpvoted ? 'bi-heart-fill' : 'bi-heart'}}"
-               (click)="onUpVote()"></i> {{comment.upvotes}}</p>
-          <p *ngIf="!userService.isLoggedIn()"><i class="bi {{isUpvoted ? 'bi-heart-fill' : 'bi-heart'}}"
-                (click)="redirectToRegister()"></i> {{comment.upvotes}}</p>
+        <!-------------- INIT LIKE BUTTON ---------------------->
+        <div (click)=" userService.isLoggedIn() ? onUpVote() : redirectToRegister()" class="col"  role="button">
+          <p class="fs-6 text-secondary"><i class="bi {{isUpvoted ? 'bi-heart-fill' : 'bi-heart'}}"></i> {{comment.upvotes}}</p>
         </div>
-        <div class="col">
-          <p *ngIf="userService.isLoggedIn()"><i class="bi bi-reply-fill" (click)="onShowResponseInput()"></i>Responder</p>
-          <p *ngIf="!userService.isLoggedIn()"><i class="bi bi-reply-fill" (click)="redirectToRegister()"></i>Responder</p>
+        <!-------------- INIT REPLY BUTTON ---------------------->
+        <div (click)="userService.isLoggedIn() ? onShowResponseInput() : redirectToRegister()" class="col">
+          <p class="fs-6 text-secondary"><i class="bi bi-reply-fill"></i>Responder</p>
         </div>
       </div>
     </div>
@@ -31,6 +31,7 @@
 </div>
 
 <div *ngIf="responsesAreShown || responseInputIsShown" class="row justify-content-end">
+  <!-------------- INIT WRITE A REPLY ---------------------->
   <div *ngIf="responseInputIsShown" class="col-10">
     <div class="row justify-content-center gy-2">
       <div class="col-12 col-sm-12 col-md-9">
@@ -41,7 +42,7 @@
       </div>
     </div>
   </div>
-
+  <!-------------- INIT RESPONSES BOX ---------------------->
   <div *ngIf="comment.responses" class="col-10 col">
     <div *ngFor="let response of comment.responses">
       <app-response [userId]="userId"

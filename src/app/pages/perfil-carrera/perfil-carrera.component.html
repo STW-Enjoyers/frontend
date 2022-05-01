@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <h1 class="display-6 text-center p-5 bg-light">{{grade.estudio}} - {{grade.localidad}}</h1>
-
-  <div class="container mt-3">
+  <!-------------- INIT CHARTS ---------------------->
+  <div class="container mt-4">
     <h5>{{statistics_title}}</h5>
     <div class="row">
       <div class="col-4 border border-1 rounded p-3">
@@ -9,36 +9,31 @@
       </div>
     </div>
   </div>
-  <br><br>
 
+  <!-------------- INIT WRITE A COMMENT ---------------------->
   <div class="container mt-5">
     <h5>{{comments_title}}</h5>
-    <div *ngIf="userService.isLoggedIn()" class="mt-2">
-      <p class="fs-6">{{comment_input_label}}</p>
-      <div class="row justify-content-center gy-2">
-        <div class="col-12 col-sm-12 col-md-9">
-          <textarea type="text" class="form-control" style="height: 100%" [(ngModel)]="newCommentText" rows="1" maxlength="150"></textarea>
-        </div>
-        <div class="col-12 col-sm-12 col-md-3">
-          <app-button [text]="comment_button_text" (btnClick)="postComment()"></app-button>
-        </div>
+    <p class="fs-6">{{comment_input_label}}</p>
+    <div class="row justify-content-center gy-2">
+      <div class="col-12 col-sm-12 col-md-9">
+        <textarea type="text" class="form-control" style="height: 100%" [(ngModel)]="newCommentText" rows="1" maxlength="150"></textarea>
       </div>
-      <div class="space-16"></div>
-    </div>
-    <div *ngIf="!userService.isLoggedIn()">
-      No estas log bro
-    </div>
-
-    <div *ngIf="comments">
-      <div *ngFor="let comment of comments" class="mt-3">
-        <app-comment [userId]="'TODO: ENLAZAR ID'"
-                     [gradeId]="this.grade.idCarrera"
-                     [comment]="comment"
-                     (hasChanged)="onCommentsHaveChanged()">
-        </app-comment>
+      <div class="col-12 col-sm-12 col-md-3">
+        <app-button *ngIf="userService.isLoggedIn()"  [text]="comment_button_text" (btnClick)="postComment()"></app-button>
+        <app-button *ngIf="!userService.isLoggedIn()" [text]="comment_button_text" [routerLink]="['/registro']"></app-button>
       </div>
     </div>
+  </div>
 
+  <!-------------- INIT COMMENT BOX ---------------------->
+  <div *ngIf="comments" class="container mt-4">
+    <div *ngFor="let comment of comments">
+      <app-comment [userId]="'TODO: ENLAZAR ID'"
+                   [gradeId]="this.grade.idCarrera"
+                   [comment]="comment"
+                   (hasChanged)="onCommentsHaveChanged()">
+      </app-comment>
+    </div>
   </div>
 </div>
 
