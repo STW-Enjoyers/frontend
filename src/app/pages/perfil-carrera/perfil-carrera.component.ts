@@ -11,11 +11,8 @@ export class PerfilCarreraComponent implements OnInit {
   constructor(  private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-      if (this.route.snapshot.paramMap.get('id') != "undefined") {
-        this.id = <string>this.route.snapshot.paramMap.get('id')
-      } else {
-        throw new Error("El id recibido por el perfil de una carrera es undefined")
-      }
+    console.log(history)
+    this.id = history.state.data
   }
 
 }

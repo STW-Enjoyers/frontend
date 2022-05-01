@@ -41,8 +41,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let grade of grades">
-          <td><a [routerLink]="['/perfil-carrera', grade.idCarrera]">
+        <tr *ngFor="let grade of grades" (click)="navigateToProfile(grade)">
+          <td><a class="link-primary" role="button">
             {{ grade.estudio }}
           </a></td>
           <td>{{ grade.centro }}</td>

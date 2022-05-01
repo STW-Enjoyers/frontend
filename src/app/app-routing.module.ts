@@ -17,7 +17,9 @@ const routes: Routes = [
   {path: 'lista-carreras', component: ListaCarrerasComponent},
   {path: 'mapa-erasmus', component: MapaErasmusComponent},
   {path: 'ajustes-usuario', component: AjustesUsuarioComponent},
-  {path: 'perfil-carrera/:id', component: PerfilCarreraComponent},
+  // Partimos el id en 2 porque a los 23 caracteres, angular inserta una
+  // etiqueta <br> machacando un caracter del id
+  {path: 'perfil-carrera', component: PerfilCarreraComponent},
 
 
 ];

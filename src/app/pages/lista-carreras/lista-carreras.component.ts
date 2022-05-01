@@ -6,6 +6,7 @@ import {Grade} from "../../models/Grade";
 import {Subject} from "rxjs";
 import {DataTableDirective} from "angular-datatables";
 import {CITIES} from "./lista-carreras.constants";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-lista-carreras',
@@ -27,7 +28,7 @@ export class ListaCarrerasComponent implements OnInit {
   @ViewChild(DataTableDirective, {static: false})
   datatableElement!: DataTableDirective;
 
-  constructor(private gradesService: GradesService) { }
+  constructor(private router: Router, private gradesService: GradesService) { }
 
   ngOnInit(): void {
     // Add custom filters (name and city)
@@ -103,6 +104,9 @@ export class ListaCarrerasComponent implements OnInit {
     $.fn['dataTable'].ext.search.pop();
   }
 
+  navigateToProfile(grade: Grade) {
+    this.router.navigate(['perfil-carrera'], { state: {data: grade.idCarrera} });
+  }
   // Calculate modulus.
   // % is not a modulus operator. It is a remainder operator
   mod(n: number, m: number) {
