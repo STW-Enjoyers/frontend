@@ -31,10 +31,12 @@
       <span><button class="btn btn-outline-dark" (click)="showChart(0)"> Zaragoza </button></span>
       <span><button class="btn btn-outline-dark" (click)="showChart(1)"> Teruel </button></span>
       <span><button class="btn btn-outline-dark" (click)="showChart(2)"> Huesca </button></span>
+      <span><button class="btn btn-outline-dark" (click)="showChart(3)"> La Almunia </button></span>
     </div>
   </div>
 
   <canvas [hidden]="chartShown !== 0" id="zaragozaChart" width="100%" height="40"> {{chart}} </canvas>
   <canvas [hidden]="chartShown !== 1" id="teruelChart" width="100%" height="40"> {{chart}} </canvas>
   <canvas [hidden]="chartShown !== 2" id="huescaChart" width="100%" height="40"> {{chart}} </canvas>
+  <canvas [hidden]="chartShown !== 3" id="almuniaChart" width="100%" height="40"> {{chart}} </canvas>
 </div>
