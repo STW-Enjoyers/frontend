@@ -18,14 +18,19 @@ export class MapaErasmusComponent implements OnInit {
   colorErasmusIn = MapaErasmusConstants.COLOR_ERASMUS_IN
   colorErasmusOut = MapaErasmusConstants.COLOR_ERASMUS_OUT
   maxCircleSize = MapaErasmusConstants.MAX_CIRCLE_SIZE
+  minCircleSize = MapaErasmusConstants.MIN_CIRCLE_SIZE
 
   erasmusList!:Erasmus[]
   options = {
     layers: [
-      L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 15, attribution: '...' }),
+      L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { 
+        maxZoom: 12, 
+        minZoom: 4,
+        attribution: '...' 
+      }),
     ],
     zoom: 4,
-    center: L.latLng(40, 3.7)
+    center: L.latLng(48.0, 7.0)
   };
 
   layers:L.Layer[] = [];
@@ -55,7 +60,7 @@ export class MapaErasmusComponent implements OnInit {
       (res: any) => {
         this.erasmusList = res
         this.erasmusList.forEach(erasmus => {
-          this.addCircle(erasmus, this.maxCircleSize, this.colorErasmusOut)
+          this.addCircle(erasmus, this.maxCircleSize, this.minCircleSize, this.colorErasmusOut)
         })})
   }
 
@@ -64,24 +69,24 @@ export class MapaErasmusComponent implements OnInit {
     this.erasmusService.getErasmusIn().subscribe(
       (res: any) => {
         let erasmus = res
-        this.addCircle(erasmus, this.maxCircleSize, this.colorErasmusIn)
+        this.addCircle(erasmus, this.maxCircleSize, this.minCircleSize, this.colorErasmusIn)
       })
   }
 
   //Add a circle layer
-  addCircle(erasmus: Erasmus, maxSize:number, color:string) {
+  addCircle(erasmus: Erasmus, maxSize:number, minSize:number, color:string) {
     var circle = L.circleMarker([erasmus.lat, erasmus.lng], {
-      radius:  this.scaledRadius(erasmus.plazas, maxSize), color: color
+      radius:  this.scaledRadius(erasmus.plazas, maxSize, minSize), color: color
     })
     // Add circle tooltip
     circle.bindPopup("<b>País: </b>" + erasmus.pais + "<br>" + "<b>Plazas: </b>" + erasmus.plazas)
     this.layers.push( circle )
   }
 
-  scaledRadius(val:number, maxVal:number) {
+  scaledRadius(val:number, maxVal:number, minVal:number) {
     let multiplier = 40
-    if (val > maxVal) return multiplier
-    return multiplier * (val / maxVal);
+    if (val > maxVal) return multiplier + minVal
+    return multiplier * (val / maxVal) + minVal;
   }
 
 }

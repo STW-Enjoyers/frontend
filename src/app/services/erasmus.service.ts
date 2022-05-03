@@ -51,4 +51,24 @@ export class ErasmusService {
       })
     )
   }
+
+  // Get number of Erasmus offers for studying at Unizar this year
+  getErasmusInAll():Observable<Erasmus[]> {
+    return this.http.get<Erasmus>(environment.url + '/erasmus/in').pipe(
+      map((data: any) => {
+        // Transform data to fit Erasmus model
+        let erasmusList:Erasmus[] = []
+        data.forEach( (erasmus:any) => {
+          let coordinates = this.coordinatesService.geocode(erasmus._id.pais) ?? {lat:0, lng: 0};
+          erasmusList.push({
+            pais: erasmus._id.pais,
+            plazas: erasmus.plazas,
+            lat: coordinates.lat,
+            lng: coordinates.lng
+          })
+        })
+        return erasmusList;
+      })
+    )
+  }
 }
