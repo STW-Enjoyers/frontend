@@ -94,7 +94,6 @@ export class ListaCarrerasComponent implements OnInit {
         ? this.search.toLowerCase().replace(/[\u0300-\u036f]/g, "")
         : "";
 
-      console.log(formattedEstudio + ", " + formattedSearch + ": " + this.levenshteinDistance(formattedEstudio, formattedSearch))
       if (ciudad.includes(this.city.name)
           && (formattedSearch == ""
               || formattedEstudio.includes(formattedSearch))
