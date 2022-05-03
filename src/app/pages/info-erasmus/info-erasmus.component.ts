@@ -12,8 +12,9 @@ import {Erasmus} from "../../models/Erasmus";
 export class InfoErasmusComponent implements OnInit {
   // Constants
   left_title:string = InfoErasmusConstants.LEFT_INFO_TITLE;
-  left_text_top:string = InfoErasmusConstants.LEFT_INFO_TEXT_TOP;
-  left_text_bot:string = InfoErasmusConstants.LEFT_INFO_TEXT_BOT;
+  first_text:string = InfoErasmusConstants.FIRST_TEXT;
+  second_text:string = InfoErasmusConstants.SECOND_TEXT;
+  third_text:string = InfoErasmusConstants.THIRD_TEXT;
   graphic_plazas_title:string = InfoErasmusConstants.GRAPHIC_PLAZAS_TITLE;
   graphic_destinos_title:string = InfoErasmusConstants.GRAPHIC_DESTINOS_TITLE;
 
@@ -30,21 +31,28 @@ export class InfoErasmusComponent implements OnInit {
 
   // Erasmus from other foreign countries to Unizar
   getErasmusIn() {
-    this.erasmusService.getErasmusIn().subscribe(
-      (erasmus: any) => {
+    this.erasmusService.getErasmusInAll().subscribe(
+      (erasmus: Erasmus[]) => {
+        let erasmusPaises:string[] = []
+        let erasmusPlazas:number[] = []
+
+        // Alphabetical sort
+        erasmus.sort((a,b)=>a.pais.localeCompare(b.pais))
+
+        for (let i = 0; i < erasmus.length; i++) {
+          erasmusPaises[i] = erasmus[i].pais
+          erasmusPlazas[i] = erasmus[i].plazas
+        }
+
         this.chart = new Chart('plazasChart', {
           type: 'bar',
           data: {
-            labels: [
-              erasmus.pais
-            ],
+            labels: erasmusPaises,
             datasets: [{
-              label: 'Plazas para estudiar en otros destinos',
-              data: [
-                erasmus.plazas
-              ],
+              label: 'Plazas',
+              data: erasmusPlazas,
               borderWidth: 2,
-              backgroundColor: '#6257f8',
+              backgroundColor: '#128100',
             }],
           },
           options: {
@@ -58,10 +66,11 @@ export class InfoErasmusComponent implements OnInit {
   getErasmusOut() {
     this.erasmusService.getErasmusOut().subscribe(
       (erasmus: Erasmus[]) => {
-        console.log(erasmus);
-
         let erasmusPaises:string[] = []
         let erasmusPlazas:number[] = []
+
+        // Alphabetical sort
+        erasmus.sort((a,b)=>a.pais.localeCompare(b.pais))
 
         for (let i = 0; i < erasmus.length; i++) {
           erasmusPaises[i] = erasmus[i].pais
