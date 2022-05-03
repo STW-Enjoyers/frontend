@@ -91,14 +91,13 @@ export class ListaCarrerasComponent implements OnInit {
       // Formatted data
       let formattedEstudio = estudio.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
       let formattedSearch:string = (this.search)
-        ? this.search.toLowerCase().replace(/[\u0300-\u036f]/g, "")
+        ? this.search.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
         : "";
-
       if (ciudad.includes(this.city.name)
           && (formattedSearch == ""
               || formattedEstudio.includes(formattedSearch))
               || formattedSearch.includes(formattedEstudio)
-              || this.levenshteinDistance(formattedEstudio, formattedSearch) <= 5
+              || this.levenshteinDistance(formattedEstudio, formattedSearch) <= 3
       ) {
         return true;
       }
