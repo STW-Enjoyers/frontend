@@ -87,7 +87,9 @@ export class RegistroComponent implements OnInit {
     }
 
     this.userService.postUser(this.registerForm.value).subscribe(
-      (res) => {
+      (res:any) => {
+        console.log("REGISTER TOKEN: " + res['token'])
+        this.userService.setToken(res['token']);
         this.resetErrors()
       },
       (error) => {
