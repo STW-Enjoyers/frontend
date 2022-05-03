@@ -1,8 +1,37 @@
 .map {
-   height: 500px;
+   height: 80vh;
 }
+
+.l-fs {
+  font-size: 14px;
+}
+
+.iconErasmusOut {
+  font-size: 14px;
+  color: #0000ff;
+}
+
+.iconErasmusIn {
+  font-size: 14px;
+  color: #128100;
+}
+
 @media only screen and (max-width: 600px) {
   .map {
-    height: 500px;
+    height: 75vh;
+  }
+
+  .l-fs {
+    font-size: 12px;
+  }
+
+  .iconErasmusOut {
+    font-size: 12px;
+    color: #0000ff;
+  }
+  
+  .iconErasmusIn {
+    font-size: 12px;
+    color: #128100;
   }
 }
