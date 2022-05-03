@@ -20,6 +20,8 @@ export class PerfilCarreraComponent implements OnInit {
   comments_title = PerfilCarreraConstants.COMMENTS_TITLE;
   comment_input_label = PerfilCarreraConstants.COMMENT_INPUT_LABEL;
   comment_button_text = PerfilCarreraConstants.COMMENT_BUTTON_TEXT;
+  option_relevance = PerfilCarreraConstants.OPTION_RELEVANCE;
+  option_date = PerfilCarreraConstants.OPTION_DATE;
   // Actual grade
   grade!: Grade;
   // Grade profile comments
@@ -29,10 +31,9 @@ export class PerfilCarreraComponent implements OnInit {
   lineChart:any = []
   // Input comment text value
   newCommentText!:string;
-  // Comments order
-  defaultOption:string = "Elija...";
-  selectOptions = [this.defaultOption,"Relevancia", "FechaPublicacion"]
-  selectedOrderValue!:string;
+  // Select
+  order = [this.option_relevance, this.option_date]
+  selected:string = this.option_relevance
 
   constructor(private forumService: ForumService,
               public userService: UserService) {
@@ -57,6 +58,7 @@ export class PerfilCarreraComponent implements OnInit {
       .getGradeProfile(idCarrera)
       .subscribe((gradeProfile) =>{
         this.comments = gradeProfile.comments
+        this.orderComments(this.option_relevance)
         if(updateChart) {
           this.pieChart = new Chart('rendimientoChart', {
             type: 'pie',
@@ -119,21 +121,20 @@ export class PerfilCarreraComponent implements OnInit {
     })
   }
 
-  onOrderChange(order:string) {
-    if (this.selectedOrderValue in this.selectOptions) {
-      switch (this.selectedOrderValue) {
-        case "Relevancia":
-          this.comments.sort( (a, b) => {
-            return b.upvotes - a.upvotes
-          })
-          break;
-        case "FechaPublicacion":
-          break;
-        default:
-          break;
-      }
+  onOrderChange() {
+    this.orderComments(this.selected)
+  }
+
+  orderComments(order:string) {
+    if (order === this.option_relevance) {
+      // order by relevance
+      this.comments.sort( (a, b) => {
+        return b.upvotes - a.upvotes
+      })
+    } else if (order=== this.option_date) {
+      // Order by comment date
     } else {
-        throw new Error("perfil-carrera.component.ts: orederComments: Unexpected order");
+      throw new Error("perfil-carrera.component.ts: orederComments: Unexpected order");
     }
   }
 

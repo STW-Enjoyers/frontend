@@ -32,12 +32,11 @@
 
   <!-------------- INIT COMMENT BOX ---------------------->
   <div *ngIf="comments" class="container mt-4">
-    <select>
-      <option **[ngValue]="null" disabled**></option>
-      <option *ngFor="let option of selectOptions" [ngValue]="option">
-        {{ option}}
-      </option>
-    </select>
+      <span>Ordenar por </span>
+      <select [(ngModel)]="selected" (ngModelChange)="onOrderChange()">
+        <option *ngFor="let o of order" [ngValue]="o">{{ o }}</option>
+      </select>
+
     <div *ngFor="let comment of comments">
       <app-comment [userId]="'TODO: ENLAZAR ID'"
                    [gradeId]="this.grade.idCarrera"
