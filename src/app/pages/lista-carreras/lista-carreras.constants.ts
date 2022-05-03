@@ -16,6 +16,11 @@ export const CITIES = [
     name: "Teruel",
     image: "/assets/teruel.jpg",
     web: "https://teruel.unizar.es/"
+  },
+  {
+    name: "Almunia de Doña Godina (La)",
+    image: "/assets/almunia.jpg",
+    web: "https://eupla.unizar.es/"
   }
 
 ]
@@ -30,12 +35,13 @@ export const DTOPTIONS = {
   columnDefs: [
     { // Handle Carreras column overflow
       "targets": 0,
-      "width": "30%",
-      render: function ( data: string) {
-        return data.length > 70
-          ? data.substr( 0, 70 ) + "<br>" + data.substr(71, data.length)
-          : data
+      "width": "100%",
+      render: function ( data: string, type: string) {
+        return data.length > 40
+          ? '<a class="text-grade" role="button">' + data.substr( 0, 38 ) + '...</a>'
+          : '<a class="text-grade" role="button">' + data + '</a>'
       }
+
     },
     {  // Handle cell padding (the only way that works)
       "targets": '_all',

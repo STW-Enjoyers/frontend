@@ -28,6 +28,13 @@
     </div>
   </div>
 
+  <select>
+    <option **[ngValue]="null" disabled**></option>
+    <option *ngFor="let option of selectOptions" [ngValue]="option">
+      {{ option}}
+    </option>
+  </select>
+
   <!-------------- INIT COMMENT BOX ---------------------->
   <div *ngIf="comments" class="container mt-4">
     <div *ngFor="let comment of comments">

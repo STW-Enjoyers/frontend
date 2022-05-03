@@ -29,7 +29,10 @@ export class PerfilCarreraComponent implements OnInit {
   lineChart:any = []
   // Input comment text value
   newCommentText!:string;
-
+  // Comments order
+  defaultOption:string = "Elija...";
+  selectOptions = [this.defaultOption,"Relevancia", "FechaPublicacion"]
+  selectedOrderValue!:string;
 
   constructor(private forumService: ForumService,
               public userService: UserService) {
@@ -114,6 +117,24 @@ export class PerfilCarreraComponent implements OnInit {
         }
       })
     })
+  }
+
+  onOrderChange(order:string) {
+    if (this.selectedOrderValue in this.selectOptions) {
+      switch (this.selectedOrderValue) {
+        case "Relevancia":
+          this.comments.sort( (a, b) => {
+            return b.upvotes - a.upvotes
+          })
+          break;
+        case "FechaPublicacion":
+          break;
+        default:
+          break;
+      }
+    } else {
+        throw new Error("perfil-carrera.component.ts: orederComments: Unexpected order");
+    }
   }
 
   postComment() {
