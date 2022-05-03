@@ -21,6 +21,18 @@ export class ForumService {
       map((data: any) => {
         console.log(JSON.stringify(data))
         // Transform data to fit Erasmus model
+        let formattedComments = data.comments.map((comment:any) => {
+          return <Comment> {
+            username: comment.username,
+            upvotes: comment.upvotes,
+            upvotedUsers: comment.upvotedUsers,
+            visible: comment.visible,
+            body: comment.body,
+            responses: comment.responses,
+            _id: comment._id,
+            date: new Date(comment.date)
+          }
+        })
         return <GradeProfile>{
           comments: data.comments,
           graduated: data.graduated.graduated,

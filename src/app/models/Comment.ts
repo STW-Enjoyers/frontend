@@ -11,5 +11,5 @@ export interface Comment {
   body: string,
   responses: Response[],
   _id: string
-  date: string
+  date: Date
 }
