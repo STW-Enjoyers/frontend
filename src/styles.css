@@ -3,10 +3,10 @@ p { font-size: 18px; }
 
 label{ font-size: 20px; }
 
+div.space-8 { margin: 8px; }
 div.space-16 { margin: 16px; }
 div.space-32 { margin: 32px; }
 div.space-64 { margin: 64px; }
 div.space-128 { margin: 128px; }
 
 .theme_color { color: #6257f8;}
-

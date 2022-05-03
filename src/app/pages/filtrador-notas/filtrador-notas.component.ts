@@ -18,10 +18,11 @@ export class FiltradorNotasComponent implements OnInit {
   title_select:string = FiltradorNotasConstants.TITLE_SELECT;
   placeholder = FiltradorNotasConstants.PLACEHOLDER;
   cupos = FiltradorNotasConstants.CUPOS;
+  default_cupo = FiltradorNotasConstants.DEFAULT_CUPO;
   grades: Grade[] = [];
   // Filter values
   filter: string = ''; /* Filter bar value */
-  select: string = ''; /* Select bar value */
+  select: string = this.default_cupo; /* Select bar value */
   cupoIndex:number = 0;
   cupo = CUPOS[this.cupoIndex] /* Actual cupo filtered */
   // Datatables attributes
@@ -46,8 +47,7 @@ export class FiltradorNotasComponent implements OnInit {
     this.gradesService
       .getGrades()
       .subscribe((grades) =>{
-        grades = this.gradesService.filterByType(grades, this.gradesService.TYPES.GRADO);
-        grades = this.gradesService.filterByCupo(grades, this.gradesService.CUPOS.GENERAL)
+        grades = this.gradesService.filterByType(grades, this.gradesService.TYPES.GRADO)
         grades = this.gradesService.renameCareers(grades);
         this.grades = grades;
         console.log(grades)
@@ -74,7 +74,7 @@ export class FiltradorNotasComponent implements OnInit {
       const cupo:string = data[3];
       console.log(data)
       if (this.filter == '' || Number(this.filter) >= Number(nota)) {
-        if (this.select == '' || this.select == cupo) {
+        if (this.select == 'Todos' || cupo.includes(this.select)) {
           return true;
         }
       }
