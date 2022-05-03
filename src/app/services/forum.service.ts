@@ -19,6 +19,7 @@ export class ForumService {
   getGradeProfile(idCarrera:string):Observable<GradeProfile> {
     return this.http.get<GradeProfile>(environment.url + '/gradeProfile?idCarrera=' + idCarrera).pipe(
       map((data: any) => {
+        console.log(JSON.stringify(data))
         // Transform data to fit Erasmus model
         return <GradeProfile>{
           comments: data.comments,
@@ -28,6 +29,10 @@ export class ForumService {
           abandoned: data.graduated.abandoned
         };
       }))
+  }
+
+  getHistoricalGrades(idCarrera:string):Observable<any> {
+    return this.http.get<Grade[]>(environment.url + '/grades/historical/' + idCarrera)
   }
 
   postComment(grade: Grade, comment: Comment) {

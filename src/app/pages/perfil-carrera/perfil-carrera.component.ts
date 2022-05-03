@@ -25,7 +25,8 @@ export class PerfilCarreraComponent implements OnInit {
   // Grade profile comments
   comments!: Comment[];
   // Grade prifile performance chart
-  chart:any = []
+  pieChart:any = []
+  lineChart:any = []
   // Input comment text value
   newCommentText!:string;
 
@@ -40,10 +41,11 @@ export class PerfilCarreraComponent implements OnInit {
     var localStorageGrade = JSON.parse(<string>localStorage.getItem('grade')) as Grade
     if (localStorageGrade) {
       this.grade = localStorageGrade;
+      this.getGradeProfileData(this.grade.idCarrera, true)
+      this.historicalGrades(this.grade.idCarrera)
     } else {
       throw new Error("perfil-carrera: ngOnInit: El id de la carrera es nulo")
     }
-    this.getGradeProfileData(this.grade.idCarrera, true)
   }
 
   // Get gradeProfile (Chart data and comments)
@@ -53,7 +55,7 @@ export class PerfilCarreraComponent implements OnInit {
       .subscribe((gradeProfile) =>{
         this.comments = gradeProfile.comments
         if(updateChart) {
-          this.chart = new Chart('rendimientoChart', {
+          this.pieChart = new Chart('rendimientoChart', {
             type: 'pie',
             data: {
               labels: PerfilCarreraConstants.CHART_PIE_LABELS,
@@ -63,9 +65,55 @@ export class PerfilCarreraComponent implements OnInit {
                 backgroundColor: PerfilCarreraConstants.CHART_PIE_COLORS,
               }],
             },
+            options: {
+              maintainAspectRatio: false,
+              responsive: true,
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'Rendimiento académio en último año.'
+                }
+              }
+            }
           })
         }
       })
+  }
+
+  historicalGrades(idCarrera:string) {
+    this.forumService.getHistoricalGrades(idCarrera).subscribe((grades:Grade[]) =>{
+      let xValues:number[] = []
+      let yValues:number[] = []
+      // Ascending sort
+      grades.sort( (a, b) => {
+        return a.curso - b.curso
+      })
+      grades.forEach( grade => {
+        xValues.push(grade.curso)
+        yValues.push(grade.nota)
+      })
+      this.pieChart = new Chart('historicalGradesChart', {
+        type: 'line',
+        data: {
+          labels: xValues,
+          datasets: [{
+            data: yValues,
+            label: this.grade.estudio + "-" + this.grade.localidad,
+            borderColor: "#3e95cd",
+          }],
+        },
+        options: {
+          maintainAspectRatio: false,
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Evolución de la nota de corte'
+            }
+          }
+        }
+      })
+    })
   }
 
   postComment() {
