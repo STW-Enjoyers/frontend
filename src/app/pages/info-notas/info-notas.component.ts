@@ -25,6 +25,7 @@ export class InfoNotasComponent implements OnInit {
   gradesZaragoza:Grade[] = [];
   gradesTeruel:Grade[] = [];
   gradesHuesca:Grade[] = [];
+  gradesAlmunia:Grade[] = [];
   chart:any = []
 
   constructor(private gradesService: GradesService) { 
@@ -47,11 +48,10 @@ export class InfoNotasComponent implements OnInit {
         grades = this.gradesService.filterByCupo(grades, this.gradesService.CUPOS.GENERAL)
         grades = this.gradesService.renameCareers(grades);
 
-        console.log(grades);
-
         this.gradesZaragoza = this.gradesService.filterByCity(grades, this.gradesService.CITIES.ZARAGOZA);
         this.gradesTeruel = this.gradesService.filterByCity(grades, this.gradesService.CITIES.TERUEL);
         this.gradesHuesca = this.gradesService.filterByCity(grades, this.gradesService.CITIES.HUESCA);
+        this.gradesAlmunia = this.gradesService.filterByCity(grades, this.gradesService.CITIES.ALMUNIA);
 
         this.gradesZaragoza = this.getTopData(this.gradesZaragoza);
         this.newChart('zaragozaChart', this.gradesZaragoza, 'Nota de corte en Zaragoza');
@@ -61,6 +61,9 @@ export class InfoNotasComponent implements OnInit {
 
         this.gradesHuesca = this.getTopData(this.gradesHuesca);
         this.newChart('huescaChart', this.gradesHuesca, 'Nota de corte en Huesca');
+
+        this.gradesAlmunia = this.getTopData(this.gradesAlmunia);
+        this.newChart('almuniaChart', this.gradesAlmunia, 'Nota de corte en La Almunia');
       });
   }
 
@@ -79,19 +82,19 @@ export class InfoNotasComponent implements OnInit {
       data: {
         labels: [
           grades[0].estudio,
+          grades[1].estudio,
           grades[2].estudio,
-          grades[4].estudio,
-          grades[6].estudio,
-          grades[8].estudio
+          grades[3].estudio,
+          grades[4].estudio
         ],
         datasets: [{
           label: labelText,
           data: [
             grades[0].nota,
+            grades[1].nota,
             grades[2].nota,
-            grades[4].nota,
-            grades[6].nota,
-            grades[8].nota
+            grades[3].nota,
+            grades[4].nota
           ],
           borderWidth: 2,
           backgroundColor: '#6257f8',
