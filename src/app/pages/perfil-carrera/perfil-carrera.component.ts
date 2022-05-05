@@ -58,6 +58,7 @@ export class PerfilCarreraComponent implements OnInit {
       .getGradeProfile(idCarrera)
       .subscribe((gradeProfile) =>{
         this.comments = gradeProfile.comments
+        this.orderResponses()
         this.orderComments(this.option_relevance)
         if(updateChart) {
           this.pieChart = new Chart('rendimientoChart', {
@@ -133,9 +134,22 @@ export class PerfilCarreraComponent implements OnInit {
       })
     } else if (order=== this.option_date) {
       // Order by comment date
+      this.comments.sort( (a, b) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime()
+      })
+      console.log(JSON.stringify(this.comments))
     } else {
       throw new Error("perfil-carrera.component.ts: orederComments: Unexpected order");
     }
+  }
+
+  // Order responses by relevance
+  orderResponses() {
+    this.comments.map((comment:Comment) => {
+      comment.responses.sort( (a, b) => {
+        return b.upvotes - a.upvotes
+      })
+    })
   }
 
   postComment() {
