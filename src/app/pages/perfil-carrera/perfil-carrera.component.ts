@@ -22,6 +22,9 @@ export class PerfilCarreraComponent implements OnInit {
   comment_button_text = PerfilCarreraConstants.COMMENT_BUTTON_TEXT;
   option_relevance = PerfilCarreraConstants.OPTION_RELEVANCE;
   option_date = PerfilCarreraConstants.OPTION_DATE;
+  max_comments_per_page:number = PerfilCarreraConstants.MAX_COMMENTS_PER_PAGE;
+  visible_comments!:number;
+
   // Actual grade
   grade!: Grade;
   // Grade profile comments
@@ -60,6 +63,9 @@ export class PerfilCarreraComponent implements OnInit {
         this.comments = gradeProfile.comments
         this.orderResponses()
         this.orderComments(this.option_relevance)
+        this.visible_comments = (this.comments.length > this.max_comments_per_page)
+          ? this.max_comments_per_page
+          : this.comments.length;
         if(updateChart) {
           this.pieChart = new Chart('rendimientoChart', {
             type: 'pie',
@@ -166,6 +172,15 @@ export class PerfilCarreraComponent implements OnInit {
   onCommentsHaveChanged() {
     // Update comments
     this.getGradeProfileData(this.grade.idCarrera, false)
+  }
+
+  onShowMoreComments() {
+    console.log("moree: before" + this.visible_comments);
+    console.log(this.visible_comments + this.max_comments_per_page > this.comments.length);
+    this.visible_comments = (this.visible_comments + this.max_comments_per_page > this.comments.length)
+      ? this.comments.length
+      : this.visible_comments + this.max_comments_per_page;
+    console.log("moree: after" + this.visible_comments);
   }
 
 }
