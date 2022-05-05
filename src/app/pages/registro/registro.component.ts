@@ -91,6 +91,7 @@ export class RegistroComponent implements OnInit {
         console.log("REGISTER TOKEN: " + res['token'])
         this.resetErrors()
         this.userService.setToken(res['token']);
+        this.userService.setUserId(res['_id']);
         this.router.navigateByUrl('/ajustes-usuario');
       },
       (error) => {

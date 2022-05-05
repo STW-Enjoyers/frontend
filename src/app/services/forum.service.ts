@@ -64,6 +64,12 @@ export class ForumService {
   }
 
   postUpvote(idCarrera: string, idComment: string, idResponse?: string) {
+    console.log("postUpvote");
+    console.log("idCarrera: " + idCarrera);
+    console.log("idComment: " + idComment);
+    console.log("idResponse: " + idResponse);
+    console.log("token: " + localStorage.getItem('token'));
+    console.log(environment.url + `/upVote?idCarrera=${idCarrera}&idcom=${idComment}${ (idResponse) ? `&idrep=${idResponse}` : `` }`)
     //Needs JWT auth
     return this.http.post(
       // @ts-ignore

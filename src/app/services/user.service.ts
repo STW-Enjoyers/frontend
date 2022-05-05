@@ -43,6 +43,11 @@ export class UserService {
     localStorage.setItem('token', token);
   }
 
+  setUserId(id:string) {
+    console.log('userId: ' + id);
+    localStorage.setItem('userId', id);
+  }
+
   getToken() {
     return localStorage.getItem('token');
   }

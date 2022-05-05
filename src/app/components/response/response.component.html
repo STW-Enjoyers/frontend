@@ -8,6 +8,12 @@
     <div class="col-10">
       <p><b>{{response.username}}</b></p>
       <p>{{response.body}}</p>
+      <div class="row">
+        <!-------------- INIT LIKE BUTTON ---------------------->
+        <div (click)="userService.isLoggedIn() ? onUpVote() : redirectToRegister()" class="col"  role="button">
+          <p class="fs-6 text-secondary"><i class="bi {{isUpvoted ? 'bi-heart-fill' : 'bi-heart'}}"></i> {{response.upvotes}}</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
