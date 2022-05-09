@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.15.4/css/all.css">
 <link rel="stylesheet" href="header.component.css" />
-<link rel="stylesheet" href="/styles.scss" />
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
@@ -22,6 +21,7 @@
 					<a class="nav-link dropdown-toggle hidden-arrow" type="button" id="dropdownNotas" data-bs-toggle="dropdown" aria-expanded="false">
 						<i class="fas fa-cut"></i> Notas
 					</a>
+
 					<ul class="dropdown-menu" aria-labelledby="dropdownNotas">
 						<li><h6 class="dropdown-header">Notas de corte</h6></li>
 						<li>
@@ -49,6 +49,7 @@
 					<a class="nav-link dropdown-toggle" type="button" id="dropdownNotas" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="100,200">
 						<i class="fas fa-plane"></i> Erasmus
 					</a>
+
 					<ul class="dropdown-menu" aria-labelledby="dropdownNotas">
 						<li><h6 class="dropdown-header">Programa Erasmus</h6></li>
 						<li>
@@ -78,10 +79,35 @@
 		<ul class="navbar-nav mb-0 mb-lg-0 hide-sm">
 
 			<!--Fourth item-->
-			<li class="nav-item me-1">
+			<li class="nav-item me-1" *ngIf="!verifyLogin()">
 				<a class="nav-link" (click)="goToPage('login')" role="button">
 					<i class="fas fa-user"></i> Iniciar sesión
 				</a>
+			</li>
+
+			<li class="dropdown" *ngIf="verifyLogin()">
+				<a class="nav-link dropdown-toggle" type="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+					<i class="fas fa-user"></i> Usuario <!-- Cambiar por username-->
+				</a>
+
+				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
+					<li><h6 class="dropdown-header">Opciones</h6></li>
+					<li>
+						<a class="dropdown-item" type="button">
+							<i class="fas fa-tachometer-alt"></i> Panel de control 
+						</a>
+					</li>
+					<li>
+						<a class="dropdown-item" type="button">
+							<i class="fas fa-cog"></i> Ajustes 
+						</a>
+					</li>
+					<li>
+						<a class="dropdown-item" type="button" (click)="logoff()">
+							<i class="fas fa-sign-out-alt"></i> Cerrar sesión 
+						</a>
+					</li>
+				</ul>
 			</li>
 
 		</ul>
