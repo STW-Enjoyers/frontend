@@ -25,7 +25,7 @@ const routes: Routes = [
   {path: 'admin-dashboard', component: AdminDashboardComponent},
 
   //Wild Card Route for 404 request
-  { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
+  {path: '**', pathMatch: 'full', component: PageNotFoundComponent}
 ];
 
 @NgModule({
