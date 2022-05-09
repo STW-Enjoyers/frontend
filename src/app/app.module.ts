@@ -32,6 +32,8 @@ import {GlobalErrorHandler} from "./global-error-handler";
 import { FooterComponent } from './components/footer/footer.component';
 import { InfoNotasComponent } from './pages/info-notas/info-notas.component';
 import { InfoErasmusComponent } from './pages/info-erasmus/info-erasmus.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { InfoErasmusComponent } from './pages/info-erasmus/info-erasmus.componen
     FooterComponent,
     InfoNotasComponent,
     InfoErasmusComponent,
+    AdminDashboardComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

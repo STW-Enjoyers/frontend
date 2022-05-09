@@ -9,12 +9,9 @@ import {UserService} from "../../services/user.service";
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(private router: Router, private userService: UserService) {}
 
-  }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   goToPage(link:string): void {
     this.router.navigate([link])
@@ -22,6 +19,10 @@ export class HeaderComponent implements OnInit {
 
   verifyLogin() {
     return this.userService.isLoggedIn()
+  }
+
+  verifyAdmin() {
+    console.log(this.userService.getProfile())
   }
 
   logoff() {

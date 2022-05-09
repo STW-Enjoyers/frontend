@@ -9,6 +9,8 @@ import {LoginComponent} from "./pages/login/login.component";
 import {AjustesUsuarioComponent} from "./pages/ajustes-usuario/ajustes-usuario.component";
 import {InfoNotasComponent} from './pages/info-notas/info-notas.component';
 import {InfoErasmusComponent} from './pages/info-erasmus/info-erasmus.component';
+import {AdminDashboardComponent} from './pages/admin-dashboard/admin-dashboard.component';
+import {PageNotFoundComponent} from './pages/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -19,7 +21,11 @@ const routes: Routes = [
   {path: 'mapa-erasmus', component: MapaErasmusComponent},
   {path: 'ajustes-usuario', component: AjustesUsuarioComponent},
   {path: 'info-notas', component: InfoNotasComponent},
-  {path: 'info-erasmus', component: InfoErasmusComponent}
+  {path: 'info-erasmus', component: InfoErasmusComponent},
+  {path: 'admin-dashboard', component: AdminDashboardComponent},
+
+  //Wild Card Route for 404 request
+  { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
 ];
 
 @NgModule({
