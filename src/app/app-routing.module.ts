@@ -7,6 +7,7 @@ import {MapaErasmusComponent} from "./pages/mapa-erasmus/mapa-erasmus.component"
 import {RegistroComponent} from "./pages/registro/registro.component";
 import {LoginComponent} from "./pages/login/login.component";
 import {AjustesUsuarioComponent} from "./pages/ajustes-usuario/ajustes-usuario.component";
+import {PerfilCarreraComponent} from "./pages/perfil-carrera/perfil-carrera.component";
 import {InfoNotasComponent} from './pages/info-notas/info-notas.component';
 import {InfoErasmusComponent} from './pages/info-erasmus/info-erasmus.component';
 import {AdminDashboardComponent} from './pages/admin-dashboard/admin-dashboard.component';
