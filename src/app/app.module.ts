@@ -35,6 +35,8 @@ import { CommentComponent } from './components/comment/comment.component';
 import { ResponseComponent } from './components/response/response.component';
 import { InfoNotasComponent } from './pages/info-notas/info-notas.component';
 import { InfoErasmusComponent } from './pages/info-erasmus/info-erasmus.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import { InfoErasmusComponent } from './pages/info-erasmus/info-erasmus.componen
     ResponseComponent,
     InfoNotasComponent,
     InfoErasmusComponent,
+    AdminDashboardComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

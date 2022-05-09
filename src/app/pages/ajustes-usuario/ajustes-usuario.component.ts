@@ -9,16 +9,17 @@ import { UserService } from '../../services/user.service';
 })
 export class AjustesUsuarioComponent implements OnInit {
   user: any;
+
   constructor(public userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
-    console.log('LLEGUE');
     this.userService.getProfile().subscribe(
       (res: any) => {
         this.user = res['user'];
       },
       (err) => {}
     );
+    console.log(this.user);
   }
 
   onLogout() {
