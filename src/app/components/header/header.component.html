@@ -93,7 +93,7 @@
 				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
 					<li><h6 class="dropdown-header">Opciones</h6></li>
 					<li>
-						<a class="dropdown-item" type="button" *ngIf="verifyAdmin()" (click)="goToPage('admin-dashboard')">
+						<a class="dropdown-item" type="button" (click)="goToPage('admin-dashboard')">
 							<i class="fas fa-tachometer-alt"></i> Panel de control 
 						</a>
 					</li>
@@ -103,7 +103,7 @@
 						</a>
 					</li>
 					<li>
-						<a class="dropdown-item" type="button" (click)="logoff()">
+						<a class="dropdown-item" type="button" (click)="onLogout()">
 							<i class="fas fa-sign-out-alt"></i> Cerrar sesión 
 						</a>
 					</li>

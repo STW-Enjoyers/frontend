@@ -72,7 +72,6 @@ export class FiltradorNotasComponent implements OnInit {
     $.fn['dataTable'].ext.search.push((settings: any, data: string[], dataIndex: any) => {
       const nota:string = data[1];
       const cupo:string = data[3];
-      console.log(data)
       if (this.filter == '' || Number(this.filter) >= Number(nota)) {
         if (this.select == 'Todos' || cupo.includes(this.select)) {
           return true;

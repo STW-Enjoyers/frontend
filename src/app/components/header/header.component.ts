@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
     console.log(this.userService.getProfile())
   }
 
-  logoff() {
+  onLogout() {
     this.userService.unSetToken()
     this.router.navigate([''])
   }

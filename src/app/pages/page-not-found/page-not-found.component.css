@@ -1,6 +1,6 @@
 .main{
-  margin-top: 10%;
-  margin-bottom: 10%;
+  margin-top: 25vh;
+  margin-bottom: 25vh;
 }
 
 .st0{fill:#fff}
@@ -128,11 +128,4 @@
     50% { transform: translateX(-2px); }
     75% { transform: translateX(3px); }
   100% { transform: translateX(-2px); }
-}
-
-@media only screen and (max-width: 1200px) {
-  .main{
-    margin-top: 40%;
-    margin-bottom: 40%;
-  }
 }
