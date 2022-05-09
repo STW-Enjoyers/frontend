@@ -1,0 +1,58 @@
+<div id="topDiv" class="container-fluid">
+  <h1 class="display-6 text-center p-5 bg-light">{{grade.estudio}} - {{grade.localidad}}</h1>
+  <!-------------- INIT CHARTS ---------------------->
+  <div class="container mt-4">
+    <h5>{{statistics_title}}</h5>
+    <div class="row justify-content-between">
+      <div class="col-4 border border-1 rounded p-3">
+        <canvas id="rendimientoChart"> {{pieChart}} </canvas>
+      </div>
+      <div class="col-8 border border-1 rounded p-3">
+        <canvas id="historicalGradesChart"> {{lineChart}} </canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-------------- INIT WRITE A COMMENT ---------------------->
+  <div class="container mt-5">
+    <h5>{{comments_title}}</h5>
+    <p class="fs-6">{{comment_input_label}}</p>
+    <div class="row justify-content-center gy-2">
+      <div class="col-12 col-sm-12 col-md-9">
+        <textarea type="text" class="form-control" style="height: 100%" [(ngModel)]="newCommentText" rows="1" maxlength="150"></textarea>
+      </div>
+      <div class="col-12 col-sm-12 col-md-3">
+        <app-button *ngIf="userService.isLoggedIn()"  [text]="comment_button_text" (btnClick)="postComment()"></app-button>
+        <app-button *ngIf="!userService.isLoggedIn()" [text]="comment_button_text" [routerLink]="['/registro']"></app-button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-------------- INIT COMMENT BOX ---------------------->
+  <div *ngIf="comments" class="container mt-4">
+      <span>Ordenar por </span>
+      <select [(ngModel)]="selected" (ngModelChange)="onOrderChange()">
+        <option *ngFor="let o of order" [ngValue]="o">{{ o }}</option>
+      </select>
+
+    <div *ngFor="let comment of comments.slice(0, visible_comments)">
+      <app-comment [userId]="'TODO: ENLAZAR ID'"
+                   [gradeId]="this.grade.idCarrera"
+                   [comment]="comment"
+                   (hasChanged)="onCommentsHaveChanged()">
+      </app-comment>
+    </div>
+    <div class="row justify-content-center mt-4 mb-5">
+      <div class="col-auto">
+        <app-button *ngIf="visible_comments < comments.length" [text]="'mostrar más comentarios'" (btnClick)="onShowMoreComments()"></app-button>
+      </div>
+      <a href="/perfil-carrera#topDiv"><i class="bi bi-arrow-up-circle" style="font-size: 2rem;" ></i></a>
+    </div>
+  </div>
+</div>
+
+
+
+

@@ -30,6 +30,9 @@ import { AjustesUsuarioComponent } from './pages/ajustes-usuario/ajustes-usuario
 import {ServerErrorInterceptor} from "./guards/error.interceptor";
 import {GlobalErrorHandler} from "./global-error-handler";
 import { FooterComponent } from './components/footer/footer.component';
+import { PerfilCarreraComponent } from './pages/perfil-carrera/perfil-carrera.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { ResponseComponent } from './components/response/response.component';
 import { InfoNotasComponent } from './pages/info-notas/info-notas.component';
 import { InfoErasmusComponent } from './pages/info-erasmus/info-erasmus.component';
 
@@ -46,6 +49,9 @@ import { InfoErasmusComponent } from './pages/info-erasmus/info-erasmus.componen
     LoginComponent,
     AjustesUsuarioComponent,
     FooterComponent,
+    PerfilCarreraComponent,
+    CommentComponent,
+    ResponseComponent,
     InfoNotasComponent,
     InfoErasmusComponent,
   ],

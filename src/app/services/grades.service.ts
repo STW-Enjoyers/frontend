@@ -48,37 +48,21 @@ export class GradesService {
 
   // Filter careers, masters or doctor'degrees
   filterByType(grades: Grade[], type:string): Grade[] {
-    switch (type) {
-      case this.TYPES.GRADO:
-        return grades.filter(grade => grade.estudio.includes(this.TYPES.GRADO))
-      case this.TYPES.MASTER:
-        return grades.filter(grade => grade.estudio.includes(this.TYPES.MASTER))
-      case this.TYPES.DOCTORADO:
-        return grades.filter(grade => grade.estudio.includes(this.TYPES.DOCTORADO))
-      default:
-        throw new Error("gradesService: filterByType: Incorrect type " + type)
+    if (Object.values(this.TYPES).indexOf(type) > -1) {
+      // Case expected type
+      return grades.filter(grade => grade.estudio.includes(type))
+    } else {
+      throw new Error("gradesService: filterByType: Incorrect type " + type)
     }
   }
 
   // Filter careers, masters or doctor'degrees
   filterByCupo(grades: Grade[], cupo:string): Grade[] {
-    switch (cupo) {
-      case this.CUPOS.DEPORTISTAS_ALTO_NIVEL:
-        return grades.filter(grade => grade.cupo.includes(this.CUPOS.DEPORTISTAS_ALTO_NIVEL))
-      case this.CUPOS.DEPORTISTAS_ALTO_RENDIMIENTO:
-        return grades.filter(grade => grade.cupo.includes(this.CUPOS.DEPORTISTAS_ALTO_RENDIMIENTO))
-      case this.CUPOS.DISCAPACIDAD:
-        return grades.filter(grade => grade.cupo.includes(this.CUPOS.DISCAPACIDAD))
-      case this.CUPOS.GENERAL:
-        return grades.filter(grade => grade.cupo.includes(this.CUPOS.GENERAL))
-      case this.CUPOS.MAS25:
-        return grades.filter(grade => grade.cupo.includes(this.CUPOS.MAS25))
-      case this.CUPOS.MAS40:
-        return grades.filter(grade => grade.cupo.includes(this.CUPOS.MAS40))
-      case this.CUPOS.MAS45:
-        return grades.filter(grade => grade.cupo.includes(this.CUPOS.MAS45))
-      default:
-        throw new Error("gradesService: filterByCupo: Incorrect cupo " + cupo)
+    if(Object.values(this.CUPOS).indexOf(cupo) > -1) {
+      // Case expected cupo
+      return grades.filter(grade => grade.cupo.includes(cupo))
+    } else {
+      throw new Error("gradesService: filterByCupo: Incorrect cupo " + cupo)
     }
   }
 

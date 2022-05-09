@@ -3,7 +3,7 @@
     <div class=" col-md-10 col-lg-7 mx-auto">
       <h1 class="display-4 text-center">{{title}}</h1>
       <form class="border border-light p-5" [formGroup]="loginForm">
-        <div class="form-group mb-4">
+        <div class="form-group mb-2">
           <label class="text-start">{{emailLabel}}</label><br>
           <input type="text" class="form-control p-3" formControlName="email" placeholder="{{emailPlaceholder}}"
                  [ngClass]="{ 'is-invalid': formErrors.email }" (blur)="updateValidationErrors()"/>
@@ -11,7 +11,7 @@
             {{formErrors.email}}
           </span>
         </div>
-        <div class="form-group mb-5">
+        <div class="form-group mb-2">
           <label>{{passwordLabel}}</label>
           <input type="password" class="form-control p-3" formControlName="password" placeholder="{{passwordPlaceholder}}"
                  [ngClass]="{ 'is-invalid': formErrors.password }" (blur)="updateValidationErrors()"/>
