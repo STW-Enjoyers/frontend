@@ -52,6 +52,7 @@ export class PerfilCarreraComponent implements OnInit {
     var localStorageGrade = JSON.parse(<string>localStorage.getItem('grade')) as Grade
     if (localStorageGrade) {
       this.grade = localStorageGrade;
+      console.log("ID CARRERA: " + JSON.stringify(this.grade))
       this.getGradeProfileData(this.grade.idCarrera, true)
       this.historicalGrades(this.grade.idCarrera)
 
@@ -177,7 +178,6 @@ export class PerfilCarreraComponent implements OnInit {
   }
 
   onCommentsHaveChanged() {
-      console.log("RELOAD COMMENTS")
       this.getGradeProfileData(this.grade.idCarrera, false)
   }
 

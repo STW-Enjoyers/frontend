@@ -37,11 +37,12 @@ export class ResponseComponent implements OnInit {
         this.response.upvotes += 1;
         this.forumService.postUpvote(this.gradeId, this.commentId, this.response._id).subscribe();
       }
+    } else {
+      this.redirectToLogin()
     }
   }
 
-  // Like or reply button have been pressed and user is not logged
-  redirectToRegister() {
-    this.router.navigate(['registro']);
+  redirectToLogin() {
+    this.router.navigate(['login']);
   }
 }

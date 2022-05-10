@@ -51,12 +51,16 @@ export class CommentComponent implements OnInit {
 
   // Response publish button has been pressed
   onPostResponse() {
-    if (this.newResponseText && this.newResponseText.length > 0) {
-      this.forumService.postResponse(this.gradeId, this.comment._id, this.newResponseText).subscribe(
-        (res: any) => {
-          //Comment has changed
-          this.reloadData.emit()
-        })
+    if (this.userService.isLoggedIn()) {
+      if (this.newResponseText && this.newResponseText.length > 0) {
+        this.forumService.postResponse(this.gradeId, this.comment._id, this.newResponseText).subscribe(
+          (res: any) => {
+            //Comment has changed
+            this.reloadData.emit()
+          })
+      }
+    } else {
+      this.redirectToLogin()
     }
   }
 
@@ -74,16 +78,17 @@ export class CommentComponent implements OnInit {
         this.comment.upvotes += 1;
         this.forumService.postUpvote(this.gradeId, this.comment._id).subscribe();
       }
+    } else {
+      this.redirectToLogin()
     }
+  }
+
+  redirectToLogin() {
+    this.router.navigate(['login']);
   }
 
   onResponsesChanged() {
     this.reloadData.emit()
-  }
-
-  // Like or reply button have been pressed and user is not logged
-  redirectToRegister() {
-    this.router.navigate(['registro']);
   }
 
   // TODO: Refactorizar este tocho xd

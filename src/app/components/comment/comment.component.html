@@ -18,11 +18,11 @@
           </p>
         </div>
         <!-------------- INIT LIKE BUTTON ---------------------->
-        <div (click)=" userService.isLoggedIn() ? onUpVote() : redirectToRegister()" class="col"  role="button">
+        <div (click)="onUpVote()" class="col"  role="button">
           <p class="fs-6 text-secondary"><i class="bi {{isUpvoted ? 'bi-heart-fill' : 'bi-heart'}}"></i> {{comment.upvotes}}</p>
         </div>
         <!-------------- INIT REPLY BUTTON ---------------------->
-        <div (click)="userService.isLoggedIn() ? onShowResponseInput() : redirectToRegister()" class="col">
+        <div (click)="onShowResponseInput()" class="col">
           <p class="fs-6 text-secondary"><i class="bi bi-reply-fill"></i>Responder</p>
         </div>
       </div>
