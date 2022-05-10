@@ -125,7 +125,6 @@ export class PerfilCarreraComponent implements OnInit {
         },
         options: {
           maintainAspectRatio: false,
-          responsive: true,
           plugins: {
             title: {
               display: true,
