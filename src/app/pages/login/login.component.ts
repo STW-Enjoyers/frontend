@@ -73,7 +73,6 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.loginForm.value).subscribe(
       (res: any) => {
         this.unknownUser = false
-        this.userService.setToken(res['token']);
         this.router.navigateByUrl('/ajustes-usuario');
       },
       (error) => {

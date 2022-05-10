@@ -39,10 +39,10 @@
       </select>
 
     <div *ngFor="let comment of comments.slice(0, visible_comments)">
-      <app-comment [userId]="'TODO: ENLAZAR ID'"
+      <app-comment [userId]="userService.getUserId()"
                    [gradeId]="this.grade.idCarrera"
                    [comment]="comment"
-                   (hasChanged)="onCommentsHaveChanged()">
+                   (reloadData)="onCommentsHaveChanged()">
       </app-comment>
     </div>
     <div class="row justify-content-center mt-4 mb-5">

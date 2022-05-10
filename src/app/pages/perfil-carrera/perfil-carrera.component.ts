@@ -151,7 +151,6 @@ export class PerfilCarreraComponent implements OnInit {
       this.comments.sort( (a, b) => {
         return new Date(b.date).getTime() - new Date(a.date).getTime()
       })
-      console.log(JSON.stringify(this.comments))
     } else {
       throw new Error("perfil-carrera.component.ts: orederComments: Unexpected order");
     }
@@ -178,21 +177,17 @@ export class PerfilCarreraComponent implements OnInit {
   }
 
   onCommentsHaveChanged() {
-    // Update comments
-    this.getGradeProfileData(this.grade.idCarrera, false)
+      console.log("RELOAD COMMENTS")
+      this.getGradeProfileData(this.grade.idCarrera, false)
   }
 
   onShowMoreComments() {
-    console.log("moree: before" + this.visible_comments);
-    console.log(this.visible_comments + this.max_comments_per_page > this.comments.length);
     this.visible_comments = (this.visible_comments + this.max_comments_per_page > this.comments.length)
       ? this.comments.length
       : this.visible_comments + this.max_comments_per_page;
-    console.log("moree: after" + this.visible_comments);
   }
 
   onScroll(height:number) {
-    console.log(height);
     this.showGoUpButton = height > 30;
   }
   onGoUp() {

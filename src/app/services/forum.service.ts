@@ -19,20 +19,6 @@ export class ForumService {
   getGradeProfile(idCarrera:string):Observable<GradeProfile> {
     return this.http.get<GradeProfile>(environment.url + '/gradeProfile?idCarrera=' + idCarrera).pipe(
       map((data: any) => {
-        console.log(JSON.stringify(data))
-        // Transform data to fit Erasmus model
-        let formattedComments = data.comments.map((comment:any) => {
-          return <Comment> {
-            username: comment.username,
-            upvotes: comment.upvotes,
-            upvotedUsers: comment.upvotedUsers,
-            visible: comment.visible,
-            body: comment.body,
-            responses: comment.responses,
-            _id: comment._id,
-            date: new Date(comment.date)
-          }
-        })
         return <GradeProfile>{
           comments: data.comments,
           graduated: data.graduated.graduated,
@@ -76,7 +62,7 @@ export class ForumService {
     //Needs JWT auth
     return this.http.post(
       // @ts-ignore
-      environment.url + `/downVote?idCarrera=${idCarrera}&idcom=${idComment}${ (idResponse) ? `&idrep=${idResponse}` : `` }`,
+      environment.url + `/cancelUpVote?idCarrera=${idCarrera}&idcom=${idComment}${ (idResponse) ? `&idrep=${idResponse}` : `` }`,
       this.header
     );
   }

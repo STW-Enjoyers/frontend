@@ -24,11 +24,15 @@ export class CommentComponent implements OnInit {
   // Comment with author, likes and responses to display
   @Input() comment!: Comment;
   // When something change, emit event
-  @Output() hasChanged: EventEmitter<any> = new EventEmitter();
+  @Output() reloadData: EventEmitter<string> = new EventEmitter();
 
   constructor(public userService: UserService, private forumService: ForumService, private router: Router) { }
 
   ngOnInit(): void {
+    if (this.userService.isLoggedIn() && (!this.userId || this.userId === "")) {
+      //Case user is loged but passed userId is not correct
+      console.log("comment.component:   ERROR El usuario esta logeado pero su Id es nulo!!")
+    }
     this.isUpvoted = this.comment.upvotedUsers.includes(this.userId);
     this.timeSinceWasPublished = this.getTimeSinceWasPublished()
   }
@@ -51,30 +55,30 @@ export class CommentComponent implements OnInit {
       this.forumService.postResponse(this.gradeId, this.comment._id, this.newResponseText).subscribe(
         (res: any) => {
           //Comment has changed
-          this.hasChanged.emit()
+          this.reloadData.emit()
         })
     }
   }
 
-  // Like button has been pressed and user is logged
+  // Like button has been pressed
   onUpVote() {
-    (this.comment.upvotedUsers.includes(this.userId))
-      ? this.forumService.postDownvote(this.gradeId, this.comment._id).subscribe(
-        (res: any) => {
-          //Comment has changed
-          this.hasChanged.emit()
-        })
-      : this.forumService.postUpvote(this.gradeId, this.comment._id).subscribe(
-        (res: any) => {
-          //Comment has changed
-          this.hasChanged.emit()
-        });
-    // comment has changed
-    this.hasChanged.emit()
+    if (this.userService.isLoggedIn()) {
+      // Case user is logged
+      if (this.comment.upvotedUsers.includes(this.userId)) {
+        //Case user had liked the comment before
+        this.isUpvoted = false;
+        this.comment.upvotes -= 1;
+        this.forumService.postDownvote(this.gradeId, this.comment._id).subscribe()
+      } else {
+        this.isUpvoted = true;
+        this.comment.upvotes += 1;
+        this.forumService.postUpvote(this.gradeId, this.comment._id).subscribe();
+      }
+    }
   }
 
   onResponsesChanged() {
-    this.hasChanged.emit()
+    this.reloadData.emit()
   }
 
   // Like or reply button have been pressed and user is not logged
@@ -82,6 +86,7 @@ export class CommentComponent implements OnInit {
     this.router.navigate(['registro']);
   }
 
+  // TODO: Refactorizar este tocho xd
   getTimeSinceWasPublished() {
     let diffTime = Math.abs(Date.now() - new Date(this.comment.date).getTime()); //milliseconds
     let diffSeconds =  Math.floor(diffTime / (1000));
@@ -92,8 +97,8 @@ export class CommentComponent implements OnInit {
     let diffMonths = Math.floor(diffDays / (30));
     let diffYears = Math.floor(diffDays / (365));
 
-    console.log(diffTime + " " + diffSeconds + " " + diffMinutes + " "
-      + diffHours + " " + diffDays + " " + diffWeeks + " " + diffMonths + " " + diffYears)
+    //console.log(diffTime + " " + diffSeconds + " " + diffMinutes + " "
+    //  + diffHours + " " + diffDays + " " + diffWeeks + " " + diffMonths + " " + diffYears)
 
     if (diffYears > 0) {
       return diffYears + " año" + this.formatDateText(diffYears, "año")

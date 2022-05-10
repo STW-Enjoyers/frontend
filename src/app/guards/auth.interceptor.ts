@@ -19,7 +19,7 @@ export class AuthInterceptor implements HttpInterceptor {
     if (req.headers.get('noauth') && console.log('NOAUTH')) {
       return next.handle(req.clone());
     }else {
-      console.log('AUTH Bearer ' + this.userService.getToken());
+      //console.log('AUTH Bearer ' + this.userService.getToken());
       const clonereq = req.clone({
         headers: req.headers.set(
           'Authorization',
