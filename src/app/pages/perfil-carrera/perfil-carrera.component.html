@@ -48,7 +48,7 @@
       <div class="col-auto">
         <app-button *ngIf="visible_comments < comments.length" [text]="'mostrar más comentarios'" (btnClick)="onShowMoreComments()"></app-button>
       </div>
-      <a href="/perfil-carrera#topDiv"><i class="bi bi-arrow-up-circle" style="font-size: 2rem;" ></i></a>
+      <a *ngIf="showGoUpButton" (click)="onGoUp()" class="float"><i class="bi bi-arrow-up" style="font-size: 2rem;"></i></a>
     </div>
   </div>
 </div>

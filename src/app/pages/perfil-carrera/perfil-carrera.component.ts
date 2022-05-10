@@ -8,6 +8,7 @@ import { Comment } from '../../models/Comment';
 import {Response} from '../../models/Response';
 import * as PerfilCarreraConstants from './perfil-carrera.constants'
 import {UserService} from "../../services/user.service";
+import {debounceTime, fromEvent, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-perfil-carrera',
@@ -37,6 +38,9 @@ export class PerfilCarreraComponent implements OnInit {
   // Select
   order = [this.option_relevance, this.option_date]
   selected:string = this.option_relevance
+  // Scroll observable from event
+  scroller!: Subscription;
+  showGoUpButton: boolean = false;
 
   constructor(private forumService: ForumService,
               public userService: UserService) {
@@ -50,6 +54,11 @@ export class PerfilCarreraComponent implements OnInit {
       this.grade = localStorageGrade;
       this.getGradeProfileData(this.grade.idCarrera, true)
       this.historicalGrades(this.grade.idCarrera)
+
+      // Subscribe to scroll event
+      this.scroller = fromEvent(window, 'scroll')
+        .pipe(debounceTime(200))
+        .subscribe(() => this.onScroll(window.scrollY));
     } else {
       throw new Error("perfil-carrera: ngOnInit: El id de la carrera es nulo")
     }
@@ -183,4 +192,11 @@ export class PerfilCarreraComponent implements OnInit {
     console.log("moree: after" + this.visible_comments);
   }
 
+  onScroll(height:number) {
+    console.log(height);
+    this.showGoUpButton = height > 30;
+  }
+  onGoUp() {
+    window.scroll(0,0);
+  }
 }

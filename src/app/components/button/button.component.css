@@ -3,3 +3,7 @@
   width: 100% !important;
   min-width: 190px !important;
 }
+
+.btn-primary:hover{
+  background-color: #4a41fa !important;
+}
