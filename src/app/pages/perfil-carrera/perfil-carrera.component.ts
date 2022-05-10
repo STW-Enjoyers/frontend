@@ -70,6 +70,7 @@ export class PerfilCarreraComponent implements OnInit {
     this.forumService
       .getGradeProfile(idCarrera)
       .subscribe((gradeProfile) =>{
+        console.log(JSON.stringify(gradeProfile))
         this.comments = gradeProfile.comments
         this.orderResponses()
         this.orderComments(this.option_relevance)

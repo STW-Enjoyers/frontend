@@ -91,6 +91,22 @@ export class CommentComponent implements OnInit {
     this.reloadData.emit()
   }
 
+  getUsername():string {
+    if(this.comment.visible) {
+      return this.comment.username
+    } else {
+      return "[borrado]"
+    }
+  }
+
+  getBody():string {
+    if(this.comment.visible) {
+      return this.comment.body
+    } else {
+      return "[borrado]"
+    }
+  }
+
   // TODO: Refactorizar este tocho xd
   getTimeSinceWasPublished() {
     let diffTime = Math.abs(Date.now() - new Date(this.comment.date).getTime()); //milliseconds

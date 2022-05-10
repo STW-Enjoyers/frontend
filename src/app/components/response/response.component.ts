@@ -45,4 +45,20 @@ export class ResponseComponent implements OnInit {
   redirectToLogin() {
     this.router.navigate(['login']);
   }
+
+  getUsername():string {
+    if(this.response.visible) {
+      return this.response.username
+    } else {
+      return "[borrado]"
+    }
+  }
+
+  getBody():string {
+    if(this.response.visible) {
+      return this.response.body
+    } else {
+      return "[borrado]"
+    }
+  }
 }
