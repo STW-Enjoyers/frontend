@@ -36,7 +36,11 @@ export class AjustesUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     // Get user profile from backend
-    // this.userService.getProfile().subscribe((user: User) => {this.user = user});
+    this.userService.getProfile().subscribe((user: User) => {
+      this.user = user
+      console.log(JSON.stringify(this.user.username))
+
+    });
 
     // Configure changeUsername form validators
     this.changeUsernameForm = this.fb.group({
@@ -62,8 +66,11 @@ export class AjustesUsuarioComponent implements OnInit {
     }
 
     // Submit action
-    this.userService.changeUsername(this.changeUsernameForm.value).subscribe(
-      (res: any) => { this.userAlreadyExists = false },
+    this.userService.changeUsername(this.changeUsernameForm.value.username).subscribe(
+      (res: any) => {
+        this.userAlreadyExists = false
+        this.user.username = this.changeUsernameForm.value.username
+      },
       (error) => {
         if (error.status === 404) {
           // username already exists

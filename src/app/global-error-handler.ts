@@ -32,13 +32,13 @@ export class GlobalErrorHandler implements ErrorHandler {
       logger.logError(message, '');
       console.error(error);
     }
-    //else {
+    else {
       // Client Error
-      //message = errorService.getClientErrorMessage(error);
+      message = errorService.getClientErrorMessage(error);
       //notifier.showError(message);
-    //}
+      logger.logError(message, '');
+    }
     // Always log errors
-    //logger.logError(message, stackTrace);
 
   }
 }
