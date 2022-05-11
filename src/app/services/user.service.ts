@@ -59,7 +59,6 @@ export class UserService {
 
   // Change current logged user username
   changeUsername(username:string):Observable<any> {
-    console.log("changeUsername: " + username)
     //Needs JWT auth
     return this.http.get(environment.url + '/changeUsername?username=' + username);
   }
