@@ -27,7 +27,7 @@ export class ResponseComponent implements OnInit {
   onUpVote() {
     if (this.userService.isLoggedIn()) {
       // Case user is logged
-      if (this.response.upvotedUsers.includes(this.userId)) {
+      if (this.isUpvoted) {
         //Case user had liked the comment before
         this.isUpvoted = false;
         this.response.upvotes -= 1;
