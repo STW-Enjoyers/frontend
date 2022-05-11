@@ -3,11 +3,11 @@
 <div class="container-fluid rounded bg-light mt-2">
   <div class="row">
     <!-------------- INIT AVATAR ---------------------->
-    <div class="col-2 col-lg-1">
+    <div class="col-auto col-sm-2 col-lg-1">
       <app-avatar *ngIf="comment.visible" [username]="comment.username"></app-avatar>
     </div>
     <!-------------- INIT CONTENT ---------------------->
-    <div class="col-10">
+    <div class="col-auto col-sm-10">
       <p><b>{{getUsername()}}</b> <span class="text-secondary" style="font-size: 12px"> · hace {{timeSinceWasPublished}}</span></p>
 
       <p>{{getBody()}}</p>
