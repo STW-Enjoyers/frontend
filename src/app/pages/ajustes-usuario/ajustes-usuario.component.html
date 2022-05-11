@@ -1,17 +1,32 @@
-<table *ngIf="user">
-  <thead>
-  <tr>
-    <td>Nombre</td>
-    <td>{{ user.username }}</td>
-  </tr>
-  <tr>
-    <td>Email</td>
-    <td>{{ user.email }}</td>
-  </tr>
-  <tr>
-    <td><input type="button" (click)="onLogout()" value="Logout" /></td>
-  </tr>
-  </thead>
-</table>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class=" col-md-10 col-lg-7 mx-auto">
+      <h1 class="display-4 text-center"> {{title}}</h1>
+
+      <!------- INIT USER INFO ------>
+      <div *ngIf="user" id="userInfo" class="row justify-content-center mt-3">
+        <div class="col-auto fs-6 text-secondary"> {{usernameLabel}}: <span class="text-primary">{{ user.username }}</span> </div>
+        <div class="col-auto fs-6 text-secondary"> {{emailLabel}}: <span class="text-primary">{{ user.email }}</span> </div>
+      </div>
+
+      <!------- INIT USERNAME FORM ------->
+      <form class="border border-light p-5" [formGroup]="changeUsernameForm">
+        <!-- INIT USERNAME INPUT -->
+        <div class="form-group mb-2">
+          <label class="text-start">{{usernameLabel}}</label><br>
+          <input type="text" class="form-control p-3" formControlName="username" placeholder="{{usernameLabel}}"
+                 [ngClass]="{ 'is-invalid': changeUsernameFormErrors.username }"/>
+          <span class="text-danger" *ngIf="changeUsernameFormErrors.username">
+            {{changeUsernameFormErrors.username}}
+          </span>
+        </div>
+        <!-- INIT SUBMIT BUTTON -->
+        <app-button [text]="'Actualizar usuario'" [disabled]="!changeUsernameForm.valid" (btnClick)="onChangeUsernameSubmit()"></app-button>
+        <p class="text-danger mt-2" *ngIf="userAlreadyExists">EL usuario ya existe. Por favor, elige otro.</p>
+      </form>
+    </div>
+  </div>
+</div>
 
 <div class="space-64"></div>
