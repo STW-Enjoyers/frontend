@@ -17,15 +17,17 @@ import {Router} from "@angular/router";
 export class ServerErrorInterceptor implements HttpInterceptor {
   constructor(public router: Router) {}
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
     return next.handle(request).pipe(
-      retry(1),
+      retry(1
+      ),
       // @ts-ignore
       catchError((error: HttpErrorResponse) => {
         switch (error.status) {
           case 401:
             // Unauthorized error
             this.router.navigateByUrl('/login'); break;
+          case 500:
+            this.router.navigateByUrl('/server-error'); break;
           default:
             // All errors will be catched by global-error-handler.ts,
             // will be notified by notification.service.ts and loggging.service.ts

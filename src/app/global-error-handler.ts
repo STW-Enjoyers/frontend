@@ -29,14 +29,16 @@ export class GlobalErrorHandler implements ErrorHandler {
       message = errorService.getServerErrorMessage(error);
       //stackTrace = errorService.getServerErrorStackTrace(error);
       notifier.showError(message);
-    } else {
-      // Client Error
-      message = errorService.getClientErrorMessage(error);
-      notifier.showError(message);
+      logger.logError(message, '');
+      console.error(error);
     }
+    //else {
+      // Client Error
+      //message = errorService.getClientErrorMessage(error);
+      //notifier.showError(message);
+    //}
     // Always log errors
     //logger.logError(message, stackTrace);
-    logger.logError(message, '');
-    console.error(error);
+
   }
 }

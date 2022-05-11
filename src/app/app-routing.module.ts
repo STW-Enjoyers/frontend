@@ -12,6 +12,7 @@ import { InfoNotasComponent } from './pages/info-notas/info-notas.component';
 import { InfoErasmusComponent } from './pages/info-erasmus/info-erasmus.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import {ServerErrorComponent} from "./pages/server-error/server-error.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -25,6 +26,8 @@ const routes: Routes = [
   {path: 'info-notas', component: InfoNotasComponent},
   {path: 'info-erasmus', component: InfoErasmusComponent},
   {path: 'admin-dashboard', component: AdminDashboardComponent},
+  {path: 'server-error', component: ServerErrorComponent},
+
 
   //Wild Card Route for 404 request
   {path: '**', pathMatch: 'full', component: PageNotFoundComponent}
