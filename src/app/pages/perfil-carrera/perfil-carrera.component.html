@@ -24,7 +24,7 @@
       </div>
       <div class="col-12 col-sm-12 col-md-3">
         <app-button *ngIf="userService.isLoggedIn()"  [text]="comment_button_text" (btnClick)="postComment()"></app-button>
-        <app-button *ngIf="!userService.isLoggedIn()" [text]="comment_button_text" [routerLink]="['/registro']"></app-button>
+        <app-button *ngIf="!userService.isLoggedIn()" [text]="comment_button_text" [routerLink]="['/login']"></app-button>
       </div>
     </div>
   </div>
