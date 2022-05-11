@@ -8,6 +8,7 @@ import { Comment } from '../../models/Comment';
 import {Response} from '../../models/Response';
 import * as PerfilCarreraConstants from './perfil-carrera.constants'
 import {UserService} from "../../services/user.service";
+import {debounceTime, fromEvent, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-perfil-carrera',
@@ -37,6 +38,9 @@ export class PerfilCarreraComponent implements OnInit {
   // Select
   order = [this.option_relevance, this.option_date]
   selected:string = this.option_relevance
+  // Scroll observable from event
+  scroller!: Subscription;
+  showGoUpButton: boolean = false;
 
   constructor(private forumService: ForumService,
               public userService: UserService) {
@@ -48,8 +52,14 @@ export class PerfilCarreraComponent implements OnInit {
     var localStorageGrade = JSON.parse(<string>localStorage.getItem('grade')) as Grade
     if (localStorageGrade) {
       this.grade = localStorageGrade;
+      console.log("ID CARRERA: " + JSON.stringify(this.grade))
       this.getGradeProfileData(this.grade.idCarrera, true)
       this.historicalGrades(this.grade.idCarrera)
+
+      // Subscribe to scroll event
+      this.scroller = fromEvent(window, 'scroll')
+        .pipe(debounceTime(200))
+        .subscribe(() => this.onScroll(window.scrollY));
     } else {
       throw new Error("perfil-carrera: ngOnInit: El id de la carrera es nulo")
     }
@@ -60,6 +70,7 @@ export class PerfilCarreraComponent implements OnInit {
     this.forumService
       .getGradeProfile(idCarrera)
       .subscribe((gradeProfile) =>{
+        console.log(JSON.stringify(gradeProfile))
         this.comments = gradeProfile.comments
         this.orderResponses()
         this.orderComments(this.option_relevance)
@@ -116,7 +127,6 @@ export class PerfilCarreraComponent implements OnInit {
         },
         options: {
           maintainAspectRatio: false,
-          responsive: true,
           plugins: {
             title: {
               display: true,
@@ -143,7 +153,6 @@ export class PerfilCarreraComponent implements OnInit {
       this.comments.sort( (a, b) => {
         return new Date(b.date).getTime() - new Date(a.date).getTime()
       })
-      console.log(JSON.stringify(this.comments))
     } else {
       throw new Error("perfil-carrera.component.ts: orederComments: Unexpected order");
     }
@@ -170,17 +179,19 @@ export class PerfilCarreraComponent implements OnInit {
   }
 
   onCommentsHaveChanged() {
-    // Update comments
-    this.getGradeProfileData(this.grade.idCarrera, false)
+      this.getGradeProfileData(this.grade.idCarrera, false)
   }
 
   onShowMoreComments() {
-    console.log("moree: before" + this.visible_comments);
-    console.log(this.visible_comments + this.max_comments_per_page > this.comments.length);
     this.visible_comments = (this.visible_comments + this.max_comments_per_page > this.comments.length)
       ? this.comments.length
       : this.visible_comments + this.max_comments_per_page;
-    console.log("moree: after" + this.visible_comments);
   }
 
+  onScroll(height:number) {
+    this.showGoUpButton = height > 30;
+  }
+  onGoUp() {
+    window.scroll(0,0);
+  }
 }

@@ -4,12 +4,13 @@
   <div class="row">
     <!-------------- INIT AVATAR ---------------------->
     <div class="col-2 col-lg-1">
-      <img src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp" class="rounded-circle shadow-4" style="width: 100%;" alt="Avatar" />
+      <app-avatar *ngIf="comment.visible" [username]="comment.username"></app-avatar>
     </div>
     <!-------------- INIT CONTENT ---------------------->
     <div class="col-10">
-      <p><b>{{comment.username}}</b> <span class="text-secondary" style="font-size: 12px"> · hace {{timeSinceWasPublished}}</span></p>
-      <p>{{comment.body}}</p>
+      <p><b>{{getUsername()}}</b> <span class="text-secondary" style="font-size: 12px"> · hace {{timeSinceWasPublished}}</span></p>
+
+      <p>{{getBody()}}</p>
       <div class="row">
         <!-------------- INIT RESPONSES BUTTON ---------------------->
         <div class="col" (click)="onShowResponses()"  role="button">
@@ -18,11 +19,11 @@
           </p>
         </div>
         <!-------------- INIT LIKE BUTTON ---------------------->
-        <div (click)=" userService.isLoggedIn() ? onUpVote() : redirectToRegister()" class="col"  role="button">
+        <div (click)="onUpVote()" class="col"  role="button">
           <p class="fs-6 text-secondary"><i class="bi {{isUpvoted ? 'bi-heart-fill' : 'bi-heart'}}"></i> {{comment.upvotes}}</p>
         </div>
         <!-------------- INIT REPLY BUTTON ---------------------->
-        <div (click)="userService.isLoggedIn() ? onShowResponseInput() : redirectToRegister()" class="col">
+        <div (click)="onShowResponseInput()" class="col">
           <p class="fs-6 text-secondary"><i class="bi bi-reply-fill"></i>Responder</p>
         </div>
       </div>

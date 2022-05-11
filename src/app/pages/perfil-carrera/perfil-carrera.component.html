@@ -4,10 +4,11 @@
   <div class="container mt-4">
     <h5>{{statistics_title}}</h5>
     <div class="row justify-content-between">
-      <div class="col-4 border border-1 rounded p-3">
+      <div class="col-12 col-sm-4 p-3">
         <canvas id="rendimientoChart"> {{pieChart}} </canvas>
       </div>
-      <div class="col-8 border border-1 rounded p-3">
+      <div class="col-12 col-sm-1"></div>
+      <div class="col-12 col-sm-7 p-3">
         <canvas id="historicalGradesChart"> {{lineChart}} </canvas>
       </div>
     </div>
@@ -31,26 +32,32 @@
 
 
   <!-------------- INIT COMMENT BOX ---------------------->
-  <div *ngIf="comments" class="container mt-4">
+  <div *ngIf="comments && comments.length > 0" class="container mt-4">
       <span>Ordenar por </span>
       <select [(ngModel)]="selected" (ngModelChange)="onOrderChange()">
         <option *ngFor="let o of order" [ngValue]="o">{{ o }}</option>
       </select>
 
     <div *ngFor="let comment of comments.slice(0, visible_comments)">
-      <app-comment [userId]="'TODO: ENLAZAR ID'"
+      <app-comment [userId]="userService.getUserId()"
                    [gradeId]="this.grade.idCarrera"
                    [comment]="comment"
-                   (hasChanged)="onCommentsHaveChanged()">
+                   (reloadData)="onCommentsHaveChanged()">
       </app-comment>
     </div>
     <div class="row justify-content-center mt-4 mb-5">
       <div class="col-auto">
         <app-button *ngIf="visible_comments < comments.length" [text]="'mostrar más comentarios'" (btnClick)="onShowMoreComments()"></app-button>
       </div>
-      <a href="/perfil-carrera#topDiv"><i class="bi bi-arrow-up-circle" style="font-size: 2rem;" ></i></a>
     </div>
   </div>
+  <!-------------- EMPTY COMMENT BOX  ---------------------->
+  <div *ngIf="comments && comments.length === 0" class="container mt-4">
+    <div class="row justify-content-center">
+        <img  src="assets/bird.svg" class="img-fluid" style="height: 10rem">
+    </div>
+    <p class="fs-6 text-secondary text-center">Guau, cuánto vacío</p>
+  </div>
 </div>
-
+<a *ngIf="showGoUpButton && comments && comments.length > 0" (click)="onGoUp()" class="float"><i class="bi bi-arrow-up" style="font-size: 2rem;"></i></a>
 <div class="space-64"></div>

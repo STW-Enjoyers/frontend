@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 import {FormValidatorService} from "../../services/form-validator.service";
 import * as LoginConstants from "../login/login.constants";
 import {HttpErrorResponse} from "@angular/common/http";
+import {User} from "../../models/User";
 
 @Component({
   selector: 'app-registro',
@@ -87,11 +88,8 @@ export class RegistroComponent implements OnInit {
     }
 
     this.userService.postUser(this.registerForm.value).subscribe(
-      (res:any) => {
-        console.log("REGISTER TOKEN: " + res['token'])
+      (user:User) => {
         this.resetErrors()
-        this.userService.setToken(res['token']);
-        this.userService.setUserId(res['_id']);
         this.router.navigateByUrl('/ajustes-usuario');
       },
       (error) => {
