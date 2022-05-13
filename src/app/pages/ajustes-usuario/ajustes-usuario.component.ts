@@ -21,6 +21,8 @@ export class AjustesUsuarioComponent implements OnInit {
   newPasswordLabel:string = AjustesUsuarioConstants.NEW_PASSWORD_LABEL
   passwordError:string = AjustesUsuarioConstants.PASSWORD_ERROR
   usernameError:string = AjustesUsuarioConstants.USERNAME_ERROR
+  usernameSuccess:string = AjustesUsuarioConstants.USERNAME_SUCCESS
+  passwordSuccess:string = AjustesUsuarioConstants.PASSWORD_SUCCESS
   //User info
   user!: User;
   // Change username form
@@ -38,6 +40,9 @@ export class AjustesUsuarioComponent implements OnInit {
   // Server error flags
   userAlreadyExists:boolean = false
   actualPasswordIncorrect:boolean = false
+  // Success flags
+  passwordUpdated:boolean = false
+  usernameUpdated:boolean = false
 
   constructor(public userService: UserService,
               private router: Router,
@@ -46,12 +51,9 @@ export class AjustesUsuarioComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log("TOKEN: " + this.userService.getToken())
     // Get user profile from backend
     this.userService.getProfile().subscribe((user: User) => {
       this.user = user
-      console.log(JSON.stringify(this.user.username))
-
     });
 
     // Configure changeUsername form validators
@@ -95,6 +97,12 @@ export class AjustesUsuarioComponent implements OnInit {
       (res: any) => {
         this.userAlreadyExists = false
         this.user.username = this.changeUsernameForm.value.username
+        this.usernameUpdated = true
+
+        //wait 5 Seconds and hide
+        setTimeout(() => {
+          this.usernameUpdated = false;
+        },5000);
       },
       (error) => {
         if (error.status === 404) {
@@ -113,9 +121,14 @@ export class AjustesUsuarioComponent implements OnInit {
     }
 
     // Submit action
-    this.userService.changePassword(this.changePasswordForm.value.actualPassword, this.changePasswordForm.value.newPassword).subscribe(
+    this.userService.changePassword(this.user.email, this.changePasswordForm.value.actualPassword, this.changePasswordForm.value.newPassword).subscribe(
       (res: any) => {
         this.actualPasswordIncorrect = false
+        this.passwordUpdated = true
+        //wait 5 Seconds and hide
+        setTimeout(() => {
+          this.passwordUpdated = false;
+        }, 5000);
       },
       (error) => {
         if (error.status === 404) {

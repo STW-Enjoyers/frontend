@@ -64,12 +64,11 @@ export class UserService {
   }
 
   // Change current logged user username
-  changePassword(actualPassword:string, newPassword:string):Observable<any> {
-    console.log("ACTUALPASSWORD: " + actualPassword)
-    console.log("NEWPASSWORD: " + newPassword)
+  changePassword(email:string, actualPassword:string, newPassword:string):Observable<any> {
     //Needs JWT auth
     return this.http.post(environment.url + '/changePassword',
       {
+        email:email,
         password: actualPassword,
         newPassword: newPassword
       });

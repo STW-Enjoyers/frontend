@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v6.1.1/css/all.css">
 
 <div class="container mt-5">
   <div class="row">
@@ -24,6 +25,7 @@
         <!-- INIT SUBMIT BUTTON -->
         <app-button [text]="'Actualizar usuario'" [disabled]="!changeUsernameForm.valid" (btnClick)="onChangeUsernameSubmit()"></app-button>
         <p class="text-danger mt-2" *ngIf="userAlreadyExists"> {{ usernameError }}</p>
+        <div class="alert alert-success mt-4" [hidden]="!usernameUpdated"><i class="fa-solid fa-check"></i> {{ usernameSuccess }}</div>
       </form>
 
       <!------- INIT CHANGE PASSWORD FORM ------->
@@ -49,6 +51,7 @@
         <!-- INIT SUBMIT BUTTON -->
         <app-button [text]="'Actualizar contraseña'" [disabled]="!changePasswordForm.valid" (btnClick)="onChangePasswordSubmit()"></app-button>
         <p class="text-danger mt-2" *ngIf="actualPasswordIncorrect"> {{ passwordError }}</p>
+        <div class="alert alert-success mt-4" [hidden]="!passwordUpdated"><i class="fa-solid fa-check"></i> {{ passwordSuccess }}</div>
       </form>
     </div>
   </div>

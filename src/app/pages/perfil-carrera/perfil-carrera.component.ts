@@ -47,7 +47,6 @@ export class PerfilCarreraComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("TOKEN: " + this.userService.getToken())
     // Get profile id from url data
     let id=this.activatedroute.snapshot.paramMap.get("id");
     //var localStorageGrade = JSON.parse(<string>localStorage.getItem('grade')) as Grade
@@ -172,8 +171,6 @@ export class PerfilCarreraComponent implements OnInit {
   }
 
   postComment() {
-    console.log("BEARER: " + this.userService.getToken())
-    console.log("gradeId: " + this.gradeProfile._id)
     if (this.newCommentText && this.newCommentText.length > 0) {
       this.forumService.postComment(this.gradeProfile, <Comment>{body: this.newCommentText}).subscribe(
         (res: any) => {

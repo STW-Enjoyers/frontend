@@ -7,6 +7,10 @@ export const USERNAME_BUTTON:string = "Actualizar usuario";
 export const PASSWORD_BUTTON:string = "Actualizar contraseña";
 export const PASSWORD_ERROR:string = "La contraseña actual introducida es incorrecta.";
 export const USERNAME_ERROR:string = "El usuario ya existe. Por favor, elige otro."
+export const PASSWORD_SUCCESS:string = "Contraseña actualizada."
+export const USERNAME_SUCCESS:string = "Usuario actualizado."
+
+
 export const VALIDATION_MESSAGES = {
   'username': {
     'required': 'Por favor, introduce un usuario',
