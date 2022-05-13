@@ -47,6 +47,7 @@ export class PerfilCarreraComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("TOKEN: " + this.userService.getToken())
     // Get profile id from url data
     let id=this.activatedroute.snapshot.paramMap.get("id");
     //var localStorageGrade = JSON.parse(<string>localStorage.getItem('grade')) as Grade

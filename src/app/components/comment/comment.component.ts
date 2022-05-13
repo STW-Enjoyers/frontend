@@ -92,19 +92,31 @@ export class CommentComponent implements OnInit {
   }
 
   getUsername():string {
+    let username:string
     if(this.comment.visible) {
-      return this.comment.username
+      username =  this.comment.username
     } else {
-      return "[borrado]"
+      if (this.comment.status === "banned") {
+        username =  "[baneado]"
+      } else {
+        username = "[borrado]"
+      }
     }
+    return username
   }
 
   getBody():string {
+    let body:string
     if(this.comment.visible) {
-      return this.comment.body
+      body =  this.comment.body
     } else {
-      return "[borrado]"
+      if (this.comment.status === "banned") {
+        body =  "[Este usuario ha sido baneado]"
+      } else {
+        body = "[Este comentario ha sido borrado]"
+      }
     }
+    return body
   }
 
   // TODO: Refactorizar este tocho xd

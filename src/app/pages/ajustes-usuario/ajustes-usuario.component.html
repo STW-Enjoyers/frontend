@@ -10,7 +10,7 @@
         <div class="col-auto fs-6 text-secondary"> {{emailLabel}}: <span class="text-primary">{{ user.email }}</span> </div>
       </div>
 
-      <!------- INIT USERNAME FORM ------->
+      <!------- INIT CHANGE USERNAME FORM ------->
       <form class="border border-light p-5" [formGroup]="changeUsernameForm">
         <!-- INIT USERNAME INPUT -->
         <div class="form-group mb-2">
@@ -23,7 +23,32 @@
         </div>
         <!-- INIT SUBMIT BUTTON -->
         <app-button [text]="'Actualizar usuario'" [disabled]="!changeUsernameForm.valid" (btnClick)="onChangeUsernameSubmit()"></app-button>
-        <p class="text-danger mt-2" *ngIf="userAlreadyExists">EL usuario ya existe. Por favor, elige otro.</p>
+        <p class="text-danger mt-2" *ngIf="userAlreadyExists"> {{ usernameError }}</p>
+      </form>
+
+      <!------- INIT CHANGE PASSWORD FORM ------->
+      <form class="border border-light p-5" [formGroup]="changePasswordForm">
+        <!-- INIT ACTUAL PASSWORD INPUT -->
+        <div class="form-group mb-2">
+          <label class="text-start">{{actualPasswordLabel}}</label><br>
+          <input type="text" class="form-control p-3" formControlName="actualPassword" placeholder="{{actualPasswordLabel}}"
+                 [ngClass]="{ 'is-invalid': changePasswordFormErrors.actualPassword }"/>
+          <span class="text-danger" *ngIf="changePasswordFormErrors.actualPassword">
+            {{changePasswordFormErrors.actualPassword}}
+          </span>
+        </div>
+        <!-- INIT NEW PASSWORD INPUT -->
+        <div class="form-group mb-2">
+          <label class="text-start">{{newPasswordLabel}}</label><br>
+          <input type="text" class="form-control p-3" formControlName="newPassword" placeholder="{{newPasswordLabel}}"
+                 [ngClass]="{ 'is-invalid': changePasswordFormErrors.newPassword }"/>
+          <span class="text-danger" *ngIf="changePasswordFormErrors.newPassword">
+            {{changePasswordFormErrors.newPassword}}
+          </span>
+        </div>
+        <!-- INIT SUBMIT BUTTON -->
+        <app-button [text]="'Actualizar contraseña'" [disabled]="!changePasswordForm.valid" (btnClick)="onChangePasswordSubmit()"></app-button>
+        <p class="text-danger mt-2" *ngIf="actualPasswordIncorrect"> {{ passwordError }}</p>
       </form>
     </div>
   </div>
