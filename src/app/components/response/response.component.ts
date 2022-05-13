@@ -47,18 +47,30 @@ export class ResponseComponent implements OnInit {
   }
 
   getUsername():string {
+    let username:string
     if(this.response.visible) {
-      return this.response.username
+      username =  this.response.username
     } else {
-      return "[borrado]"
+      if (this.response.status === "banned") {
+        username =  "[baneado]"
+      } else {
+        username = "[borrado]"
+      }
     }
+    return username
   }
 
   getBody():string {
+    let body:string
     if(this.response.visible) {
-      return this.response.body
+      body =  this.response.body
     } else {
-      return "[borrado]"
+      if (this.response.status === "banned") {
+        body =  "[Este usuario ha sido baneado]"
+      } else {
+        body = "[Este comentario ha sido borrado]"
+      }
     }
+    return body
   }
 }

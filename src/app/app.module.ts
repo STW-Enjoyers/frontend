@@ -38,6 +38,7 @@ import { InfoErasmusComponent } from './pages/info-erasmus/info-erasmus.componen
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
+import { ServerErrorComponent } from './pages/server-error/server-error.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { AvatarComponent } from './components/avatar/avatar.component';
     AdminDashboardComponent,
     PageNotFoundComponent,
     AvatarComponent,
+    ServerErrorComponent,
   ],
   imports: [
     BrowserModule,

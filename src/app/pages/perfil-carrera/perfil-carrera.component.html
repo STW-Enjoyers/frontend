@@ -1,5 +1,5 @@
 <div id="topDiv" class="container-fluid">
-  <h1 class="display-6 text-center p-5 bg-light">{{grade.estudio}} - {{grade.localidad}}</h1>
+  <h1 *ngIf="gradeProfile" class="display-6 text-center p-5 bg-light">{{gradeProfile.estudio}} - {{gradeProfile.localidad}}</h1>
   <!-------------- INIT CHARTS ---------------------->
   <div class="container mt-4">
     <h5>{{statistics_title}}</h5>
@@ -32,32 +32,34 @@
 
 
   <!-------------- INIT COMMENT BOX ---------------------->
-  <div *ngIf="comments && comments.length > 0" class="container mt-4">
+  <div *ngIf="gradeProfile && gradeProfile.comments.length > 0" class="container mt-4">
       <span>Ordenar por </span>
       <select [(ngModel)]="selected" (ngModelChange)="onOrderChange()">
         <option *ngFor="let o of order" [ngValue]="o">{{ o }}</option>
       </select>
 
-    <div *ngFor="let comment of comments.slice(0, visible_comments)">
+    <div *ngFor="let comment of gradeProfile.comments.slice(0, visible_comments)">
       <app-comment [userId]="userService.getUserId()"
-                   [gradeId]="this.grade.idCarrera"
+                   [gradeId]="this.gradeProfile._id"
                    [comment]="comment"
                    (reloadData)="onCommentsHaveChanged()">
       </app-comment>
     </div>
     <div class="row justify-content-center mt-4 mb-5">
       <div class="col-auto">
-        <app-button *ngIf="visible_comments < comments.length" [text]="'mostrar más comentarios'" (btnClick)="onShowMoreComments()"></app-button>
+        <app-button *ngIf="visible_comments < gradeProfile.comments.length" [text]="'mostrar más comentarios'" (btnClick)="onShowMoreComments()"></app-button>
       </div>
     </div>
   </div>
   <!-------------- EMPTY COMMENT BOX  ---------------------->
-  <div *ngIf="comments && comments.length === 0" class="container mt-4">
+  <div *ngIf="gradeProfile && gradeProfile.comments.length === 0" class="container mt-4">
     <div class="row justify-content-center">
         <img  src="assets/bird.svg" class="img-fluid" style="height: 10rem">
     </div>
     <p class="fs-6 text-secondary text-center">Guau, cuánto vacío</p>
   </div>
+  <a *ngIf="showGoUpButton && gradeProfile.comments && gradeProfile.comments.length > 0" (click)="onGoUp()" class="float"><i class="bi bi-arrow-up" style="font-size: 2rem;"></i></a>
 </div>
-<a *ngIf="showGoUpButton && comments && comments.length > 0" (click)="onGoUp()" class="float"><i class="bi bi-arrow-up" style="font-size: 2rem;"></i></a>
+
+
 <div class="space-64"></div>

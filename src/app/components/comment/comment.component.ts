@@ -10,31 +10,48 @@ import {Grade} from "../../models/Grade";
   styleUrls: ['./comment.component.css']
 })
 export class CommentComponent implements OnInit {
-  // By default responses are hidden
-  responsesAreShown: boolean = false;
-  isUpvoted:boolean = false;
-  responseInputIsShown:boolean = false;
-  newResponseText!:string;
-  // hace 2h, hace 5minutos, hace 1dia ....
-  timeSinceWasPublished!:string;
-  // User id required to match if comment was liked by user
+  /******** Inputs ********/
+  // User id (required to check if a comment is liked by the actual user)
   @Input() userId!: string;
   // Grade where this comment is published
   @Input() gradeId!: string;
   // Comment with author, likes and responses to display
   @Input() comment!: Comment;
-  // When something change, emit event
+
+  /******** Outputs ********/
+  // When a response is added to comment, emit an event
   @Output() reloadData: EventEmitter<string> = new EventEmitter();
+
+  /********* State **********/
+  // Show / hide responses
+  responsesAreShown: boolean = false;
+  // Comment is liked by user with userId
+  isUpvoted:boolean = false;
+  // Show / hide response input text
+  responseInputIsShown:boolean = false;
+  // New response current text
+  newResponseText!:string;
+  // Time since comment was published. For ex: hace 2h, hace 5minutos, hace 1dia ....
+  timeSinceWasPublished!:string;
+
 
   constructor(public userService: UserService, private forumService: ForumService, private router: Router) { }
 
   ngOnInit(): void {
-    if (this.userService.isLoggedIn() && (!this.userId || this.userId === "")) {
-      //Case user is loged but passed userId is not correct
-      console.log("comment.component:   ERROR El usuario esta logeado pero su Id es nulo!!")
-    }
+    this.validateInputs()
     this.isUpvoted = this.comment.upvotedUsers.includes(this.userId);
     this.timeSinceWasPublished = this.getTimeSinceWasPublished()
+  }
+
+  validateInputs() {
+    // Check userId
+    if (this.userService.isLoggedIn()) {
+      if ((!this.userId || this.userId === "")) throw new Error("comment.component: userId es vacio o nulo!!")
+    }
+    // Check gradeId
+    if ((!this.gradeId || this.gradeId === "")) throw new Error("comment.component: gradeId es vacio o nulo!!")
+
+
   }
 
   // Show/hide responses
@@ -92,19 +109,31 @@ export class CommentComponent implements OnInit {
   }
 
   getUsername():string {
+    let username:string
     if(this.comment.visible) {
-      return this.comment.username
+      username =  this.comment.username
     } else {
-      return "[borrado]"
+      if (this.comment.status === "banned") {
+        username =  "[baneado]"
+      } else {
+        username = "[borrado]"
+      }
     }
+    return username
   }
 
   getBody():string {
+    let body:string
     if(this.comment.visible) {
-      return this.comment.body
+      body =  this.comment.body
     } else {
-      return "[borrado]"
+      if (this.comment.status === "banned") {
+        body =  "[Este usuario ha sido baneado]"
+      } else {
+        body = "[Este comentario ha sido borrado]"
+      }
     }
+    return body
   }
 
   // TODO: Refactorizar este tocho xd

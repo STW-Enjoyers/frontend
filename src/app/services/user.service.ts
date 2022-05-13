@@ -48,9 +48,30 @@ export class UserService {
     )
   }
 
-  getProfile() {
+  getProfile():Observable<User> {
     //Needs JWT auth
-    return this.http.get(environment.url + '/profile');
+    return this.http.get<User>(environment.url + '/profile').pipe(
+      map((data: any) => {
+        return <User>data.user;
+      })
+    );
+  }
+
+  // Change current logged user username
+  changeUsername(username:string):Observable<any> {
+    //Needs JWT auth
+    return this.http.get(environment.url + '/changeUsername?username=' + username);
+  }
+
+  // Change current logged user username
+  changePassword(email:string, actualPassword:string, newPassword:string):Observable<any> {
+    //Needs JWT auth
+    return this.http.post(environment.url + '/changePassword',
+      {
+        email:email,
+        password: actualPassword,
+        newPassword: newPassword
+      });
   }
 
   //Aux

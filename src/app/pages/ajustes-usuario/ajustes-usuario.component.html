@@ -1,17 +1,60 @@
-<table *ngIf="user">
-  <thead>
-  <tr>
-    <td>Nombre</td>
-    <td>{{ user.username }}</td>
-  </tr>
-  <tr>
-    <td>Email</td>
-    <td>{{ user.email }}</td>
-  </tr>
-  <tr>
-    <td><input type="button" (click)="onLogout()" value="Logout" /></td>
-  </tr>
-  </thead>
-</table>
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v6.1.1/css/all.css">
+
+<div class="container mt-5">
+  <div class="row">
+    <div class=" col-md-10 col-lg-7 mx-auto">
+      <h1 class="display-4 text-center"> {{title}}</h1>
+
+      <!------- INIT USER INFO ------>
+      <div *ngIf="user" id="userInfo" class="row justify-content-center mt-3">
+        <div class="col-auto fs-6 text-secondary"> {{usernameLabel}}: <span class="text-primary">{{ user.username }}</span> </div>
+        <div class="col-auto fs-6 text-secondary"> {{emailLabel}}: <span class="text-primary">{{ user.email }}</span> </div>
+      </div>
+
+      <!------- INIT CHANGE USERNAME FORM ------->
+      <form class="border border-light p-5" [formGroup]="changeUsernameForm">
+        <!-- INIT USERNAME INPUT -->
+        <div class="form-group mb-2">
+          <label class="text-start">{{usernameLabel}}</label><br>
+          <input type="text" class="form-control p-3" formControlName="username" placeholder="{{usernameLabel}}"
+                 [ngClass]="{ 'is-invalid': changeUsernameFormErrors.username }"/>
+          <span class="text-danger" *ngIf="changeUsernameFormErrors.username">
+            {{changeUsernameFormErrors.username}}
+          </span>
+        </div>
+        <!-- INIT SUBMIT BUTTON -->
+        <app-button [text]="'Actualizar usuario'" [disabled]="!changeUsernameForm.valid" (btnClick)="onChangeUsernameSubmit()"></app-button>
+        <p class="text-danger mt-2" *ngIf="userAlreadyExists"> {{ usernameError }}</p>
+        <div class="alert alert-success mt-4" [hidden]="!usernameUpdated"><i class="fa-solid fa-check"></i> {{ usernameSuccess }}</div>
+      </form>
+
+      <!------- INIT CHANGE PASSWORD FORM ------->
+      <form class="border border-light p-5" [formGroup]="changePasswordForm">
+        <!-- INIT ACTUAL PASSWORD INPUT -->
+        <div class="form-group mb-2">
+          <label class="text-start">{{actualPasswordLabel}}</label><br>
+          <input type="text" class="form-control p-3" formControlName="actualPassword" placeholder="{{actualPasswordLabel}}"
+                 [ngClass]="{ 'is-invalid': changePasswordFormErrors.actualPassword }"/>
+          <span class="text-danger" *ngIf="changePasswordFormErrors.actualPassword">
+            {{changePasswordFormErrors.actualPassword}}
+          </span>
+        </div>
+        <!-- INIT NEW PASSWORD INPUT -->
+        <div class="form-group mb-2">
+          <label class="text-start">{{newPasswordLabel}}</label><br>
+          <input type="text" class="form-control p-3" formControlName="newPassword" placeholder="{{newPasswordLabel}}"
+                 [ngClass]="{ 'is-invalid': changePasswordFormErrors.newPassword }" (blur)="updateChangePasswordErrors()"/>
+          <span class="text-danger" *ngIf="changePasswordFormErrors.newPassword">
+            {{changePasswordFormErrors.newPassword}}
+          </span>
+        </div>
+        <!-- INIT SUBMIT BUTTON -->
+        <app-button [text]="'Actualizar contraseña'" [disabled]="!changePasswordForm.valid" (btnClick)="onChangePasswordSubmit()"></app-button>
+        <p class="text-danger mt-2" *ngIf="actualPasswordIncorrect"> {{ passwordError }}</p>
+        <div class="alert alert-success mt-4" [hidden]="!passwordUpdated"><i class="fa-solid fa-check"></i> {{ passwordSuccess }}</div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <div class="space-64"></div>

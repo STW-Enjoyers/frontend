@@ -8,6 +8,7 @@ export interface Comment {
   upvotes: number,
   upvotedUsers: string[],
   visible: boolean,
+  status:string,
   body: string,
   responses: Response[],
   _id: string

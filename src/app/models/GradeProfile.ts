@@ -4,6 +4,9 @@
  **************************************************/
 import { Comment } from '../models/Comment';
 export interface GradeProfile {
+  _id:string,
+  estudio:string,
+  localidad:string,
   comments: Comment[],
   graduated: number,
   changed: number,
