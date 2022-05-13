@@ -19,6 +19,7 @@ export const PASSWORD_VALIDATION_MESSAGES = {
   },
   'newPassword': {
     'required': 'Por favor, introduce un una nueva contraseña',
+    'minlength': 'La contraseña es muy corta'
   },
 };
 

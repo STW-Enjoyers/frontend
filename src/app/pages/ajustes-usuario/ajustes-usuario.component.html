@@ -41,7 +41,7 @@
         <div class="form-group mb-2">
           <label class="text-start">{{newPasswordLabel}}</label><br>
           <input type="text" class="form-control p-3" formControlName="newPassword" placeholder="{{newPasswordLabel}}"
-                 [ngClass]="{ 'is-invalid': changePasswordFormErrors.newPassword }"/>
+                 [ngClass]="{ 'is-invalid': changePasswordFormErrors.newPassword }" (blur)="updateChangePasswordErrors()"/>
           <span class="text-danger" *ngIf="changePasswordFormErrors.newPassword">
             {{changePasswordFormErrors.newPassword}}
           </span>

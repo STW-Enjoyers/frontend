@@ -59,11 +59,11 @@ export class AjustesUsuarioComponent implements OnInit {
       // username field cannot be empty
       username: ['', [Validators.required]],
     });
-    // Configure passwordUsername form validators
+    // Configure changePassword form validators
     this.changePasswordForm = this.fb.group({
       // username field cannot be empty
       actualPassword: ['', [Validators.required]],
-      newPassword: ['', [Validators.required]]
+      newPassword: ['', [Validators.required, Validators.minLength(5)]]
     });
 
     // Subscribe changeUsername form onValueChange event
