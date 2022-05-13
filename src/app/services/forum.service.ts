@@ -19,12 +19,17 @@ export class ForumService {
   getGradeProfile(idCarrera:string):Observable<GradeProfile> {
     return this.http.get<GradeProfile>(environment.url + '/gradeProfile?idCarrera=' + idCarrera).pipe(
       map((data: any) => {
+        console.log("graduated: " + data.gradeProfile.graduated.graduated)
+        console.log("changed: " + data.gradeProfile.graduated.changed)
         return <GradeProfile>{
-          comments: data.comments,
-          graduated: data.graduated.graduated,
-          changed: data.graduated.graduated,
-          average: data.graduated.average,
-          abandoned: data.graduated.abandoned
+          _id: idCarrera,
+          estudio: data.gradeData.estudio,
+          localidad: data.gradeData.localidad,
+          comments: data.gradeProfile.comments,
+          graduated: data.gradeProfile.graduated.graduated,
+          changed: data.gradeProfile.graduated.changed,
+          average: data.gradeProfile.graduated.average,
+          abandoned: data.gradeProfile.graduated.abandoned
         };
       }))
   }
@@ -33,10 +38,10 @@ export class ForumService {
     return this.http.get<Grade[]>(environment.url + '/grades/historical/' + idCarrera)
   }
 
-  postComment(grade: Grade, comment: Comment) {
+  postComment(gradeProfile: GradeProfile, comment: Comment) {
     //Needs JWT auth
     return this.http.post(
-      environment.url + '/comment?idCarrera=' + grade.idCarrera + "&cuerpo=" + comment.body,
+      environment.url + '/comment?idCarrera=' + gradeProfile._id + "&cuerpo=" + comment.body,
       this.header
     );
   }

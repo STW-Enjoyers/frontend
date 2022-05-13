@@ -26,10 +26,8 @@ export class PerfilCarreraComponent implements OnInit {
   max_comments_per_page:number = PerfilCarreraConstants.MAX_COMMENTS_PER_PAGE;
   visible_comments!:number;
 
-  // Actual grade
-  grade!: Grade;
-  // Grade profile comments
-  comments!: Comment[];
+  // Actual grade profile
+  gradeProfile!: GradeProfile;
   // Grade prifile performance chart
   pieChart:any = []
   lineChart:any = []
@@ -43,19 +41,18 @@ export class PerfilCarreraComponent implements OnInit {
   showGoUpButton: boolean = false;
 
   constructor(private forumService: ForumService,
-              public userService: UserService) {
+              public userService: UserService,
+              private activatedroute:ActivatedRoute) {
     Chart.register(...registerables)
   }
 
   ngOnInit(): void {
     // Get profile id from url data
-    var localStorageGrade = JSON.parse(<string>localStorage.getItem('grade')) as Grade
-    if (localStorageGrade) {
-      this.grade = localStorageGrade;
-      console.log("ID CARRERA: " + JSON.stringify(this.grade))
-      this.getGradeProfileData(this.grade.idCarrera, true)
-      this.historicalGrades(this.grade.idCarrera)
-
+    let id=this.activatedroute.snapshot.paramMap.get("id");
+    //var localStorageGrade = JSON.parse(<string>localStorage.getItem('grade')) as Grade
+    if (id) {
+      // this.grade = localStorageGrade;
+      this.getGradeProfileData(id, true)
       // Subscribe to scroll event
       this.scroller = fromEvent(window, 'scroll')
         .pipe(debounceTime(200))
@@ -70,37 +67,43 @@ export class PerfilCarreraComponent implements OnInit {
     this.forumService
       .getGradeProfile(idCarrera)
       .subscribe((gradeProfile) =>{
-        console.log(JSON.stringify(gradeProfile))
-        this.comments = gradeProfile.comments
+        this.gradeProfile = gradeProfile
         this.orderResponses()
         this.orderComments(this.option_relevance)
-        this.visible_comments = (this.comments.length > this.max_comments_per_page)
+        this.visible_comments = (this.gradeProfile.comments.length > this.max_comments_per_page)
           ? this.max_comments_per_page
-          : this.comments.length;
+          : this.gradeProfile.comments.length;
+
+
         if(updateChart) {
-          this.pieChart = new Chart('rendimientoChart', {
-            type: 'pie',
-            data: {
-              labels: PerfilCarreraConstants.CHART_PIE_LABELS,
-              datasets: [{
-                data: [gradeProfile.graduated, gradeProfile.changed, gradeProfile.abandoned],
-                borderWidth: 2,
-                backgroundColor: PerfilCarreraConstants.CHART_PIE_COLORS,
-              }],
-            },
-            options: {
-              maintainAspectRatio: false,
-              responsive: true,
-              plugins: {
-                title: {
-                  display: true,
-                  text: 'Rendimiento académio en último año.'
-                }
-              }
-            }
-          })
+          this.performanceGrades()
+          this.historicalGrades(this.gradeProfile._id)
         }
       })
+  }
+
+  performanceGrades() {
+    this.pieChart = new Chart('rendimientoChart', {
+      type: 'pie',
+      data: {
+        labels: PerfilCarreraConstants.CHART_PIE_LABELS,
+        datasets: [{
+          data: [this.gradeProfile.graduated, this.gradeProfile.changed, this.gradeProfile.abandoned],
+          borderWidth: 2,
+          backgroundColor: PerfilCarreraConstants.CHART_PIE_COLORS,
+        }],
+      },
+      options: {
+        maintainAspectRatio: false,
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Rendimiento académio en último año.'
+          }
+        }
+      }
+    })
   }
 
   historicalGrades(idCarrera:string) {
@@ -121,7 +124,7 @@ export class PerfilCarreraComponent implements OnInit {
           labels: xValues,
           datasets: [{
             data: yValues,
-            label: this.grade.estudio + "-" + this.grade.localidad,
+            label: this.gradeProfile.estudio + "-" + this.gradeProfile.localidad,
             borderColor: "#3e95cd",
           }],
         },
@@ -145,12 +148,12 @@ export class PerfilCarreraComponent implements OnInit {
   orderComments(order:string) {
     if (order === this.option_relevance) {
       // order by relevance
-      this.comments.sort( (a, b) => {
+      this.gradeProfile.comments.sort( (a, b) => {
         return b.upvotes - a.upvotes
       })
     } else if (order=== this.option_date) {
       // Order by comment date
-      this.comments.sort( (a, b) => {
+      this.gradeProfile.comments.sort( (a, b) => {
         return new Date(b.date).getTime() - new Date(a.date).getTime()
       })
     } else {
@@ -160,7 +163,7 @@ export class PerfilCarreraComponent implements OnInit {
 
   // Order responses by relevance
   orderResponses() {
-    this.comments.map((comment:Comment) => {
+    this.gradeProfile.comments.map((comment:Comment) => {
       comment.responses.sort( (a, b) => {
         return b.upvotes - a.upvotes
       })
@@ -168,8 +171,10 @@ export class PerfilCarreraComponent implements OnInit {
   }
 
   postComment() {
+    console.log("BEARER: " + this.userService.getToken())
+    console.log("gradeId: " + this.gradeProfile._id)
     if (this.newCommentText && this.newCommentText.length > 0) {
-      this.forumService.postComment(this.grade, <Comment>{body: this.newCommentText}).subscribe(
+      this.forumService.postComment(this.gradeProfile, <Comment>{body: this.newCommentText}).subscribe(
         (res: any) => {
           // Reset input
           this.newCommentText = ""
@@ -179,12 +184,12 @@ export class PerfilCarreraComponent implements OnInit {
   }
 
   onCommentsHaveChanged() {
-      this.getGradeProfileData(this.grade.idCarrera, false)
+      this.getGradeProfileData(this.gradeProfile._id, false)
   }
 
   onShowMoreComments() {
-    this.visible_comments = (this.visible_comments + this.max_comments_per_page > this.comments.length)
-      ? this.comments.length
+    this.visible_comments = (this.visible_comments + this.max_comments_per_page > this.gradeProfile.comments.length)
+      ? this.gradeProfile.comments.length
       : this.visible_comments + this.max_comments_per_page;
   }
 

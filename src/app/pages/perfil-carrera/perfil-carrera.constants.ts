@@ -8,6 +8,6 @@ export const MAX_COMMENTS_PER_PAGE:number = 5;
 
 
 export const CHART_PIE_LABELS = [ "Graduados", "Cambio de carrera", "Abandono"];
-export const CHART_PIE_COLORS = ['#d91920', '#0baff0', '#f79517'];
+export const CHART_PIE_COLORS = ['#0baff0', '#f79517', '#d91920'];
 
 

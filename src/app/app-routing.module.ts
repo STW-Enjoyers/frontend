@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: 'lista-carreras', component: ListaCarrerasComponent},
   {path: 'mapa-erasmus', component: MapaErasmusComponent},
   {path: 'ajustes-usuario', component: AjustesUsuarioComponent},
-  {path: 'perfil-carrera', component: PerfilCarreraComponent},
+  {path: 'perfil-carrera/:id', component: PerfilCarreraComponent},
   {path: 'info-notas', component: InfoNotasComponent},
   {path: 'info-erasmus', component: InfoErasmusComponent},
   {path: 'admin-dashboard', component: AdminDashboardComponent},
