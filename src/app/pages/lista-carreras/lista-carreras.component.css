@@ -26,7 +26,19 @@ img {
 
 .table-striped>tbody>tr:nth-child(odd)>td,
 .table-striped>tbody>tr:nth-child(odd)>th {
-  background-color: #fafdff;
+  border-style:none;
+}
+
+.table-striped>tbody>tr:nth-child(even)>td,
+.table-striped>tbody>tr:nth-child(even)>th {
+  border-style:none;
+}
+.link {
+  color: #6557f4;
+}
+
+tr:hover td p {
+  color: #2f274f;
 }
 
 @media only screen and (max-width: 600px) {
@@ -42,5 +54,6 @@ img {
     filter: invert(100%);
   }
 }
+
 
 
