@@ -31,24 +31,26 @@
     </div>
     <a href="{{city.web}}">{{city.web}}</a>
     <!-- Datatable starts-->
-    <div class="table-responsive">
-      <table datatable class="table table-sm table-striped nowrap" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-        <thead>
-        <tr>
-          <th>Carrera</th>
-          <th>Centro</th>
-          <th class="d-none">Localidad</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let grade of grades"  [routerLink]="['/perfil-carrera', grade.idCarrera]">
-          <td>
-            {{ grade.estudio }}
-          </td>
-          <td>{{ grade.centro }}</td>
-          <td class="d-none">{{ grade.localidad }}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+    <table datatable class="table table-sm table-striped" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+      <thead>
+      <tr>
+        <th>Carrera</th>
+        <th class="d-none">Centro</th>
+        <th class="d-none">Localidad</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let grade of grades"  [routerLink]="['/perfil-carrera', grade.idCarrera]" role="button">
+        <td class=" text-sm-left" style="width: 100%;">
+          <p class="fs-5 link"><b>{{ grade.estudio }}</b></p>
+          <p class="mt-0 fs-6 text-secondary">{{ grade.centro }}</p>
+        </td>
+        <td class="d-none">{{ grade.centro }}</td>
+        <td class="d-none">{{ grade.localidad }}</td>
+        <td></td>
+      </tr>
+      </tbody>
+    </table>
+
 </div>

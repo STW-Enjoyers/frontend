@@ -32,24 +32,6 @@ export const DTOPTIONS = {
   dom:  '<<t>ip>',
   scrollX: true,
   scrollCollapse: true,
-  columnDefs: [
-    { // Handle Carreras column overflow
-      "targets": 0,
-      "width": "100%",
-      render: function ( data: string, type: string) {
-        return data.length > 40
-          ? '<a class="text-grade" role="button">' + data.substr( 0, 38 ) + '...</a>'
-          : '<a class="text-grade" role="button">' + data + '</a>'
-      }
-
-    },
-    {  // Handle cell padding (the only way that works)
-      "targets": '_all',
-      "createdCell": function (td: any) {
-        $(td).css('padding', '15px')
-      }
-    }
-  ],
   language: {
     zeroRecords: "No hemos encontrado ninguna carrera - disculpa",
     info: "Mostrando _TOTAL_ carreras",
