@@ -42,6 +42,13 @@ export class FiltradorNotasComponent implements OnInit {
     this.getGrades();
   }
 
+  ngOnDestroy(): void {
+    // Reset data table every time we leave the page
+    this.dtTrigger.unsubscribe();
+    // Delete custom filters
+    this.unsetExternalFilter()
+  }
+
   // Get grades and update datatables
   getGrades(): void {
     this.gradesService
@@ -79,6 +86,14 @@ export class FiltradorNotasComponent implements OnInit {
       }
       return false;
     });
+  }
+
+  // Unset an external filter to search by grade name
+  // Code modified from: http://l-lin.github.io/angular-datatables/#/advanced/custom-range-search
+  unsetExternalFilter() {
+    // /!\ This is not the ideal solution as other components may add other search function in this array, so be careful when
+    // handling this global variable
+    $.fn['dataTable'].ext.search.pop();
   }
 
 }
