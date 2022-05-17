@@ -43,6 +43,9 @@ export class AjustesUsuarioComponent implements OnInit {
   // Success flags
   passwordUpdated:boolean = false
   usernameUpdated:boolean = false
+  // Password inputs visibility
+  actualPasswordShow:boolean = false
+  newPasswordShow:boolean = false
 
   constructor(public userService: UserService,
               private router: Router,
@@ -137,6 +140,13 @@ export class AjustesUsuarioComponent implements OnInit {
         } else throw new HttpErrorResponse(error) //GlobalErrorHandler will handle it
       }
     );
+  }
+
+  onClickActualPasswordVisibility() {
+    this.actualPasswordShow = !this.actualPasswordShow
+  }
+  onClickNewPasswordVisibility() {
+    this.newPasswordShow = !this.newPasswordShow
   }
 
 }
