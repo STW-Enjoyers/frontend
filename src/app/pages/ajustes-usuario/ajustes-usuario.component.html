@@ -39,7 +39,7 @@
         <div class="input-group">
           <input [type]="actualPasswordShow ? 'text' : 'password'" class="form-control p-3" formControlName="actualPassword" placeholder="{{actualPasswordLabel}}"
                  [ngClass]="{ 'is-invalid': changePasswordFormErrors.actualPassword }"/>
-          <span class="input-group-text" (click)="onClickActualPasswordVisibility()">
+          <span class="input-group-text" role="button" (click)="onClickActualPasswordVisibility()">
             <i class="fa-solid" [ngClass]="{'fa-eye-slash': !actualPasswordShow, 'fa-eye':actualPasswordShow}"></i>
           </span>
         </div>
@@ -49,9 +49,11 @@
         <!-- INIT NEW PASSWORD INPUT -->
         <label class="text-start mt-4 d-block">{{newPasswordLabel}}</label><br>
         <div class="input-group">
-          <input type="password" class="form-control p-3" formControlName="newPassword" placeholder="{{newPasswordLabel}}"
+          <input [type]="newPasswordShow ? 'text' : 'password'" class="form-control p-3" formControlName="newPassword" placeholder="{{newPasswordLabel}}"
                  [ngClass]="{ 'is-invalid': changePasswordFormErrors.newPassword }" (blur)="updateChangePasswordErrors()"/>
-          <span class="input-group-text"><i class="fa-solid fa-eye-slash"></i></span>
+          <span class="input-group-text" (click)="onClickNewPasswordVisibility()" role="button">
+            <i class="fa-solid" [ngClass]="{'fa-eye-slash': !newPasswordShow, 'fa-eye':newPasswordShow}"></i>
+          </span>
         </div>
         <span class="text-danger" *ngIf="changePasswordFormErrors.newPassword">
             {{changePasswordFormErrors.newPassword}}

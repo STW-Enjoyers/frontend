@@ -9,6 +9,7 @@ import {Response} from '../../models/Response';
 import * as PerfilCarreraConstants from './perfil-carrera.constants'
 import {UserService} from "../../services/user.service";
 import {debounceTime, fromEvent, Subscription} from "rxjs";
+import {GradesService} from "../../services/grades.service";
 
 @Component({
   selector: 'app-perfil-carrera',
@@ -41,6 +42,7 @@ export class PerfilCarreraComponent implements OnInit {
   showGoUpButton: boolean = false;
 
   constructor(private forumService: ForumService,
+              public gradesService: GradesService,
               public userService: UserService,
               private activatedroute:ActivatedRoute) {
     Chart.register(...registerables)
@@ -107,7 +109,7 @@ export class PerfilCarreraComponent implements OnInit {
   }
 
   historicalGrades(idCarrera:string) {
-    this.forumService.getHistoricalGrades(idCarrera).subscribe((grades:Grade[]) =>{
+    this.gradesService.getHistoricalGrades(idCarrera).subscribe((grades:Grade[]) =>{
       let xValues:number[] = []
       let yValues:number[] = []
       // Ascending sort
