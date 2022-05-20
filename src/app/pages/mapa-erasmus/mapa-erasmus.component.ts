@@ -79,7 +79,7 @@ export class MapaErasmusComponent implements OnInit {
       radius:  this.scaledRadius(erasmus.plazas, maxSize, minSize), color: color
     })
     // Add circle tooltip
-    circle.bindPopup("<b>País: </b>" + erasmus.pais + "<br>" + "<b>Plazas: </b>" + erasmus.plazas)
+    circle.bindPopup("<b>País: </b>" + erasmus.pais + "<br>" + "<b>Plazas: </b>" + erasmus.plazas, {closeButton:false})
     this.layers.push( circle )
   }
 
