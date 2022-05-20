@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
+import {User} from '../../models/User';
 
 @Component({
   selector: 'app-header',
@@ -8,10 +9,13 @@ import {UserService} from "../../services/user.service";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  //User info
+  user!: User;
 
   constructor(private router: Router, private userService: UserService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   goToPage(link:string): void {
     this.router.navigate([link])
@@ -22,7 +26,7 @@ export class HeaderComponent implements OnInit {
   }
 
   verifyAdmin() {
-    console.log(this.userService.getProfile())
+    return true
   }
 
   onLogout() {

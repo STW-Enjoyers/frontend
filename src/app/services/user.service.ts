@@ -4,14 +4,16 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import {map, Observable} from "rxjs";
 import {Erasmus} from "../models/Erasmus";
+import {YearlyUsers} from "../models/YearlyUsers";
+//import { userInfo } from 'os';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   header = {headers: new HttpHeaders({NoAuth: 'True'})}; //For those that don't need authorization
-  constructor(private http: HttpClient) {
-  }
+
+  constructor(private http: HttpClient) { }
 
   // Post new registered user
   postUser(user: User):Observable<User> {
@@ -76,6 +78,23 @@ export class UserService {
       });
   }
 
+  getYearly():Observable<YearlyUsers[]> {
+    //Needs JWT auth
+    return this.http.get<YearlyUsers>(environment.url + '/user/yearly').pipe(
+      map((data: any) => {
+        // Transform data to fit Erasmus model
+        let yearlyUsersList:YearlyUsers[] = []
+        data.forEach( (yearlyUsers:any) => {
+          yearlyUsersList.push({
+            _id: yearlyUsers._id,
+            users: yearlyUsers.users
+          })
+        })
+        return yearlyUsersList;
+      })
+    )
+  }
+
   //Aux
   setToken(token: string) {
     console.log('Setting: ' + token);
@@ -113,5 +132,4 @@ export class UserService {
     //TODO cambiar el 1000
     else return null;
   }
-
 }

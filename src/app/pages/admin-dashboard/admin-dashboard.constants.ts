@@ -1,0 +1,5 @@
+export const MAIN_TITLE:string = "Panel de Control"
+export const YEARLY_CHART_TITLE:string = "Gráfica de los usuarios registrados mensualmente en el año en curso"
+export const COMMENT_CHART_TITLE:string = "Gráfica de las carreras con más comentarios"
+export const CONFLICT_CHART_TITLE:string = "Gráficas de las carreras más conflictivas"
+export const COMMENT_MOD_TITLE:string = "Sección de moderación de comentarios"

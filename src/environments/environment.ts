@@ -8,4 +8,7 @@
 export const environment = {
   production: false,
   url: 'http://localhost:3000/api',
+  recaptcha: {
+    siteKey: '6LfKNi0cAAAAACeYwFRY9_d_qjGhpiwYUo5gNW5-',
+  },
 };
