@@ -9,6 +9,6 @@ export const environment = {
   production: true,
   url: 'https://unizapp-backend.herokuapp.com/api',
   recaptcha: {
-    siteKey: '6LfKNi0cAAAAACeYwFRY9_d_qjGhpiwYUo5gNW5-',
+    siteKey: '6Ldat9wfAAAAAME-_0PzCrXfgQVG7aqAWLulcMsE',
   },
 };
