@@ -13,10 +13,10 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  // Register a new user
+  // Post new registered user
   postUser(user: User):Observable<User> {
     return this.http.post<User>(
-      environment.url + '/register', user, this.header,
+      environment.url + '/user/register', user, this.header,
     ).pipe(
       map((user: any) => {
         // Update session token
@@ -34,9 +34,10 @@ export class UserService {
     )
   }
 
+  // Post email and password and get user token
   login(user: User) {
     return this.http.post(
-      environment.url + '/login',
+      environment.url + '/user/login',
       user,
       this.header
     ).pipe(
@@ -48,25 +49,26 @@ export class UserService {
     )
   }
 
+  // Ger user given a user id
   getProfile():Observable<User> {
     //Needs JWT auth
-    return this.http.get<User>(environment.url + '/profile').pipe(
+    return this.http.get<User>(environment.url + '/user/' + this.getUserId() + '/profile').pipe(
       map((data: any) => {
         return <User>data.user;
       })
     );
   }
 
-  // Change current logged user username
+  // Change username given a user id and new username
   changeUsername(username:string):Observable<any> {
     //Needs JWT auth
-    return this.http.get(environment.url + '/changeUsername?username=' + username);
+    return this.http.get(environment.url + '/user/' + this.getUserId() + '/username?username=' + username);
   }
 
-  // Change current logged user username
+  // Change password given a user id and new password
   changePassword(email:string, actualPassword:string, newPassword:string):Observable<any> {
     //Needs JWT auth
-    return this.http.post(environment.url + '/changePassword',
+    return this.http.post(environment.url + '/user/' + this.getUserId() + '/password',
       {
         email:email,
         password: actualPassword,

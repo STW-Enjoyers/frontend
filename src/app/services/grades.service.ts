@@ -37,13 +37,15 @@ export class GradesService {
 
   constructor(private http: HttpClient) {}
 
-  /*
-    Get all grades (careers, masters and doctor's degree)
-    year: If undefined, it will return last year degrees
-   */
+  // Get admission grades of an specific year or (if no year provided) get admission grades of last year
   getGrades(year?:number): Observable<Grade[]> {
     let endpoint:string = year == undefined ? `/grades/last` : `/grades/${year}`
     return this.http.get<Grade[]>(environment.url + endpoint);
+  }
+
+  // Get historical general admission grades for a degree
+  getHistoricalGrades(idCarrera:string):Observable<any> {
+    return this.http.get<Grade[]>(environment.url + '/grades/historical/' + idCarrera)
   }
 
   // Filter careers, masters or doctor'degrees

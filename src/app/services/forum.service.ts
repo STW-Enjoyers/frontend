@@ -15,12 +15,10 @@ export class ForumService {
   header = {headers: new HttpHeaders({NoAuth: 'True'})}; //For those that don't need authorization
   constructor(private http: HttpClient) { }
 
-  // Get number of Erasmus offers for Unizar students for studying abroad
+  // Get grade profile fiven an id
   getGradeProfile(idCarrera:string):Observable<GradeProfile> {
-    return this.http.get<GradeProfile>(environment.url + '/gradeProfile?idCarrera=' + idCarrera).pipe(
+    return this.http.get<GradeProfile>(environment.url + '/gradeProfile/' + idCarrera + '/info').pipe(
       map((data: any) => {
-        console.log("graduated: " + data.gradeProfile.graduated.graduated)
-        console.log("changed: " + data.gradeProfile.graduated.changed)
         return <GradeProfile>{
           _id: idCarrera,
           estudio: data.gradeData.estudio,
@@ -34,40 +32,43 @@ export class ForumService {
       }))
   }
 
-  getHistoricalGrades(idCarrera:string):Observable<any> {
-    return this.http.get<Grade[]>(environment.url + '/grades/historical/' + idCarrera)
-  }
 
+  // Post comment on grade profile given an id and comment body
   postComment(gradeProfile: GradeProfile, comment: Comment) {
     //Needs JWT auth
     return this.http.post(
-      environment.url + '/comment?idCarrera=' + gradeProfile._id + "&cuerpo=" + comment.body,
+      environment.url + '/gradeProfile/' + gradeProfile._id + "/comment?cuerpo=" + comment.body,
       this.header
     );
   }
 
+  // Post reply to a comment on grade profile given an grade id, comment id and reply body
   postResponse(idCarrera:string, idComment: string, responseBody: string) {
     //Needs JWT auth
     return this.http.post(
-      environment.url + '/reply?idCarrera=' + idCarrera + "&cuerpo=" + responseBody + "&_id=" + idComment,
+      environment.url + '/gradeProfile/' + idCarrera + "/comment/" + idComment + "/reply?cuerpo=" + responseBody ,
       this.header
     );
   }
 
+  // Post upVote to a comment on grade profile given an grade id, comment id (and reply id if you
+  // want to upVote a reply
   postUpvote(idCarrera: string, idComment: string, idResponse?: string) {
     //Needs JWT auth
     return this.http.post(
       // @ts-ignore
-    environment.url + `/upVote?idCarrera=${idCarrera}&idcom=${idComment}${ (idResponse) ? `&idrep=${idResponse}` : `` }`,
+      environment.url + `/gradeProfile/${idCarrera}/comment/${idComment}${ (idResponse) ? `/reply/${idResponse}` : `` }/upVote`,
       this.header
     );
   }
 
+  // Post downVote to a comment on grade profile given an grade id, comment id (and reply id if you
+  // want to downVote a reply
   postDownvote(idCarrera: string, idComment: string, idResponse?: string) {
     //Needs JWT auth
     return this.http.post(
       // @ts-ignore
-      environment.url + `/cancelUpVote?idCarrera=${idCarrera}&idcom=${idComment}${ (idResponse) ? `&idrep=${idResponse}` : `` }`,
+      environment.url + `/gradeProfile/${idCarrera}/comment/${idComment}${ (idResponse) ? `/reply/${idResponse}` : `` }/cancelUpVote`,
       this.header
     );
   }

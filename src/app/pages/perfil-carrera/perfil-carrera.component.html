@@ -1,8 +1,10 @@
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.15.4/css/all.css">
 <div id="topDiv" class="container-fluid">
   <h1 *ngIf="gradeProfile" class="display-6 text-center p-5 bg-light">{{gradeProfile.estudio}} - {{gradeProfile.localidad}}</h1>
   <!-------------- INIT CHARTS ---------------------->
   <div class="container mt-4">
-    <h5>{{statistics_title}}</h5>
+    <h5 class="d-inline">{{statistics_title}}   </h5>
+    <button class="btn btn-light" (click)="sendMail()"><i class="bi bi-envelope"></i> Compartir</button>
     <div class="row justify-content-between">
       <div class="col-12 col-sm-4 p-3">
         <canvas id="rendimientoChart"> {{pieChart}} </canvas>

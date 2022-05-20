@@ -9,6 +9,7 @@ import {Response} from '../../models/Response';
 import * as PerfilCarreraConstants from './perfil-carrera.constants'
 import {UserService} from "../../services/user.service";
 import {debounceTime, fromEvent, Subscription} from "rxjs";
+import {GradesService} from "../../services/grades.service";
 
 @Component({
   selector: 'app-perfil-carrera',
@@ -41,6 +42,7 @@ export class PerfilCarreraComponent implements OnInit {
   showGoUpButton: boolean = false;
 
   constructor(private forumService: ForumService,
+              public gradesService: GradesService,
               public userService: UserService,
               private activatedroute:ActivatedRoute) {
     Chart.register(...registerables)
@@ -68,6 +70,7 @@ export class PerfilCarreraComponent implements OnInit {
       .getGradeProfile(idCarrera)
       .subscribe((gradeProfile) =>{
         this.gradeProfile = gradeProfile
+        this.gradeProfile.estudio = this.gradeProfile.estudio.replace("Grado:", "")
         this.orderResponses()
         this.orderComments(this.option_relevance)
         this.visible_comments = (this.gradeProfile.comments.length > this.max_comments_per_page)
@@ -107,7 +110,7 @@ export class PerfilCarreraComponent implements OnInit {
   }
 
   historicalGrades(idCarrera:string) {
-    this.forumService.getHistoricalGrades(idCarrera).subscribe((grades:Grade[]) =>{
+    this.gradesService.getHistoricalGrades(idCarrera).subscribe((grades:Grade[]) =>{
       let xValues:number[] = []
       let yValues:number[] = []
       // Ascending sort
@@ -196,5 +199,13 @@ export class PerfilCarreraComponent implements OnInit {
   }
   onGoUp() {
     window.scroll(0,0);
+  }
+
+  sendMail() {
+    var receiver:string="friend@correo.com"
+    var subject:string="Unizapp estadísticas"
+    var body:string="Te comparto las estadísticas del grado " + this.gradeProfile.estudio + ".%0A"
+     + window.location.href
+    window.location.href = "mailto:"+ receiver + "?subject="+ subject+"&body="+ body;
   }
 }
