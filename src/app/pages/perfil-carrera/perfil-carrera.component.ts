@@ -70,6 +70,7 @@ export class PerfilCarreraComponent implements OnInit {
       .getGradeProfile(idCarrera)
       .subscribe((gradeProfile) =>{
         this.gradeProfile = gradeProfile
+        this.gradeProfile.estudio = this.gradeProfile.estudio.replace("Grado:", "")
         this.orderResponses()
         this.orderComments(this.option_relevance)
         this.visible_comments = (this.gradeProfile.comments.length > this.max_comments_per_page)
@@ -198,5 +199,13 @@ export class PerfilCarreraComponent implements OnInit {
   }
   onGoUp() {
     window.scroll(0,0);
+  }
+
+  sendMail() {
+    var receiver:string="friend@correo.com"
+    var subject:string="Unizapp estadísticas"
+    var body:string="Te comparto las estadísticas del grado " + this.gradeProfile.estudio + ".%0A"
+     + window.location.href
+    window.location.href = "mailto:"+ receiver + "?subject="+ subject+"&body="+ body;
   }
 }

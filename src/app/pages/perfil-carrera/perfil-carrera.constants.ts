@@ -1,4 +1,4 @@
-export const STATISTICS_TITLE:string = "Estadísticas de egresados";
+export const STATISTICS_TITLE:string = "Estadísticas de la carrera";
 export const COMMENTS_TITLE:string = "Comentarios";
 export const COMMENT_INPUT_LABEL:string = "Deja tu comentario, consejo u opinión sobre la carrera.";
 export const COMMENT_BUTTON_TEXT:string = "Publicar";
