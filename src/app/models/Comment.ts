@@ -14,3 +14,12 @@ export interface Comment {
   _id: string
   date: Date
 }
+
+export interface CheckComment {
+  type: string,
+  username: string,
+  body: string,
+  commentId: string,
+  responseId: string,
+  degreeId: string
+}

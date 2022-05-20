@@ -7,6 +7,8 @@ import {GradeProfile} from "../models/GradeProfile";
 import {Comment} from "../models/Comment";
 import {Response} from "../models/Response";
 import {Grade} from "../models/Grade";
+import {GradeCommented} from "../models/GradeInfo";
+import {GradeConflictive} from "../models/GradeInfo";
 
 @Injectable({
   providedIn: 'root'
@@ -71,5 +73,39 @@ export class ForumService {
       environment.url + `/gradeProfile/${idCarrera}/comment/${idComment}${ (idResponse) ? `/reply/${idResponse}` : `` }/cancelUpVote`,
       this.header
     );
+  }
+
+  getConflictive():Observable<GradeConflictive[]> {
+    return this.http.get(environment.url + '/gradeProfile/conflictives').pipe(
+      map((data: any) => {
+        // Transform data to fit GradeConflictive model
+        let gradeConflictiveList:GradeConflictive[] = []
+        data.forEach( (gradeConflict:any) => {
+          gradeConflictiveList.push({
+            idCarrera: gradeConflict.idCarrera,
+            estudio: gradeConflict.estudio,
+            deletedCount: gradeConflict.deletedCount
+          })
+        })
+        return gradeConflictiveList;
+      })
+    )
+  }
+
+  getCommented():Observable<GradeCommented[]> {
+    return this.http.get(environment.url + '/gradeProfile/commented').pipe(
+      map((data: any) => {
+        // Transform data to fit GradeCommented model
+        let gradeCommentedList:GradeCommented[] = []
+        data.forEach( (gradeComment:any) => {
+          gradeCommentedList.push({
+            idCarrera: gradeComment.idCarrera,
+            estudio: gradeComment.estudio,
+            commentCount: gradeComment.commentCount
+          })
+        })
+        return gradeCommentedList;
+      })
+    )
   }
 }

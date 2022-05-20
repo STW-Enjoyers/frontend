@@ -40,6 +40,9 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { ServerErrorComponent } from './pages/server-error/server-error.component';
 
+import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,12 +76,15 @@ import { ServerErrorComponent } from './pages/server-error/server-error.componen
     DataTablesModule,
     MdbDropdownModule,
     MdbCollapseModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RecaptchaModule,
+    RecaptchaFormsModule
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
+    { provide: RECAPTCHA_SETTINGS, useValue: { siteKey: environment.recaptcha.siteKey,} as RecaptchaSettings, },
     UserService,
     AuthGuard,
   ],

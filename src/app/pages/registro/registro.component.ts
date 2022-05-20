@@ -12,6 +12,7 @@ import {FormValidatorService} from "../../services/form-validator.service";
 import * as LoginConstants from "../login/login.constants";
 import {HttpErrorResponse} from "@angular/common/http";
 import {User} from "../../models/User";
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-registro',
@@ -34,6 +35,7 @@ export class RegistroComponent implements OnInit {
   redirectButton: string = RegistroConstants.REDIRECT_BUTTON;
   duplicateEmailMessage: string =  RegistroConstants.DUPLICATE_EMAIL_MESSAGE;
   duplicateUsernameMessage: string =  RegistroConstants.DUPLICATE_USERNAME_MESSAGE;
+  token: string|undefined;
   // Form
   registerForm!: FormGroup;
   // Client errors (undefined = No errors)
@@ -52,7 +54,9 @@ export class RegistroComponent implements OnInit {
     private userService: UserService,
     public router: Router,
     private validator: FormValidatorService
-  ) {}
+  ) {
+    this.token = undefined;
+  }
 
   ngOnInit(): void {
     // Init form validators
@@ -82,7 +86,14 @@ export class RegistroComponent implements OnInit {
     this.duplicateUsername = false
   }
 
-  onSubmit() {
+  onSubmit(form: NgForm) {
+    if (form.invalid) {
+      for (const control of Object.keys(form.controls)) {
+        form.controls[control].markAsTouched();
+      }
+      return;
+    }
+
     if (!this.registerForm.valid) {
       return;
     }
@@ -104,5 +115,11 @@ export class RegistroComponent implements OnInit {
         }  else throw new HttpErrorResponse(error) //GlobalErrorHandler will handle it
       }
     );
+  }
+
+  public send(form: NgForm): void {
+
+
+    //console.debug(`Token [${this.token}] generated`);
   }
 }

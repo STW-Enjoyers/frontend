@@ -34,8 +34,17 @@
                  [ngClass]="{ 'is-invalid':formErrors.confirmPassword }" (blur)="updateValidationErrors()"/>
           <span class="text-danger" *ngIf="formErrors.confirmPassword">{{formErrors.confirmPassword}}</span>
         </div>
+        <!-------------- INIT RECAPTCHA ---------------------->
+        <form #form="ngForm">
+          <div class="reCaptcha mb-2">
+            <re-captcha id="recaptcha" name="recaptcha" #recaptcha="ngModel" [(ngModel)]="token" required [class.is-invalid]="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)"></re-captcha>
+            <div *ngIf="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)" class="invalid-feedback">
+              <div *ngIf="recaptcha.errors?.['required']">Es necesario realizar el catcha.</div>
+            </div>
+          </div>
+        </form>
         <!-------------- INIT SUBMIT BUTTON ---------------------->
-        <app-button [text]="submitButton" [disabled]="!registerForm.valid" (btnClick)="onSubmit()"></app-button>
+        <app-button [text]="submitButton" [disabled]="!registerForm.valid" (btnClick)="onSubmit(form)"></app-button>
         <p class="mt-5"> {{redirectMessage}} <a href='/login'>{{redirectButton}}</a></p>
       </form>
     </div>

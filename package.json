@@ -35,6 +35,7 @@
     "jquery": "^3.6.0",
     "leaflet": "^1.7.1",
     "mdb-angular-ui-kit": "^2.1.0",
+    "ng-recaptcha": "^9.0.0",
     "path": "^0.12.7",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
