@@ -101,7 +101,7 @@ export class AjustesUsuarioComponent implements OnInit {
         this.userAlreadyExists = false
         this.user.username = this.changeUsernameForm.value.username
         this.usernameUpdated = true
-
+        window.location.reload(); //Refresh to update header
         //wait 5 Seconds and hide
         setTimeout(() => {
           this.usernameUpdated = false;
