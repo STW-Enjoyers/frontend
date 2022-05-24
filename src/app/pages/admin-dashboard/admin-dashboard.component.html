@@ -24,9 +24,83 @@
 
   <div class="space-64"></div>
 
-  <div class="row">
+  <div class="row" >
     <div class="col-12">
       <h4>{{commentModTitle}}</h4>
+
+      <div class="space-64"></div>
+
+      <div *ngIf="checkModComments()">
+        <div class="col-12 text-end p-1">
+          Comentario {{indiceModerar}} de {{maxModerar}} sin moderar
+        </div>
+        <!-- CUSTOM BLOCKQUOTE -->
+        <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
+          <div class="blockquote-custom-icon bg-info shadow-sm">
+            <i class="fa fa-quote-left text-white"></i>
+          </div>
+  
+          <p class="mb-0 mt-2 font-italic">
+            {{textoComentario}}
+          </p>
+  
+          <footer class="blockquote-footer pt-4 mt-4 border-top">
+            {{usuarioComentario}}
+          </footer>
+        </blockquote><!-- END BLOCKQUOTE -->
+  
+        <div class="col-md-12 mb-3">
+          <div class="row">
+            <div class="col-md-2">
+              <button type="button" class="btn mb-2 mb-md-0 btn-round btn-outline btn-block" (click)="previousModComment()">
+                <i class="far fa-arrow-alt-circle-left"></i> {{anteriorBtn}}
+              </button>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-6 text-center">
+              <button type="button" class="btn mb-2 mb-md-0 btn-success btn-block btn-round" (click)="verifyComment()"><span> {{verificarBtn}} </span> 
+                <div class="icon icon-round d-flex align-items-center justify-content-center text-success">
+                  <i class="fas fa-check"></i>
+                </div>
+              </button>
+              <button type="button" class="btn btn-danger btn-block btn-round" (click)="deleteComment()"><span> {{borrarBtn}} </span> 
+                <div class="icon icon-round d-flex align-items-center justify-content-center text-danger">
+                  <i class="fas fa-trash-alt"></i>
+                </div>
+              </button>
+              <button type="button" class="btn mb-2 mb-md-0 btn-dark btn-block btn-round"><span> {{banearBtn}} </span> 
+                <div class="icon icon-round d-flex align-items-center justify-content-center text-dark">
+                  <i class="fas fa-user-slash"></i>
+                </div>
+              </button>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2 text-end">
+              <button type="button" class="btn mb-2 mb-md-0 btn-round btn-outline btn-block" (click)="nextModComment()">
+                {{siguienteBtn}} <i class="far fa-arrow-alt-circle-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div *ngIf="!checkModComments()">
+        <!-- CUSTOM BLOCKQUOTE -->
+        <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
+          <div class="blockquote-custom-icon bg-info shadow-sm">
+            <i class="fa fa-quote-left text-white"></i>
+          </div>
+  
+          <p class="mb-0 mt-2 font-italic">
+            No hay comentarios sin moderar
+          </p>
+  
+          <footer class="blockquote-footer pt-4 mt-4 border-top">
+            ¡Felicidades!
+          </footer>
+        </blockquote><!-- END BLOCKQUOTE -->
+      </div>
+
     </div>
   </div>
 </div>

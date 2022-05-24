@@ -3,3 +3,9 @@ export const YEARLY_CHART_TITLE:string = "Gráfica de los usuarios registrados m
 export const COMMENT_CHART_TITLE:string = "Gráfica de las carreras con más comentarios"
 export const CONFLICT_CHART_TITLE:string = "Gráficas de las carreras más conflictivas"
 export const COMMENT_MOD_TITLE:string = "Sección de moderación de comentarios"
+
+export const ANTERIOR_BTN:string = "Anterior"
+export const VERIFICAR_BTN:string = "Verificar"
+export const BORRAR_BTN:string = "Borrar"
+export const BANEAR_BTN:string = "Banear"
+export const SIGUIENTE_BTN:string = "Siguiente"

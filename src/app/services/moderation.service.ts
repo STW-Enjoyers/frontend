@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {map, Observable} from "rxjs";
 import {environment} from 'src/environments/environment';
 
@@ -7,39 +7,36 @@ import {environment} from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ModerationService {
-
+  header = {headers: new HttpHeaders({NoAuth: 'True'})}; //For those that don't need authorization
   constructor(private http: HttpClient) {}
 
-  checkComments():Observable<any> {
-    return this.http.get(environment.url + '/gradeProfile/comments/check').pipe(
-      map((data: any) => {
-        console.log(data)
-        return data;
-      })
+  getComments():Observable<any> {
+    return this.http.get<any>(environment.url + '/gradeProfile/comments/check')
+  }
+
+  verifyComment(degreeId:string, commentId:string):Observable<any> {
+    return this.http.post(environment.url + 
+      '/gradeProfile/' + degreeId + '/comment/' + commentId + '/verify', null
     )
   }
 
-  verifyComment(degreeId:string, commentId:string) {
-    return this.http.get(environment.url + 
-      '/gradeProfile/' + degreeId + '/comment/' + commentId + '/verify')
+  verifyResponse(degreeId:string, commentId:string, responseId:string):Observable<any> {
+    return this.http.post(environment.url + 
+      '/gradeProfile/' + degreeId + '/comment/' + commentId + '/response/' + responseId + '/verify', null
+    )
   }
 
-  verifyResponse(degreeId:string, commentId:string, responseId:string) {
-    return this.http.get(environment.url + 
-      '/gradeProfile/' + degreeId + '/comment/' + commentId + '/response/' + responseId + '/verify')
-  }
-
-  deleteComment(degreeId:string, commentId:string) {
+  deleteComment(degreeId:string, commentId:string): Observable<any> {
     return this.http.delete(environment.url + 
       '/gradeProfile/' + degreeId + '/comment/' + commentId + '/delete')
   }
   
-  deleteResponse(degreeId:string, commentId:string, responseId:string) {
+  deleteResponse(degreeId:string, commentId:string, responseId:string): Observable<any> {
     return this.http.delete(environment.url + 
       '/gradeProfile/' + degreeId + '/comment/' + commentId + '/response/' + responseId + '/delete')
   }
 
-  banUser(userId:string) {
+  banUser(userId:string): Observable<any> {
     return this.http.get(environment.url + '/user/' + userId + '/ban')
   }
 }

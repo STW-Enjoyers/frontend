@@ -57,7 +57,6 @@ export class FiltradorNotasComponent implements OnInit {
         grades = this.gradesService.filterByType(grades, this.gradesService.TYPES.GRADO)
         grades = this.gradesService.renameCareers(grades);
         this.grades = grades;
-        console.log(grades)
         // Workaround to init datatables with dtOptions
         setTimeout(function() {
           // @ts-ignore
