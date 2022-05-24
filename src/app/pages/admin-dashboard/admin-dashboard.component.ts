@@ -189,10 +189,11 @@ export class AdminDashboardComponent implements OnInit {
     this.textoComentario = this.listaComentarios[indice].body
     this.idComentario = this.listaComentarios[indice].commentId
     this.idCarrera = this.listaComentarios[indice].degreeId
+    this.idUsuario = this.listaComentarios[indice].userid
     if(this.tipoComentario == "response") {
       this.idRespuesta = this.listaComentarios[indice].responseId
     }
-    console.log(this.listaComentarios[indice])
+    //console.log(this.listaComentarios[indice])
   }
 
   nextModComment() {
@@ -216,11 +217,11 @@ export class AdminDashboardComponent implements OnInit {
   verifyComment() {
     if(this.tipoComentario == "comment") {
       this.modService.verifyComment(this.idCarrera, this.idComentario).subscribe(data => {
-        console.log(data)
+        //console.log(data)
       })
     } else if (this.tipoComentario == "response") {
       this.modService.verifyResponse(this.idCarrera, this.idComentario, this.idRespuesta).subscribe(data => {
-        console.log(data)
+        //console.log(data)
       })
     }
 
@@ -239,11 +240,11 @@ export class AdminDashboardComponent implements OnInit {
   deleteComment() {
     if(this.tipoComentario == "comment") {
       this.modService.deleteComment(this.idCarrera, this.idComentario).subscribe(data => {
-        console.log(data)
+        //
       })
     } else if (this.tipoComentario == "response") {
       this.modService.deleteResponse(this.idCarrera, this.idComentario, this.idRespuesta).subscribe(data => {
-        console.log(data)
+        //
       })
     }
 
@@ -261,9 +262,9 @@ export class AdminDashboardComponent implements OnInit {
 
   banUser() {
     this.modService.banUser(this.idUsuario).subscribe(data => {
-      console.log(data)
+      //
     })
     this.getModComments() //Actualizo lista
-    //TODO CAMBIAR COMENTARIO
+    this.changeModComment(0)
   }
 }

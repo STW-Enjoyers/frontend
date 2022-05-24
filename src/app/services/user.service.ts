@@ -97,12 +97,12 @@ export class UserService {
 
   //Aux
   setToken(token: string) {
-    console.log('Setting: ' + token);
+    //console.log('Setting: ' + token);
     localStorage.setItem('token', token);
   }
 
   setUserId(id:string) {
-    console.log('userId: ' + id);
+    //console.log('userId: ' + id);
     localStorage.setItem('userId', id);
   }
 

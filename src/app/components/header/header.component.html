@@ -75,7 +75,7 @@
 
 					<li class="dropdown" *ngIf="verifyLogin()">
 						<a class="nav-link dropdown-toggle" type="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="fas fa-user"></i> Usuario <!-- Cambiar por username-->
+							<i class="fas fa-user"></i> {{username}} <!-- Cambiar por username-->
 						</a>
 
 						<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
@@ -114,11 +114,11 @@
 
 			<li class="dropdown" *ngIf="verifyLogin()">
 				<a class="nav-link dropdown-toggle" type="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-					<i class="fas fa-user"></i> Usuario <!-- Cambiar por username-->
+					<i class="fas fa-user"></i> {{username}} <!-- Cambiar por username-->
 				</a>
 
 				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
-					<li><h6 class="dropdown-header">Opciones</h6></li>
+					<li><h6 class="dropdown-header"> Opciones </h6></li>
 					<li>
 						<a class="dropdown-item" type="button" (click)="goToPage('admin-dashboard')" *ngIf="verifyAdmin()">
 							<i class="fas fa-tachometer-alt"></i> Panel de control 
