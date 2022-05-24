@@ -15,10 +15,12 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
-    this.userService.getProfile().subscribe(data => {
-      this.username = data.username
-      this.admin = data.admin
-    })
+    if(this.verifyLogin()) {
+      this.userService.getProfile().subscribe(data => {
+        this.username = data.username
+        this.admin = data.admin
+      })
+    }
   }
 
   goToPage(link:string): void {
