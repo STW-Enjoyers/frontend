@@ -22,12 +22,18 @@ export class AvatarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.drawColor()
+  }
+
+  ngOnChanges(): void {
+    this.drawColor()
+  }
+
+  drawColor() {
     if (this.username && this.username.length > 0) {
       this.initial = this.username.charAt(0)
       const index = this.initial.charCodeAt(0) % this.colors.length
       this.circleColor = this.colors[index];
-    } else {
-      throw new Error("avatar.component: Username is empty or underfined")
     }
   }
 }

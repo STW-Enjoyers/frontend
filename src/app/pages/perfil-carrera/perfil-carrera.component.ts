@@ -168,7 +168,7 @@ export class PerfilCarreraComponent implements OnInit {
   orderResponses() {
     this.gradeProfile.comments.map((comment:Comment) => {
       comment.responses.sort( (a, b) => {
-        return b.upvotes - a.upvotes
+        return new Date(a.date).getTime() - new Date(b.date).getTime()
       })
     })
   }

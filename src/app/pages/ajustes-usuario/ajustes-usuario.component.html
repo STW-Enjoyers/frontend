@@ -27,7 +27,7 @@
         <div class="mt-3">
           <app-button [text]="'Actualizar usuario'" [disabled]="!changeUsernameForm.valid" (btnClick)="onChangeUsernameSubmit()"></app-button>
           <p class="text-danger mt-2" *ngIf="userAlreadyExists"> {{ usernameError }}</p>
-          <div class="alert alert-success mt-4" [hidden]="!usernameUpdated"><i class="fa-solid fa-check"></i> {{ usernameSuccess }}</div>
+          <!--<div class="alert alert-success mt-4" [hidden]="!usernameUpdated"><i class="fa-solid fa-check"></i> {{ usernameSuccess }}</div>-->
         </div>
       </form>
 

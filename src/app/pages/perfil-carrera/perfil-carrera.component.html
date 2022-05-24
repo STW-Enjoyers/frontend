@@ -6,7 +6,7 @@
   <div class="container mt-4">
     <h5 class="d-inline">{{statistics_title}}   </h5>
     <button class="btn btn-light" (click)="sendMail()"><i class="bi bi-envelope"></i> Compartir</button>
-    <div class="row justify-content-between">
+    <div class="row justify-content-center">
       <div class="col-12 col-sm-4 p-3">
         <canvas id="rendimientoChart"> {{pieChart}} </canvas>
       </div>
@@ -14,7 +14,17 @@
       <div class="col-12 col-sm-7 p-3">
         <canvas id="historicalGradesChart"> {{lineChart}} </canvas>
       </div>
+      <div class="col-12 alert alert-info text-center rounded-3 shadow-sm">
+        <span class="fa-stack fs-1">
+          <i class="bi bi-calendar fa-stack-2x"></i>
+            <strong class="fa-stack-1x mt-2">
+              {{this.gradeProfile.average.toPrecision(2)}}
+            </strong>
+        </span>
+        <span> años tarda de media un estudiante en graduarse.</span>
+      </div>
     </div>
+
   </div>
 
   <!-------------- INIT WRITE A COMMENT ---------------------->

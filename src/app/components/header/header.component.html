@@ -26,12 +26,12 @@
 						<li><h6 class="dropdown-header">Notas de corte</h6></li>
 						<li>
 							<a class="dropdown-item" type="button" (click)="goToPage('filtrador-notas')">
-								<i class="fas fa-filter pe-1"></i> Filtrador 
+								<i class="fas fa-filter pe-1"></i> Filtrador
 							</a>
 						</li>
 						<li>
 							<a class="dropdown-item" type="button" (click)="goToPage('info-notas')">
-								<i class="fas fa-info-circle pe-1"></i> Información 
+								<i class="fas fa-info-circle pe-1"></i> Información
 							</a>
 						</li>
 					</ul>
@@ -54,12 +54,12 @@
 						<li><h6 class="dropdown-header">Programa Erasmus</h6></li>
 						<li>
 							<a class="dropdown-item" type="button" (click)="goToPage('mapa-erasmus')">
-								<i class="fas fa-map-marker-alt pe-1"></i> Mapa 
+								<i class="fas fa-map-marker-alt pe-1"></i> Mapa
 							</a>
 						</li>
 						<li>
 							<a class="dropdown-item" type="button" (click)="goToPage('info-erasmus')">
-								<i class="fas fa-info-circle pe-1"></i> Información 
+								<i class="fas fa-info-circle pe-1"></i> Información
 							</a>
 						</li>
 					</ul>
@@ -72,37 +72,40 @@
 							<i class="fas fa-user"></i> Iniciar sesión
 						</a>
 					</li>
+          <div  *ngIf="verifyLogin()" class="row align-items-start justify-content-start">
+            <div class="col-auto pe-0" style="padding-left: 35px"><app-avatar username="{{username}}"></app-avatar></div>
+            <div class="col-auto">
+              <li class="dropdown" *ngIf="verifyLogin()">
+                <a class="nav-link dropdown-toggle ps-0" type="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{username}}
+                </a>
 
-					<li class="dropdown" *ngIf="verifyLogin()">
-						<a class="nav-link dropdown-toggle" type="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="fas fa-user"></i> {{username}} <!-- Cambiar por username-->
-						</a>
-
-						<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
-							<li><h6 class="dropdown-header">Opciones</h6></li>
-							<li>
-								<a class="dropdown-item" type="button" (click)="goToPage('admin-dashboard')" *ngIf="verifyAdmin()">
-									<i class="fas fa-tachometer-alt"></i> Panel de control 
-								</a>
-							</li>
-							<li>
-								<a class="dropdown-item" type="button" (click)="goToPage('ajustes-usuario')">
-									<i class="fas fa-cog"></i> Ajustes 
-								</a>
-							</li>
-							<li>
-								<a class="dropdown-item" type="button" (click)="onLogout()">
-									<i class="fas fa-sign-out-alt"></i> Cerrar sesión 
-								</a>
-							</li>
-						</ul>
-					</li>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
+                  <li><h6 class="dropdown-header">Opciones</h6></li>
+                  <li>
+                    <a class="dropdown-item" type="button" (click)="goToPage('admin-dashboard')" *ngIf="verifyAdmin()">
+                      <i class="fas fa-tachometer-alt"></i> Panel de control
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" type="button" (click)="goToPage('ajustes-usuario')">
+                      <i class="fas fa-cog"></i> Ajustes
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" type="button" (click)="onLogout()">
+                      <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </div>
+          </div>
 				</div>
 
       </ul>
 
     </div>
-
 		<ul class="navbar-nav mb-0 mb-lg-0 hide-sm">
 
 			<!--Fourth item outside-->
@@ -111,31 +114,37 @@
 					<i class="fas fa-user"></i> Iniciar sesión
 				</a>
 			</li>
+      <div  *ngIf="verifyLogin()" class="row align-items-center justify-content-end ">
+        <div class="col-auto"><app-avatar username="{{username}}"></app-avatar></div>
+        <div class="col-auto">
+          <li class="dropdown">
+            <a class="nav-link dropdown-toggle ps-0" type="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+              {{username}}
+            </a>
 
-			<li class="dropdown" *ngIf="verifyLogin()">
-				<a class="nav-link dropdown-toggle" type="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-					<i class="fas fa-user"></i> {{username}} <!-- Cambiar por username-->
-				</a>
 
-				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
-					<li><h6 class="dropdown-header"> Opciones </h6></li>
-					<li>
-						<a class="dropdown-item" type="button" (click)="goToPage('admin-dashboard')" *ngIf="verifyAdmin()">
-							<i class="fas fa-tachometer-alt"></i> Panel de control 
-						</a>
-					</li>
-					<li>
-						<a class="dropdown-item" type="button" (click)="goToPage('ajustes-usuario')">
-							<i class="fas fa-cog"></i> Ajustes 
-						</a>
-					</li>
-					<li>
-						<a class="dropdown-item" type="button" (click)="onLogout()">
-							<i class="fas fa-sign-out-alt"></i> Cerrar sesión 
-						</a>
-					</li>
-				</ul>
-			</li>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
+              <li><h6 class="dropdown-header"> Opciones </h6></li>
+              <li>
+                <a class="dropdown-item" type="button" (click)="goToPage('admin-dashboard')" *ngIf="verifyAdmin()">
+                  <i class="fas fa-tachometer-alt"></i> Panel de control
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" type="button" (click)="goToPage('ajustes-usuario')">
+                  <i class="fas fa-cog"></i> Ajustes
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" type="button" (click)="onLogout()">
+                  <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                </a>
+              </li>
+            </ul>
+          </li>
+
+        </div>
+      </div>
 
 		</ul>
   </div>
