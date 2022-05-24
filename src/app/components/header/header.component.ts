@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
-import {User} from '../../models/User';
 
 @Component({
   selector: 'app-header',
@@ -10,11 +9,18 @@ import {User} from '../../models/User';
 })
 export class HeaderComponent implements OnInit {
   //User info
-  user!: User;
+  username:string = ""
+  admin:boolean = false
 
   constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
+    if(this.verifyLogin()) {
+      this.userService.getProfile().subscribe(data => {
+        this.username = data.username
+        this.admin = data.admin
+      })
+    }
   }
 
   goToPage(link:string): void {
@@ -26,11 +32,14 @@ export class HeaderComponent implements OnInit {
   }
 
   verifyAdmin() {
-    return true
+    return this.admin
   }
 
   onLogout() {
     this.userService.unSetToken()
+    this.username = ""
+    this.admin = false
+
     this.router.navigate([''])
   }
 
