@@ -20,6 +20,7 @@ export class ResponseComponent implements OnInit {
   constructor(public userService:UserService, private router: Router, private forumService: ForumService) { }
 
   ngOnInit(): void {
+    console.log("init respuesta " + this.response.username)
     this.isUpvoted = this.response.upvotedUsers.includes(this.userId);
   }
 
@@ -29,12 +30,14 @@ export class ResponseComponent implements OnInit {
       // Case user is logged
       if (this.isUpvoted) {
         //Case user had liked the comment before
-        this.isUpvoted = false;
+        this.response.upvotedUsers = this.response.upvotedUsers.filter((userId) => userId != this.userId);
         this.response.upvotes -= 1;
+        this.isUpvoted = false;
         this.forumService.postDownvote(this.gradeId, this.commentId, this.response._id).subscribe()
       } else {
-        this.isUpvoted = true;
+        this.response.upvotedUsers.push(this.userId);
         this.response.upvotes += 1;
+        this.isUpvoted = true;
         this.forumService.postUpvote(this.gradeId, this.commentId, this.response._id).subscribe();
       }
     } else {
